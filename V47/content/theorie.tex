@@ -76,17 +76,74 @@ Bei hinreichend großen Temperaturen wird dieser Wert asymptotisch erreicht.
 Im Einsteinmodell wird beachtet, dass die atomaren Oszillatoren nur Energien in Einheiten von $\hbar\omega$ austauschen können.
 Zudem wird angenommen, dass alle Atome einheitlich mit der selben Frequenz $\omega$ schwingen.
 Aus der Boltzmann-Verteilung
-\begin{euqation}
+\begin{equation}
   W(n) = e^{-\frac{n\hbar\omega}{k_BT}}
-\end{euqation}
+\end{equation}
 welche angibt, mit welcher Wahrscheinlichkeit ein Oszillator, der bei der Temperatur $T$ im Gleichgewicht mit seiner Umgebung steht, die Energie $n\hbar\omega$ besitzt, kann die mittlere Energie eines Oszillators pro Freiheitsgrad über die Formel
 \begin{equation}
   <u>_E = \frac{\sum_{n=0}^{\infty}n\hbar\omega e^{-\frac{n\hbar\omega}{k_BT}}}{\sum_{n=0}^{\infty} e^{-\frac{n\hbar\omega}{k_BT}}}
-\end{euqation}
+\end{equation}
 errechnet werden.
 Hierbei wird die Summe über alle Energien multipliziert mit deren Wahrscheinlichkeit auf die Summe aller Wahrscheinlichkeiten normiert.
 Das führt zur Energie eines Mols von
-\begin{euqation}
-  U = 3N_L\frac{\hbar\omega}{e^{\frac{n\hbar\omega}{k_BT}}-1}
+\begin{equation}
+  U = 3N_L\frac{\hbar\omega}{e^{\frac{n\hbar\omega}{k_BT}}-1}.
 \end{equation}
-und für ein Mol
+Daraus folgt, dass die Molwärme
+\begin{equation}
+  C_V = 3R\frac{\hbar^2\omega^2}{k_B^2}\frac{1}{T^2}\frac{e^{\frac{\hbar\omega}{k_BT}}}{\left(e^{\frac{\hbar\omega}{k_BT}}-1\right)^2}.
+\end{equation}
+Die Annahme, dass alle Atome mit der selben Frequenz schwingen, ist jedoch eine grobe Näherung und wird im Debye-Modell aufgearbeitet.
+
+\subsection{Das Debye-Modell}
+
+Das Debye-Modell zieht die spektrale Verteilung $Z(\omega)$ der Eigenschwingungen mit ein, woraus sich die innere Energie aus dem Integral über alle Eigenschwingungen ergibt.
+Für die Molwärme folgt der Ausdruck
+\begin{equation}
+  C_V = \frac{\mathrm{d}}{\mathrm{d}T}\int_{0}^{\omega_{max}}Z(\omega).
+\end{equation}
+Die Funktion $Z(\omega)$ wird insofern angenähert, dass von einem isotropen Kristall mit einer linearen Dispersionsrelation ausgegangen wird.
+Daraus folgt, dass die Phasengeschwindigkeit einer elastischen Welle im Material nicht von der Ausbreitungsrichtung oder Frequenz abhängt.
+Diese Näherung, welche es erlaubt die spektrale Verteilung durch Abzählung der Eigenschwingungen in einem Würfel der Kantenlänge $L$ im Frequenzintervall $[\omega,\omega+d\omega]$ zu berechnen, wird Debye-Modell genannt.
+Dies führt zu einer spektralen Dichte von
+\begin{equation}
+  Z(\omega)d\omega = \frac{3L^3}{2\pi^2}\omega^2\left(\frac{1}{v_l^3}+\frac{2}{v_{tr}^3}\right). \label{eqn:1}
+\end{equation}
+Hierbei bezeichnen $v_l$ und $v_{tr}$ die longitudinale und transversale Phasengeschwindigkeit.
+Da ein Atom nur drei Eigenschwingungen besitzt, hat ein Kristall aus $N_L$ Atomen höchstens $3N_L$ Eigenschwingungen, woraus folgt, dass es eine obere Grenze der Frequenz geben muss, die Debye-Frequenz $\omega_D$, und es folgt die Relation
+\begin{equation}
+  \int_{0}^{\omega_D}Z(\omega)d\omega = 3N_L. \label{eqn:2}
+\end{equation}
+Aus \eqref{eqn:1} und \eqref{eqn:2} folgt
+\begin{equation}
+  \omega_D^3 = \frac{18\pi^2N_L}{L^3}\left(\frac{1}{v_l^3}+\frac{2}{v_{tr}^3} \right)^{-1}. \label{eqn:3}
+\end{equation}
+Demnach vereinfacht sich die spektrale Dichte zu
+\begin{equation}
+  Z(\omega)d\omega = \frac{3N_L}{\omega^3}\omega^2d\omega.
+\end{equation}
+Die Molwärme nach Debye beträgt somit
+\begin{equation}
+  C_V = \frac{\mathrm{d}}{\mathrm{d}T}\frac{9N_L\hbar}{\omega_D^3} \int_{0}^{\omega_D}\frac{\omega^3}{e^{\frac{\hbar\omega}{k_BT}}-1}d\omega.
+\end{equation}
+Mit Hilfe der Substitutionen
+\begin{equation}
+  x := \frac{\hbar\omega}{k_BT} \: \text{und} \: \frac{\Theta_D}{T} := \frac{\hbar\omega_D}{k_BT} \label{eqn:4}
+\end{equation}
+lässt sich die Molwärme schreiben als
+\begin{equation}
+  C_V = \frac{\mathrm{d}}{\mathrm{d}T} \left{ 9N_L k_BT \left(\frac{T}{\Theta}\right)^3 \int_{0}^{\frac{\omega_D}{T}}\frac{x^3}{e^x-1}dx\right}.
+\end{equation}
+Durch Nutzen der Leibnitz-Regel für Parameterintegrale lässt sich diese Formel auf
+\begin{equation}
+  C_V = 9R \left(\frac{T}{\Theta}\right)^3 \int_{0}^{\frac{\Theta_D}{T}} \frac{x^4e^x}{\left(e^x-1\right)^2}dx
+\end{equation}
+vereinfachen.
+Hierbei ist $\Theta_D$ die materialabhängige Debye-Temperatur, die Funktion $C_V\left(\frac{\Theta_D}{T}\right)$ hingegen ist universel.
+Ihre Werte können im Anhang eingesehen werden.
+%\ref{tabelle}
+Die Molwärme nach Debye zeigt das selbe asymptotische Verhalten wie die des Einstein-Modells.
+Im Tieftemperaturbereich ist jene jedoch proportional zu $T^3$, die nach Einstein steigt exponentiell an.\\
+Das Debye-Modell ist aber auch nur eine Näherung.
+Um exakte Ergebnisse zu erhalten, müssen die wirklichen Dispersionsrelationen der Longitudinal- und Transversalwellen berücksichtigt werden.
+Das Einstein- und Debyemodell vernachlässigen jedoch beide den Beitrag von Leitungselektronen zur Molwärme, welcher bei tiefen Temperaturen einen Beitrag proportional zu $T$ liefert.
