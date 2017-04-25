@@ -38,6 +38,8 @@ from table import (
 from error_calculation import(
     MeanError
 )
+
+from scipy.integrate import quad
 ################################################ Finish importing custom libraries #################################################
 
 
@@ -163,6 +165,16 @@ def Wie(T,a,b,c):
 def C_v(alpha, kappa, V_0, T, C_p):
     return C_p - (9 * alpha**2 * kappa * V_0 * T)
 
+def debye_funktion(x):
+    return (x**4 * np.exp(x))/(np.exp(x)-1)**2
+
+
+
+def C_debye(T, theta):
+    R = 8.3144598
+    a = R*9*(T/theta)**3*list(map(lambda b: quad(debye_funktion, 0, b)[0], theta/T))
+    return a
+
 a = 0.00134
 b = 2.296
 c = 243.02
@@ -202,6 +214,7 @@ C_v = C_v(alpha_interpol, kappa, V_0, T_interpol, C_m)
 integralwerte = np.array([ 3.3, 2.8, 2.7, 2.6, 1.9, 2.2, 2.0, 1.8])
 theta_deb = integralwerte * T_interpol[0:8]
 
+print(np.mean(theta_deb))
 # d)
 
 V = m/rho
@@ -212,5 +225,17 @@ v_t = 2260
 w_theo = ((18*np.pi**2 * N_L)/(V) * 1/ ( 1/v_l**3 + 2/v_t**3))**(1/3)
 theta_theo = const.hbar * w_theo / const.k
 
+# plot this shit
+x = np.linspace(80,300)
+plt.plot(x, C_debye(x, np.mean(theta_deb)))
+plt.plot(x, C_debye(x, 345))
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.plot(T_interpol, C_v, 'x')
+plt.axhline(y=3*const.R)
 
+
+plt.savefig('build/fit.pdf')
+#print( np.shape( 9*C_debye(x, np.mean(theta_deb)) ))
+#print(const.R)
 print(Wie(x,a,b,c)/1000)
