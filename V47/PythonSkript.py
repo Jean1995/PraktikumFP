@@ -157,3 +157,29 @@ from error_calculation import(
 
 ########## DIFFERENT STUFF ##########
 # R = const.physical_constants["molar gas constant"]      # Array of value, unit, error
+
+
+def Temp(R):
+    return 0.00134*R**2+2.296*R-243.02
+
+def Wie(T,a,b,c):
+    return -b/(2*a) + np.sqrt((b**2)/(4*a**2)+(c+T)/a)
+
+a = 0.00134
+b = 2.296
+c = 243.02
+
+# 1celsius = 273.15K
+#erstes t von 0.0256 bis 0.0299
+#R = np.array([])
+#auf ein ohm genau
+#spannung eine nachkommastelle
+#beim strom 2 nachkommastellen
+#stefanie.roese@tu-dortmund.de
+#cp-e1-140
+t = np.array([52+60*7 ,59+60*13 ,7+60*20 ,20+60*26 ,38+60*31 ,39+60*36 ,47+60*41 ,7+60*47 ,49+60*52 ,39+60*58 ,21+60*64 ,14+60*70 ,7+60*76 ,4+60*82 ,56+60*87 ,6+60*94 ,5+60*100 ,3+60*106 ,10+60*112 ,14+60*118 ,26+60*124 ])
+u = np.array([13.9    ,16.5     ,16.6    ,16.7     ,19.4     ,19.5     ,19.5     ,19.6    ,19.6     ,19.6     ,19.6     ,19.6     ,19.6    ,19.6    ,19.6     ,19.6    ,19.6     ,19.6     ,19.6      ,19.6      ,19.6, 19.6])
+i = np.array([133.3   ,157      ,158.3   ,159      ,184      ,185      ,185.2    ,185.3   ,185.3    ,185.4    ,185.6    ,185.8    ,185.9   ,186     ,186.1    ,186.2   ,186.3    ,186.3    ,186.4     ,186.5     ,186.5, 186.5])
+#T = Temp(R)
+x = np.arange((80-273.15),(300-273.15+10),10)
+print(Wie(x,a,b,c)/1000)
