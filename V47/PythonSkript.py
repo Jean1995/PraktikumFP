@@ -32,13 +32,8 @@ from table import (
     make_table,
     make_full_table,
     make_composed_table,
-    make_SI,
-    write,
-)
-from regression import (
-    reg_linear,
-    reg_quadratic,
-    reg_cubic
+    make_SI,In [21]: w = ((18*np.pi**2 * 2.6867811*10**25)/(L**3) * 1/ ( 1/4700**3 + 2/2260**3))**(1/3)
+
 )
 from error_calculation import(
     MeanError
@@ -165,6 +160,9 @@ def Temp(R):
 def Wie(T,a,b,c):
     return -b/(2*a) + np.sqrt((b**2)/(4*a**2)+(c+T)/a)
 
+def C_v(alpha, kappa, V_0, T, C_p):
+    return C_p - (9 * alpha**2 * kappa * V_0 * T)
+
 a = 0.00134
 b = 2.296
 c = 243.02
@@ -177,9 +175,42 @@ c = 243.02
 #beim strom 2 nachkommastellen
 #stefanie.roese@tu-dortmund.de
 #cp-e1-140
-t = np.array([52+60*7 ,59+60*13 ,7+60*20 ,20+60*26 ,38+60*31 ,39+60*36 ,47+60*41 ,7+60*47 ,49+60*52 ,39+60*58 ,21+60*64 ,14+60*70 ,7+60*76 ,4+60*82 ,56+60*87 ,6+60*94 ,5+60*100 ,3+60*106 ,10+60*112 ,14+60*118 ,26+60*124 ])
-u = np.array([13.9    ,16.5     ,16.6    ,16.7     ,19.4     ,19.5     ,19.5     ,19.6    ,19.6     ,19.6     ,19.6     ,19.6     ,19.6    ,19.6    ,19.6     ,19.6    ,19.6     ,19.6     ,19.6      ,19.6      ,19.6, 19.6])
-i = np.array([133.3   ,157      ,158.3   ,159      ,184      ,185      ,185.2    ,185.3   ,185.3    ,185.4    ,185.6    ,185.8    ,185.9   ,186     ,186.1    ,186.2   ,186.3    ,186.3    ,186.4     ,186.5     ,186.5, 186.5])
+t = np.array([0, 52+60*7 ,59+60*13 ,7+60*20 ,20+60*26 ,38+60*31 ,39+60*36 ,47+60*41 ,7+60*47 ,49+60*52 ,39+60*58 ,21+60*64 ,14+60*70 ,7+60*76 ,4+60*82 ,56+60*87 ,6+60*94 ,5+60*100 ,3+60*106 ,10+60*112 ,14+60*118 ,26+60*124 ])
+u = np.array([13.9    ,16.5     ,16.6    ,16.7     ,19.4     ,19.5     ,19.5     ,19.6    ,19.6     ,19.6     ,19.6     ,19.6     ,19.6    ,19.6    ,19.6     ,19.6    ,19.6     ,19.6     ,19.6      ,19.6      ,19.6]) # +19.6
+i = np.array([133.3   ,157      ,158.3   ,159      ,184      ,185      ,185.2    ,185.3   ,185.3    ,185.4    ,185.6    ,185.8    ,185.9   ,186     ,186.1    ,186.2   ,186.3    ,186.3    ,186.4     ,186.5     ,186.5]) # +186.5
+i = i*10**(-3)
 #T = Temp(R)
-x = np.arange((80-273.15),(300-273.15+10),10)
+x = np.arange((80+10-273.15),(300-273.15+10),10)
+T = np.arange(80+10,300+10,10)
+alpha = np.array([9.75, 10.7, 11.5, 12.1, 12.65, 13.15, 13.6, 13.9, 14.25, 14.5, 14.75, 14.95, 15.2, 15.4, 15.6, 15.75, 15.9, 16.1, 16.25, 16.35, 16.5, 16.65]) # aus Anleitung
+alpha = alpha**(-6)
+alpha_interpol = np.diff(alpha)/2 + alpha[:-1]
+T_interpol = np.diff(T)/2 + T[:-1]
+
+m = 342/1000 # Masse kilgo
+M = 63/1000 # kilogramm Pro Mol
+n = m/M # Stoffmenge
+kappa = 140 * 10**9 #Quelle: http://www.periodensystem-online.de/index.php?show=list&id=modify&prop=Kompressionsmodul&sel=oz&el=68
+rho = 8920 # Quelle Wikipedia
+V_0 = M / rho
+
+E = u * i * np.diff(t) # zugeführte Energiemenge
+C_m = E / (n * 10)
+
+C_v = C_v(alpha_interpol, kappa, V_0, T_interpol, C_m)
+
+integralwerte = np.array([ 3.3, 2.8, 2.7, 2.6, 1.9, 2.2, 2.0, 1.8])
+theta_deb = integralwerte * T_interpol[0:8]
+
+# d)
+
+V = m/rho
+N_L = 2.6867811*10**25 # quelle wikipedia
+v_l = 4700
+v_t = 2260
+
+w_theo = ((18*np.pi**2 * N_L)/(V) * 1/ ( 1/v_l**3 + 2/v_t**3))**(1/3)
+theta_theo = const.hbar * w_theo / const.k
+
+
 print(Wie(x,a,b,c)/1000)
