@@ -32,7 +32,7 @@ from table import (
     make_table,
     make_full_table,
     make_composed_table,
-    make_SI,In [21]: w = ((18*np.pi**2 * 2.6867811*10**25)/(L**3) * 1/ ( 1/4700**3 + 2/2260**3))**(1/3)
+    make_SI,
 
 )
 from error_calculation import(
