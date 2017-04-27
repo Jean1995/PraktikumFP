@@ -33,7 +33,12 @@ from table import (
     make_full_table,
     make_composed_table,
     make_SI,
-
+    write,
+)
+from regression import (
+    reg_linear,
+    reg_quadratic,
+    reg_cubic
 )
 from error_calculation import(
     MeanError
@@ -172,7 +177,7 @@ def debye_funktion(x):
 
 def C_debye(T, theta):
     R = 8.3144598
-    a = R*9*(T/theta)**3*list(map(lambda b: quad(debye_funktion, 0, b)[0], theta/T))
+    a = R*9*(unp.nominal_values(T)/unp.nominal_values(theta))**3*list(map(lambda b: quad(debye_funktion, 0, b)[0], unp.nominal_values(theta)/unp.nominal_values(T)))
     return a
 
 a = 0.00134
@@ -187,17 +192,70 @@ c = 243.02
 #beim strom 2 nachkommastellen
 #stefanie.roese@tu-dortmund.de
 #cp-e1-140
-t = np.array([0, 52+60*7 ,59+60*13 ,7+60*20 ,20+60*26 ,38+60*31 ,39+60*36 ,47+60*41 ,7+60*47 ,49+60*52 ,39+60*58 ,21+60*64 ,14+60*70 ,7+60*76 ,4+60*82 ,56+60*87 ,6+60*94 ,5+60*100 ,3+60*106 ,10+60*112 ,14+60*118 ,26+60*124 ])
-u = np.array([13.9    ,16.5     ,16.6    ,16.7     ,19.4     ,19.5     ,19.5     ,19.6    ,19.6     ,19.6     ,19.6     ,19.6     ,19.6    ,19.6    ,19.6     ,19.6    ,19.6     ,19.6     ,19.6      ,19.6      ,19.6]) # +19.6
-i = np.array([133.3   ,157      ,158.3   ,159      ,184      ,185      ,185.2    ,185.3   ,185.3    ,185.4    ,185.6    ,185.8    ,185.9   ,186     ,186.1    ,186.2   ,186.3    ,186.3    ,186.4     ,186.5     ,186.5]) # +186.5
-i = i*10**(-3)
+t_r = np.array([0, 52+60*7 ,59+60*13 ,7+60*20 ,20+60*26 ,38+60*31 ,39+60*36 ,47+60*41 ,7+60*47 ,49+60*52 ,39+60*58 ,21+60*64 ,14+60*70 ,7+60*76 ,4+60*82 ,56+60*87 ,6+60*94 ,5+60*100 ,3+60*106 ,10+60*112 ,14+60*118 ,26+60*124 ])
+u_r = np.array([13.9    ,16.5     ,16.6    ,16.7     ,19.4     ,19.5     ,19.5     ,19.6    ,19.6     ,19.6     ,19.6     ,19.6     ,19.6    ,19.6    ,19.6     ,19.6    ,19.6     ,19.6     ,19.6      ,19.6      ,19.6]) # +19.6
+i_r = np.array([133.3   ,157      ,158.3   ,159      ,184      ,185      ,185.2    ,185.3   ,185.3    ,185.4    ,185.6    ,185.8    ,185.9   ,186     ,186.1    ,186.2   ,186.3    ,186.3    ,186.4     ,186.5     ,186.5]) # +186.5
+i_r = i_r*10**(-3)
+
+print(len(t_r))
+print(len(u_r))
+print(len(i_r))
+
+x = np.arange((80+10-273.15),(300-273.15+10),10) #wir haben zuerst geguckt bei welchen Temperaturen wir messen wollten, dies entspricht x (in celsius)
+#Ungenauigkeiten
+delta_t = t_r*0+1
+delta_u = u_r*0+0.1
+delta_i = i_r*0+0.1*10**(-3)
+R_r = Wie(x,a,b,c)  #das sind die Widerstände, die wir gemessen haben, bzw bei denen wir gemessen haben
+delta_R = R_r*0+1   #der Widerstand hat jedoch eine Ungenauigkeit und dieser muss hier berücksichtigt werden
+
+print(len(R_r))
+
+t = unp.uarray(t_r, delta_t)
+u = unp.uarray(u_r, delta_u)
+i = unp.uarray(i_r, delta_i)
+R = unp.uarray(R_r, delta_R)
+
+T = Temp(R) +273.15    #aus dem Widerstand mit seiner Ungenauigkeit ergibt sich letztendlich die Temperatur bei der wir wirklich gemessen haben
+#p = 1
+#write('build/parameter_p.tex', make_SI(p * 1e-3, r'\kilo\volt', figures=1))
+
+print(T)
+write('build/messwerte.tex', make_table([t_r[:-1], u_r, i_r*10**3, R_r[:-1], T[:-1]],[0, 1, 1, 1, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/Tabelle_messwerte.tex', make_full_table(
+    'Messdaten.',
+    'tab:1',
+    'build/messwerte.tex',
+    [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                              # die Multicolumns sein sollen
+    [#'Wert',
+    r'$t \:/\: \si{\second}$',
+    r'$U \:/\: \si{\volt}$',
+    r'$I \:/\: \si{\milli\ampere}$',
+    r'$R \:/\: \si{\ohm}$',
+    r'$T \:/\: \si{\kelvin}$',
+    r'$\Delta T \:/\: \si{\kelvin}$']))
+
 #T = Temp(R)
-x = np.arange((80+10-273.15),(300-273.15+10),10)
-T = np.arange(80+10,300+10,10)
+#x = np.arange((80+10-273.15),(300-273.15+10),10)
+#T = np.arange(80+10,300+10,10)
 alpha = np.array([9.75, 10.7, 11.5, 12.1, 12.65, 13.15, 13.6, 13.9, 14.25, 14.5, 14.75, 14.95, 15.2, 15.4, 15.6, 15.75, 15.9, 16.1, 16.25, 16.35, 16.5, 16.65]) # aus Anleitung
-alpha = alpha**(-6)
+alpha = alpha*10**(-6)
 alpha_interpol = np.diff(alpha)/2 + alpha[:-1]
 T_interpol = np.diff(T)/2 + T[:-1]
+
+write('build/ausdehnung.tex', make_table([alpha_interpol*10**6, T_interpol],[2, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/Tabelle_ausdehnung.tex', make_full_table(
+    'Interpolierter Ausdehnungskoeffizient in Abhängigkeit der interpolierten Temperatur.',
+    'tab:2',
+    'build/ausdehnung.tex',
+    [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                              # die Multicolumns sein sollen
+    [#'Wert',
+    r'$\alpha_{\text{interp}} \:/\: 10^{-6}\si{\kelvin}$',
+    r'$T_{\text{interp}} \:/\: \si{\kelvin}$',
+    r'$\Delta T_{\text{interp}} \:/\: \si{\kelvin}$']))
+
 
 m = 342/1000 # Masse kilgo
 M = 63/1000 # kilogramm Pro Mol
@@ -225,17 +283,17 @@ v_t = 2260
 w_theo = ((18*np.pi**2 * N_L)/(V) * 1/ ( 1/v_l**3 + 2/v_t**3))**(1/3)
 theta_theo = const.hbar * w_theo / const.k
 
-# plot this shit
-x = np.linspace(80,300)
-plt.plot(x, C_debye(x, np.mean(theta_deb)))
-plt.plot(x, C_debye(x, 345))
-plt.legend(loc='best')
-plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-plt.plot(T_interpol, C_v, 'x')
-plt.axhline(y=3*const.R)
-
-
-plt.savefig('build/fit.pdf')
+## plot this shit
+#x = np.linspace(80,300)
+#plt.plot(x, C_debye(x, np.mean(theta_deb)))
+#plt.plot(x, C_debye(x, 345))
+#plt.legend(loc='best')
+#plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+#plt.plot(T_interpol, C_v, 'x')
+#plt.axhline(y=3*const.R)
+#
+#
+#plt.savefig('build/fit.pdf')
 #print( np.shape( 9*C_debye(x, np.mean(theta_deb)) ))
 #print(const.R)
 print(Wie(x,a,b,c)/1000)
