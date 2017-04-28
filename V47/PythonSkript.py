@@ -197,6 +197,9 @@ u_r = np.array([13.9    ,16.5     ,16.6    ,16.7     ,19.4     ,19.5     ,19.5  
 i_r = np.array([133.3   ,157      ,158.3   ,159      ,184      ,185      ,185.2    ,185.3   ,185.3    ,185.4    ,185.6    ,185.8    ,185.9   ,186     ,186.1    ,186.2   ,186.3    ,186.3    ,186.4     ,186.5     ,186.5]) # +186.5
 i_r = i_r*10**(-3)
 
+u_tabelle = np.array([13.9    ,16.5     ,16.6    ,16.7     ,19.4     ,19.5     ,19.5     ,19.6    ,19.6     ,19.6     ,19.6     ,19.6     ,19.6    ,19.6    ,19.6     ,19.6    ,19.6     ,19.6     ,19.6      ,19.6      ,19.6, 19.6])
+i_tabelle = np.array([133.3   ,157      ,158.3   ,159      ,184      ,185      ,185.2    ,185.3   ,185.3    ,185.4    ,185.6    ,185.8    ,185.9   ,186     ,186.1    ,186.2   ,186.3    ,186.3    ,186.4     ,186.5     ,186.5, 186.5])
+
 print(len(t_r))
 print(len(u_r))
 print(len(i_r))
@@ -221,7 +224,7 @@ T = Temp(R) +273.15    #aus dem Widerstand mit seiner Ungenauigkeit ergibt sich 
 #write('build/parameter_p.tex', make_SI(p * 1e-3, r'\kilo\volt', figures=1))
 
 print(T)
-write('build/messwerte.tex', make_table([t_r[:-1], u_r, i_r*10**3, R_r[:-1], T[:-1]],[0, 1, 1, 1, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/messwerte.tex', make_table([R_r, T, t_r, u_tabelle, i_tabelle],[1, 2, 2, 1, 1, 1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_messwerte.tex', make_full_table(
     'Messdaten.',
     'tab:1',
@@ -229,12 +232,12 @@ write('build/Tabelle_messwerte.tex', make_full_table(
     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
                               # die Multicolumns sein sollen
     [#'Wert',
-    r'$t \:/\: \si{\second}$',
-    r'$U \:/\: \si{\volt}$',
-    r'$I \:/\: \si{\milli\ampere}$',
     r'$R \:/\: \si{\ohm}$',
     r'$T \:/\: \si{\kelvin}$',
-    r'$\Delta T \:/\: \si{\kelvin}$']))
+    r'$\Delta T \:/\: \si{\kelvin}$',
+    r'$t \:/\: \si{\second}$',
+    r'$U \:/\: \si{\volt}$',
+    r'$I \:/\: \si{\milli\ampere}$']))
 
 #T = Temp(R)
 #x = np.arange((80+10-273.15),(300-273.15+10),10)
@@ -283,17 +286,24 @@ v_t = 2260
 w_theo = ((18*np.pi**2 * N_L)/(V) * 1/ ( 1/v_l**3 + 2/v_t**3))**(1/3)
 theta_theo = const.hbar * w_theo / const.k
 
-## plot this shit
-#x = np.linspace(80,300)
-#plt.plot(x, C_debye(x, np.mean(theta_deb)))
-#plt.plot(x, C_debye(x, 345))
-#plt.legend(loc='best')
-#plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-#plt.plot(T_interpol, C_v, 'x')
-#plt.axhline(y=3*const.R)
-#
-#
-#plt.savefig('build/fit.pdf')
-#print( np.shape( 9*C_debye(x, np.mean(theta_deb)) ))
-#print(const.R)
+
+
+
+
+# plot this shit
+x = np.linspace(80,300)
+plt.plot(x, C_debye(x, unp.nominal_values(np.mean(theta_deb))), label=r'Theoriekurve mit $\Theta_{D,gem}$')
+plt.plot(x, C_debye(x, 345), label=r'Theoriekurve mit $\Theta_{D,gem}$')
+plt.errorbar(unp.nominal_values(T_interpol), unp.nominal_values(C_v), fmt='rx', xerr=unp.std_devs(T_interpol), yerr=unp.std_devs(C_v), label='Messdaten')
+#plt.plot(unp.nominal_values(T_interpol), unp.nominal_values(C_v), 'x')
+plt.axhline(y=3*const.R, color='y', label=r'Dulong-Petit')
+plt.xlabel(r'$T \:/\: \si{\kelvin}$')
+plt.ylabel(r'$C_V \:/\: \si{\joule\per\kelvin}$')
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/fit.pdf')
+
+
+print( np.shape( 9*C_debye(x, np.mean(theta_deb)) ))
+print(const.R)
 print(Wie(x,a,b,c)/1000)
