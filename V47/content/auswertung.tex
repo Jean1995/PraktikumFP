@@ -87,8 +87,33 @@
 %     {Ersatzschaltbilder der verschiedenen Teilaufgaben.}
 %     \label{fig:Schaltungen}
 % \end{figure*}
+
+\subsection{Messdaten}
 Die untersuchte Kupferprobe hat eine Masse von $m = \SI{342}{\gram}$ \cite{skript}.
 In Tabelle \ref{tab:eig} sind die Eigenschaften von Kupfer dargestellt.
+
+\begin{table}
+    \centering
+    \caption{Materialeigenschaften von Kupfer.}
+    \label{tab:eig}
+    \sisetup{parse-numbers=false}
+    \begin{tabular}{
+	S[table-format=3.1]
+	S[table-format=3.1]
+	S[table-format=1.1]
+	S[table-format=4.2]
+	}
+	\toprule
+  {$\rho \:/\: \si{\kilo\gram\per\meter\tothe{3}}$} &
+  {$M \:/\: 10^{-3}\si{\kilo\gram\per\mol}$} &  {$\kappa \:/\: 10^{9}\si{\pascal}$} &
+  {$V_0 \:/\: 10^{-6}\si{\meter\tothe{3}\per\mol}$}		\\
+	\midrule
+    \input{eigenschaften.tex}
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+
 
 %\input{build/Tabelle_eigenschaften.tex}
 
@@ -104,6 +129,9 @@ Die Temperatur $T$ in Kelvin kann aus dem Thermowiderstand über die Formel
 gewonnen werden.
 \input{build/Tabelle_messwerte.tex}
 
+\newpage
+
+\subsection{Berechnung der Molwärme}
 Die der Probe zugeführte Energie $\Delta E$ wird aus dem Produkt aus Spannung, Stromstärke und Aufheizzeit $\Delta t$,
 \begin{equation}
   \Delta E =  U\cdot I\cdot \Delta t
@@ -118,8 +146,50 @@ Daraus resultiert einschließlich der Messwerte die Tabelle \ref{tab:3}.
 
 \input{build/Tabelle_cp.tex}
 
-
-
-
+Um auf die Molwärme bei konstantem Volumen zu kommen, wird der Zusammenhang
+\begin{equation}
+  C_{\text{V}} = C_{\text{p}} - 9 \alpha^2 \kappa V_0 T
+\end{equation}
+verwendet.
+Hierbei entspricht $\alpha$ dem Ausdehnungskoeffizienten, dessen Beziehung zur Temperatur in Tabelle \ref{tab:alpha} im Anhang einzusehen ist.
+Es wird jeweils die mittlere Temperatur während einer Heizperiode genutzt und somit zwischen den angegebenen Werten des Ausdehnungskoeffizienten linear interpoliert.
+Die Ergebnisse sind in Tabelle \ref{tab:2} zu begutachten.
 
 \input{build/Tabelle_ausdehnung.tex}
+
+\subsection{Debye-Temperatur und -Frequenz}
+
+Die Debye-Temperatur wird über die Tabelle \ref{tab:deb} im Anhang bestimmt, indem $(C_{\text{V}},T)$-Wertepaare abgeglichen werden.
+Es werden hier jedoch nur Temperaturen bis $\SI{170}{\kelvin}$ berücksichtigt.
+In Tabelle \ref{tab:4} sind die Resultate aufgeführt.
+
+\input{build/Tabelle_temp.tex}
+
+Eine Mittelung führt auf eine Debye-Temperatur von
+\begin{align*}
+  \Theta_{\text{D,gem}} &= \input{build/Theta_deb.tex}.
+\end{align*}
+Aus dem Zusammenhang \eqref{eqn:4} ergibt dies eine Debye-Frequenz von
+\begin{align*}
+  \omega_{\text{D,gem}} &= \input{build/omega_deb.tex}.
+\end{align*}
+
+Nach der Formel \eqref{eqn:3} lassen sich über die transversale und longitudinale Phasengeschwindigkeit von
+\begin{align*}
+  v_{\text{l}}  &= \SI{4.7}{\kilo\meter\per\second},\\
+  v_{\text{tr}} &= \SI{2.26}{\kilo\meter\per\second}
+\end{align*}
+Theoriewerte von
+\begin{align*}
+  \Theta_{\text{D,Theorie}} &= \input{build/Theta_deb_theo.tex},\\
+  \omega_{\text{D,Theorie}} &= \input{build/omega_deb_theo.tex}
+\end{align*}
+berechnen.
+Zuletzt sind die Gesamtergebnisse in Plot \ref{plot:1} einzusehen.
+
+\begin{figure}
+  \centering
+  \includegraphics{build/fit.pdf}
+  \caption{Ergebnisse für die Molwärme und Theoriekurven.}
+  \label{plot:1}
+\end{figure}

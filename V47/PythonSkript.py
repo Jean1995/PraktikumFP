@@ -247,17 +247,6 @@ alpha = alpha*10**(-6)
 alpha_interpol = np.diff(alpha)/2 + alpha[:-1]
 T_interpol = np.diff(T)/2 + T[:-1]
 
-write('build/ausdehnung.tex', make_table([alpha_interpol*10**6, T_interpol],[2, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
-write('build/Tabelle_ausdehnung.tex', make_full_table(
-    'Interpolierter Ausdehnungskoeffizient in Abhängigkeit der interpolierten Temperatur.',
-    'tab:2',
-    'build/ausdehnung.tex',
-    [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
-                              # die Multicolumns sein sollen
-    [#'Wert',
-    r'$\alpha_{\text{interp}} \:/\: 10^{-6}\si{\kelvin}$',
-    r'$T_{\text{interp}} \:/\: \si{\kelvin}$',
-    r'$\Delta T_{\text{interp}} \:/\: \si{\kelvin}$']))
 
 
 m = 342/1000 # Masse kilgo
@@ -307,10 +296,44 @@ write('build/Tabelle_cp.tex', make_full_table(
 
 C_v = C_v(alpha_interpol, kappa, V_0, T_interpol, C_m)
 
+write('build/ausdehnung.tex', make_table([T_interpol, alpha_interpol*10**6, C_v],[2, 2, 2, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/Tabelle_ausdehnung.tex', make_full_table(
+    'Interpolierter Ausdehnungskoeffizient in Abhängigkeit der interpolierten Temperatur und dazugehöriger Molwärme.',
+    'tab:2',
+    'build/ausdehnung.tex',
+    [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                              # die Multicolumns sein sollen
+    [#'Wert',
+    r'$T_{\text{interp}} \:/\: \si{\kelvin}$',
+    r'$\delta T_{\text{interp}} \:/\: \si{\kelvin}$',
+    r'$\alpha_{\text{interp}} \:/\: 10^{-6}\si{\kelvin}$',
+    r'$C_{\text{V}} \:/\: \si{\joule\per\kelvin}$',
+    r'$\delta C_{\text{V}} \:/\: \si{\joule\per\kelvin}$']))
+
 integralwerte = np.array([ 3.3, 2.8, 2.7, 2.6, 1.9, 2.2, 2.0, 1.8])
 theta_deb = integralwerte * T_interpol[0:8]
 
+write('build/temp.tex', make_table([integralwerte, T_interpol[0:8], theta_deb],[1, 1, 1, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/Tabelle_temp.tex', make_full_table(
+    'Debye-Temperaturen.',
+    'tab:4',
+    'build/temp.tex',
+    [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                              # die Multicolumns sein sollen
+    [#'Wert',
+    r'$\text{Integral}$',
+    r'$T_{\text{interp}} \:/\: \si{\kelvin}$',
+    r'$\delta T_{\text{interp}} \:/\: \si{\kelvin}$',
+    r'$\Theta_{\text{D}} \:/\: \si{\kelvin}$',
+    r'$\delta \Theta_{\text{D}} \:/\: \si{\kelvin}$']))
+
+
 print(np.mean(theta_deb))
+
+write('build/Theta_deb.tex', make_SI(np.mean(theta_deb), r'\kelvin', figures=2))
+write('build/omega_deb.tex', make_SI(np.mean(theta_deb)*const.k/const.hbar*10**(-9), r'\giga\hertz', figures=2))
+
+
 # d)
 
 V = m/rho
@@ -321,17 +344,20 @@ v_t = 2260
 w_theo = ((18*np.pi**2 * N_L)/(V) * 1/ ( 1/v_l**3 + 2/v_t**3))**(1/3)
 theta_theo = const.hbar * w_theo / const.k
 
-
+write('build/Theta_deb_theo.tex', make_SI(np.mean(theta_theo), r'\kelvin', figures=2))
+write('build/omega_deb_theo.tex', make_SI(w_theo*10**(-9), r'\giga\hertz', figures=2))
 
 
 
 # plot this shit
 x = np.linspace(80,300)
 plt.plot(x, C_debye(x, unp.nominal_values(np.mean(theta_deb))), label=r'Theoriekurve mit $\Theta_{D,gem}$')
-plt.plot(x, C_debye(x, 345), label=r'Theoriekurve mit $\Theta_{D,gem}$')
+plt.plot(x, C_debye(x, 345), label=r'Theoriekurve mit $\Theta_{D,lit} = \SI{345}{\kelvin}$')
 plt.errorbar(unp.nominal_values(T_interpol), unp.nominal_values(C_v), fmt='rx', xerr=unp.std_devs(T_interpol), yerr=unp.std_devs(C_v), label='Messdaten')
 #plt.plot(unp.nominal_values(T_interpol), unp.nominal_values(C_v), 'x')
 plt.axhline(y=3*const.R, color='y', label=r'Dulong-Petit')
+plt.xlim(80,300)
+plt.ylim(10,42)
 plt.xlabel(r'$T \:/\: \si{\kelvin}$')
 plt.ylabel(r'$C_V \:/\: \si{\joule\per\kelvin}$')
 plt.legend(loc='best')
