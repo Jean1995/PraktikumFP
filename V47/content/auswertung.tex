@@ -87,9 +87,39 @@
 %     {Ersatzschaltbilder der verschiedenen Teilaufgaben.}
 %     \label{fig:Schaltungen}
 % \end{figure*}
+Die untersuchte Kupferprobe hat eine Masse von $m = \SI{342}{\gram}$ \cite{skript}.
+In Tabelle \ref{tab:eig} sind die Eigenschaften von Kupfer dargestellt.
 
+%\input{build/Tabelle_eigenschaften.tex}
 
-
+Dabei beschreibt $\rho$ die Dichte, $M$ die Molmasse, $\kappa$ den Kompressionsmodul und $V_0$ das Molvolumen.
+Die aufgenommenen Messwerte sind in Tabelle \ref{tab:1} wiedergegeben.
+Hierbei ist $R$ der Thermowiderstand an der Probe, $t$ die Messzeit, $U$ und $I$ beschreiben jeweils die Spannung und die Stromstärke der Heizwindung.
+Das Ohmmeter hat eine Ungenauigkeit von $\delta R = \SI{1}{\ohm}$, das Voltmeter eine von $\delta U = \SI{0.1}{\volt}$, sowie das Amperemeter eine von $\delta I = \SI{0.01}{\ampere}$.
+Die Zeit wird eine Ableseungenauigkeit von $\delta t = \SI{1}{\second}$ zugewiesen.\\
+Die Temperatur $T$ in Kelvin kann aus dem Thermowiderstand über die Formel
+\begin{equation}
+  T = 0.00134R^2+2.296R+30.13
+\end{equation}
+gewonnen werden.
 \input{build/Tabelle_messwerte.tex}
+
+Die der Probe zugeführte Energie $\Delta E$ wird aus dem Produkt aus Spannung, Stromstärke und Aufheizzeit $\Delta t$,
+\begin{equation}
+  \Delta E =  U\cdot I\cdot \Delta t
+\end{equation}
+hergeleitet.\\
+Dabei werden jeweils die Messwerte zu Beginn der Heizperiode genommen.
+Für die Wärmekapazität bei konstantem Druck folgt
+\begin{equation}
+  C_{\text{p}} = \frac{M}{m}\frac{\Delta E}{\Delta T} = \frac{U\cdot I\cdot \Delta t}{\Delta T}.
+\end{equation}
+Daraus resultiert einschließlich der Messwerte die Tabelle \ref{tab:3}.
+
+\input{build/Tabelle_cp.tex}
+
+
+
+
 
 \input{build/Tabelle_ausdehnung.tex}

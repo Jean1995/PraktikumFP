@@ -234,7 +234,7 @@ write('build/Tabelle_messwerte.tex', make_full_table(
     [#'Wert',
     r'$R \:/\: \si{\ohm}$',
     r'$T \:/\: \si{\kelvin}$',
-    r'$\Delta T \:/\: \si{\kelvin}$',
+    r'$\delta T \:/\: \si{\kelvin}$',
     r'$t \:/\: \si{\second}$',
     r'$U \:/\: \si{\volt}$',
     r'$I \:/\: \si{\milli\ampere}$']))
@@ -267,8 +267,43 @@ kappa = 140 * 10**9 #Quelle: http://www.periodensystem-online.de/index.php?show=
 rho = 8920 # Quelle Wikipedia
 V_0 = M / rho
 
+#write('build/eigenschaften.tex', make_table([rho,M*10**3,kappa*10**(-9),V_0],[1, 2, 1, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+#write('build/Tabelle_eigenschaften.tex', make_full_table(
+#    'Materialeigenschaften von Kupfer.',
+#    'tab:eig',
+#    'eigenschaften.tex',
+#    [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+#                              # die Multicolumns sein sollen
+#    [#'Wert',
+#    r'$\rho \:/\: \si{\kilo\gram\per\meter\tothe{3}}$',
+#    r'$M \:/\: 10^{-3}\si{\kilo\gram\per\mol}$',
+#    r'$\kappa \:/\: 10^{9}\si{\pascal}$',
+#    r'$V_0 \:/\: 10**{-6}\si{\meter\tothe{3}\per\mol}$']))
+
+
 E = u * i * np.diff(t) # zugeführte Energiemenge
-C_m = E / (n * 10)
+C_m = E / (n * np.diff(T))
+
+write('build/cp.tex', make_table([u_r, i_r*10**3, np.diff(t), np.diff(T), C_m],[2, 2, 2, 2, 2, 2, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/Tabelle_cp.tex', make_full_table(
+    'Daten bezüglich der Molwärme von Kupfer bei konstantem Druck.',
+    'tab:3',
+    'build/cp.tex',
+    [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                              # die Multicolumns sein sollen
+    [#'Wert',
+    r'$U \:/\: \si{\volt}$',
+    r'$I \:/\: \si{\milli\ampere}$',
+    r'$\Delta t \:/\: \si{\second}$',
+    r'$\delta(\Delta t) \:/\: \si{\second}$',
+    r'$\Delta T \:/\: \si{\kelvin}$',
+    r'$\delta(\Delta T) \:/\: \si{\kelvin}$',
+    r'$C_{\text{p}} \:/\: \si{\joule\per\kelvin}$',
+    r'$\delta C_{\text{p}} \:/\: \si{\joule\per\kelvin}$']))
+
+
+
+
 
 C_v = C_v(alpha_interpol, kappa, V_0, T_interpol, C_m)
 
