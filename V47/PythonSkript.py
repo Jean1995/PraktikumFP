@@ -347,7 +347,9 @@ N_L = 2.6867811*10**25 # quelle wikipedia
 v_l = 4700
 v_t = 2260
 
-w_theo = ((18*np.pi**2 * N_L)/(V) * 1/ ( 1/v_l**3 + 2/v_t**3))**(1/3)
+N_L_richtig = 1/(63.546*const.u) * 0.342
+
+w_theo = ((18*np.pi**2 * N_L_richtig)/(V) * 1/ ( 1/v_l**3 + 2/v_t**3))**(1/3) # setze hier statt N_l n ein
 theta_theo = const.hbar * w_theo / const.k
 
 write('build/Theta_deb_theo.tex', make_SI(np.mean(theta_theo), r'\kelvin', figures=2))
@@ -374,3 +376,7 @@ plt.savefig('build/fit.pdf')
 print( np.shape( 9*C_debye(x, np.mean(theta_deb)) ))
 print(const.R)
 print(Wie(x,a,b,c)/1000)
+
+#diskussion
+err_deb = np.abs(theta_theo - np.mean(theta_deb))/theta_theo
+write('build/err_deb.tex', make_SI(err_deb*100, r'\percent', figures=1))

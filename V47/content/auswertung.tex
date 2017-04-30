@@ -65,7 +65,7 @@
 %         \includegraphics[width=\textwidth]{Abbildungen/Schaltung2.pdf}
 %         \caption[]%
 %         {{\small Schaltung 2.}}
-%         \label{fig:Schaltung2}
+%         \label{stdfig:Schaltung2}
 %     \end{subfigure}
 %     \vskip\baselineskip
 %     \begin{subfigure}[b]{0.475\textwidth}
@@ -144,7 +144,15 @@ Für die molare Wärmekapazität bei konstantem Druck folgt
   C_{\text{p}} = \frac{M}{m}\frac{\Delta E}{\Delta T} = \frac{M}{m}\frac{U\cdot I\cdot \Delta t}{\Delta T}.
 \end{equation}
 Daraus resultiert einschließlich der Messwerte die Tabelle \ref{tab:3}.
-
+Die Fehler für die $C_{\text{p}}$ berechnet sich nach der Gaußschen Fehlerfortpflanzung \eqref{eq:gauss} nach der Formel
+\begin{equation}
+  \delta C_\text{p} = \frac{M}{m} \Bigl( \frac{I \Delta t}{\Delta T} \delta U + \frac{U \Delta t}{\Delta T} \delta I + \frac{U I}{\Delta T} \delta(\Delta t) - \frac{U I \Delta t}{(\Delta T)^2} \delta(\Delta T) \Bigr)
+\end{equation}
+wobei sich der Fehler der Temperatur aus dem Ablesefehler des Ohmmeters ergibt, so dass nach der Fehlerfortpflanzung
+\begin{equation}
+ \delta T = 2 \cdot 0.00134 \cdot R \cdot \delta R + 2.296 \cdot \delta R
+\end{equation}
+folgt.
 \input{build/Tabelle_cp.tex}
 
 Um auf die Molwärme bei konstantem Volumen zu kommen, wird der Zusammenhang

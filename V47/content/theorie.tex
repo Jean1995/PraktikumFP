@@ -41,12 +41,12 @@
 %     \label{fig:Schaltungen}
 % \end{figure*}
 
-Die Molwärme eines Materials gibt an, wieviel Wärmemenge dem Material zugeführt werden muss, um es um einen Grad Kelvin zu erwärmen.
+Die molare Wärmekapazität eines Materials gibt an, wieviel Wärmemenge dem Material zugeführt werden muss, um es um einen Grad Kelvin zu erwärmen.
 Es gibt drei Ansätze diese Größe zu beschreiben: Das klassische, das Einstein- und das Debye-Modell.
 
-\subsection{Das klassische Modell der Molwärme}
+\subsection{Das klassische Modell der molaren Wärmekapazität}
 
-Im klassischen Modell der Molwärme wird davon ausgegangen, dass sich die Wärme nach dem Äquipartitionstheorem im thermischen Gleichgewicht gleichmäßig auf alle Bewegungsfreiheitsgrade verteilt.
+Im klassischen Modell der molaren Wärmekapazität wird davon ausgegangen, dass sich die Wärme nach dem Äquipartitionstheorem im thermischen Gleichgewicht gleichmäßig auf alle Bewegungsfreiheitsgrade verteilt.
 Für die mittlere potentielle Energie eines Atoms pro Freiheitsgrad ergibt sich demnach
 \begin{equation}
   \left\langle u \right\rangle_{\text{kl}} = \frac{1}{2}k_{\text{B}}T,
@@ -109,21 +109,21 @@ Dies führt zu einer spektralen Dichte von
   Z(\omega)d\omega = \frac{3L^3}{2\pi^2}\omega^2\left(\frac{1}{v_l^3}+\frac{2}{v_{tr}^3}\right)d\omega. \label{eqn:1}
 \end{equation}
 Hierbei bezeichnen $v_l$ und $v_{tr}$ die longitudinale und transversale Phasengeschwindigkeit.
-Da ein Atom nur drei Eigenschwingungen besitzt, hat ein Kristall aus $N_{\text{L}}$ Atomen höchstens $3N_{\text{L}}$ Eigenschwingungen, woraus folgt, dass es eine obere Grenze der Frequenz geben muss, die Debye-Frequenz $\omega_{\text{D}}$, und es folgt die Relation
+Da ein Atom nur drei Eigenschwingungen besitzt, hat ein Kristall aus $N$ Atomen höchstens $3N$ Eigenschwingungen, woraus folgt, dass es eine obere Grenze der Frequenz geben muss, die Debye-Frequenz $\omega_{\text{D}}$, und es folgt die Relation
 \begin{equation}
-  \int_{0}^{\omega_{\text{D}}}Z(\omega)d\omega = 3N_{\text{L}}. \label{eqn:2}
+  \int_{0}^{\omega_{\text{D}}}Z(\omega)d\omega = 3N. \label{eqn:2}
 \end{equation}
 Aus \eqref{eqn:1} und \eqref{eqn:2} folgt
 \begin{equation}
-  \omega_{\text{D}}^3 = \frac{18\pi^2N_{\text{L}}}{L^3}\left(\frac{1}{v_l^3}+\frac{2}{v_{tr}^3} \right)^{-1}. \label{eqn:3}
+  \omega_{\text{D}}^3 = \frac{18\pi^2N}{L^3}\left(\frac{1}{v_l^3}+\frac{2}{v_{tr}^3} \right)^{-1}. \label{eqn:3}
 \end{equation}
 Demnach vereinfacht sich die spektrale Dichte zu
 \begin{equation}
-  Z(\omega)d\omega = \frac{3N_{\text{L}}}{\omega^3}\omega^2d\omega.
+  Z(\omega)d\omega = \frac{3N}{\omega^3}\omega^2d\omega.
 \end{equation}
 Die Molwärme nach Debye beträgt somit
 \begin{equation}
-  C_{\text{V}} = \frac{\mathrm{d}}{\mathrm{d}T}\frac{9N_{\text{L}}\hbar}{\omega_{\text{D}}^3} \int_{0}^{\omega_{\text{D}}}\frac{\omega^3}{e^{\frac{\hbar\omega}{k_{\text{B}}T}}-1}d\omega.
+  C_{\text{V}} = \frac{\mathrm{d}}{\mathrm{d}T}\frac{9N\hbar}{\omega_{\text{D}}^3} \int_{0}^{\omega_{\text{D}}}\frac{\omega^3}{e^{\frac{\hbar\omega}{k_{\text{B}}T}}-1}d\omega.
 \end{equation}
 Mit Hilfe der Substitutionen
 \begin{equation}
@@ -131,7 +131,7 @@ Mit Hilfe der Substitutionen
 \end{equation}
 lässt sich die Molwärme schreiben als
 \begin{equation}
-  C_{\text{V}} = \frac{\mathrm{d}}{\mathrm{d}T} \left( 9N_{\text{L}} k_{\text{B}}T \left(\frac{T}{\Theta_{\text{D}}}\right)^3 \int_{0}^{\frac{\omega_{\text{D}}}{T}}\frac{x^3}{e^x-1}dx\right).
+  C_{\text{V}} = \frac{\mathrm{d}}{\mathrm{d}T} \left( 9N k_{\text{B}}T \left(\frac{T}{\Theta_{\text{D}}}\right)^3 \int_{0}^{\frac{\omega_{\text{D}}}{T}}\frac{x^3}{e^x-1}dx\right).
 \end{equation}
 Durch Nutzen der Leibnitz-Regel für Parameterintegrale lässt sich diese Formel auf
 \begin{equation}
