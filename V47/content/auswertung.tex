@@ -119,13 +119,13 @@ In Tabelle \ref{tab:eig} sind die Eigenschaften von Kupfer dargestellt.
 
 Dabei beschreibt $\rho$ die Dichte, $M$ die Molmasse, $\kappa$ den Kompressionsmodul und $V_0$ das Molvolumen von Kupfer.
 Die aufgenommenen Messwerte sind in Tabelle \ref{tab:1} wiedergegeben.
-Hierbei ist $R$ der Thermowiderstand an der Probe, $t$ die Messzeit, $U$ und $I$ beschreiben jeweils die Spannung und die Stromstärke der Heizwindung.
+Hierbei ist $R$ der Thermowiderstand an der Probe, $t$ die Messzeit, $U$ und $I$ beschreiben jeweils die Spannung und die Stromstärke der Heizwicklung der Probe.
 Als Messintervall wird ein $\increment T$ von $\SI{10}{\kelvin}$ gewählt.
 Das Ohmmeter hat eine Ungenauigkeit von $\delta R = \SI{0.1}{\ohm}$, das Voltmeter eine von $\delta U = \SI{0.1}{\volt}$, sowie das Amperemeter eine von $\delta I = \SI{0.01}{\ampere}$.
 Der Zeit wird eine Ableseungenauigkeit von $\delta t = \SI{1}{\second}$ zugewiesen.\\
 Die Temperatur $T$ in Kelvin kann aus dem Thermowiderstand $R$ über die Formel
 \begin{equation}
-  T = 0.00134R^2+2.296R+30.13
+  T = 0,00134R^2+2,296R+30,13
 \end{equation}
 gewonnen werden \cite{skript}.
 \input{build/Tabelle_messwerte.tex}
@@ -135,7 +135,7 @@ gewonnen werden \cite{skript}.
 \subsection{Berechnung der molaren Wärmekapazität}
 Die der Probe zugeführte Energie $\Delta E$ wird aus dem Produkt aus Spannung, Stromstärke und Aufheizzeit $\Delta t$,
 \begin{equation}
-  \Delta E =  U\cdot I\cdot \Delta t
+  \Delta E =  U\cdot I\cdot \Delta t,
 \end{equation}
 hergeleitet.\\
 Dabei werden für Spannug und Stromstärke jeweils die Messwerte zu Beginn der Heizperiode genommen.
@@ -146,7 +146,7 @@ Für die molare Wärmekapazität bei konstantem Druck folgt
 Daraus resultiert einschließlich der Messwerte die Tabelle \ref{tab:3}.
 Die Fehler für die $C_{\text{p}}$ berechnet sich nach der Gaußschen Fehlerfortpflanzung \eqref{eq:gauss} nach der Formel
 \begin{equation}
-  \delta C_\text{p} = \frac{M}{m} \Bigl( \frac{I \Delta t}{\Delta T} \delta U + \frac{U \Delta t}{\Delta T} \delta I + \frac{U I}{\Delta T} \delta(\Delta t) - \frac{U I \Delta t}{(\Delta T)^2} \delta(\Delta T) \Bigr)
+  \delta C_\text{p} = \frac{M}{m} \sqrt{ \left(\frac{I \Delta t}{\Delta T} \delta U \right)^2 + \left( \frac{U \Delta t}{\Delta T} \delta I \right)^2 + \left(\frac{U I}{\Delta T} \delta(\Delta t) \right)^2 + \left( \frac{U I \Delta t}{(\Delta T)^2} \delta(\Delta T)\right)^2 }
 \end{equation}
 wobei sich der Fehler der Temperatur aus dem Ablesefehler des Ohmmeters ergibt, so dass nach der Fehlerfortpflanzung
 \begin{equation}

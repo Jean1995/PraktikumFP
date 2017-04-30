@@ -86,7 +86,7 @@ errechnet werden.
 Hierbei wird die Summe über alle Energien multipliziert mit deren Wahrscheinlichkeit auf die Summe aller Wahrscheinlichkeiten normiert.
 Das führt zur Energie eines Mols von
 \begin{equation}
-  U = 3N_{\text{L}}\frac{\hbar\omega}{e^{\frac{n\hbar\omega}{k_{\text{B}}T}}-1}.
+  U = 3N_{\text{L}}\frac{\hbar\omega}{e^{\frac{\hbar\omega}{k_{\text{B}}T}}-1}.
 \end{equation}
 Daraus folgt, dass die Molwärme
 \begin{equation}
@@ -99,7 +99,7 @@ Die Annahme, dass alle Atome mit der selben Frequenz schwingen, ist jedoch eine 
 Das Debye-Modell zieht die spektrale Verteilung $Z(\omega)$ der Eigenschwingungen mit ein, woraus sich die innere Energie aus dem Integral über alle Eigenschwingungen ergibt.
 Für die Molwärme folgt der Ausdruck
 \begin{equation}
-  C_{\text{V}} = \frac{\mathrm{d}}{\mathrm{d}T}\int_{0}^{\omega_{\text{max}}}Z(\omega)d\omega.
+  C_{\text{V}} = \frac{\mathrm{d}}{\mathrm{d}T}\int_{0}^{\omega_{\text{max}}}Z(\omega)\frac{\hbar\omega}{e^{\frac{\hbar\omega}{k_{\text{B}}T}}-1}d\omega.
 \end{equation}
 Die Funktion $Z(\omega)$ wird insofern angenähert, dass von einem isotropen Kristall mit einer linearen Dispersionsrelation ausgegangen wird.
 Daraus folgt, dass die Phasengeschwindigkeit einer elastischen Welle im Material nicht von der Ausbreitungsrichtung oder Frequenz abhängt.

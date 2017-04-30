@@ -230,7 +230,7 @@ T = Temp(R) +273.15    #aus dem Widerstand mit seiner Ungenauigkeit ergibt sich 
 #write('build/parameter_p.tex', make_SI(p * 1e-3, r'\kilo\volt', figures=1))
 
 print(T)
-write('build/messwerte.tex', make_table([R_r, T, t_r, u_tabelle, i_tabelle],[1, 2, 2, 1, 1, 1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/messwerte.tex', make_table([R_r, T, t_r, u_tabelle, i_tabelle],[1, 1, 1, 1, 1, 1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_messwerte.tex', make_full_table(
     'Messdaten zur Bestimmung der temperaturabhängigen Wärmekapazität.',
     'tab:1',
@@ -279,7 +279,7 @@ V_0 = M / rho
 E = u * i * np.diff(t) # zugeführte Energiemenge
 C_m = E / (n * np.diff(T))
 
-write('build/cp.tex', make_table([u_r, i_r*10**3, np.diff(t), np.diff(T), C_m],[2, 2, 2, 2, 2, 2, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/cp.tex', make_table([u_r, i_r*10**3, np.diff(t), np.diff(T), C_m],[1, 1, 2, 1, 1, 1, 1, 1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_cp.tex', make_full_table(
     'Daten bezüglich der molaren Wärmekapazität von Kupfer bei konstantem Druck.',
     'tab:3',
@@ -302,7 +302,7 @@ write('build/Tabelle_cp.tex', make_full_table(
 
 C_v = C_v(alpha_interpol, kappa, V_0, T_interpol, C_m)
 
-write('build/ausdehnung.tex', make_table([T_interpol, alpha_interpol*10**6, C_v],[2, 2, 2, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/ausdehnung.tex', make_table([T_interpol, alpha_interpol*10**6, C_v],[1, 1, 1, 1, 1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_ausdehnung.tex', make_full_table(
     'Interpolierter Ausdehnungskoeffizient in Abhängigkeit der interpolierten Temperatur und dazugehörige molare Wärmekapazität bei konstantem Volumen..',
     'tab:2',
