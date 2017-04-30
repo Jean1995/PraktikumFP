@@ -94,7 +94,7 @@ In Tabelle \ref{tab:eig} sind die Eigenschaften von Kupfer dargestellt.
 
 \begin{table}
     \centering
-    \caption{Materialeigenschaften von Kupfer.}
+    \caption{Materialeigenschaften von Kupfer \cite[S. 1509]{3527261699},\cite{komp},\cite{skript}. }
     \label{tab:eig}
     \sisetup{parse-numbers=false}
     \begin{tabular}{
@@ -117,30 +117,31 @@ In Tabelle \ref{tab:eig} sind die Eigenschaften von Kupfer dargestellt.
 
 %\input{build/Tabelle_eigenschaften.tex}
 
-Dabei beschreibt $\rho$ die Dichte, $M$ die Molmasse, $\kappa$ den Kompressionsmodul und $V_0$ das Molvolumen.
+Dabei beschreibt $\rho$ die Dichte, $M$ die Molmasse, $\kappa$ den Kompressionsmodul und $V_0$ das Molvolumen von Kupfer.
 Die aufgenommenen Messwerte sind in Tabelle \ref{tab:1} wiedergegeben.
 Hierbei ist $R$ der Thermowiderstand an der Probe, $t$ die Messzeit, $U$ und $I$ beschreiben jeweils die Spannung und die Stromstärke der Heizwindung.
-Das Ohmmeter hat eine Ungenauigkeit von $\delta R = \SI{1}{\ohm}$, das Voltmeter eine von $\delta U = \SI{0.1}{\volt}$, sowie das Amperemeter eine von $\delta I = \SI{0.01}{\ampere}$.
-Die Zeit wird eine Ableseungenauigkeit von $\delta t = \SI{1}{\second}$ zugewiesen.\\
-Die Temperatur $T$ in Kelvin kann aus dem Thermowiderstand über die Formel
+Als Messintervall wird ein $\increment T$ von $\SI{10}{\kelvin}$ gewählt.
+Das Ohmmeter hat eine Ungenauigkeit von $\delta R = \SI{0.1}{\ohm}$, das Voltmeter eine von $\delta U = \SI{0.1}{\volt}$, sowie das Amperemeter eine von $\delta I = \SI{0.01}{\ampere}$.
+Der Zeit wird eine Ableseungenauigkeit von $\delta t = \SI{1}{\second}$ zugewiesen.\\
+Die Temperatur $T$ in Kelvin kann aus dem Thermowiderstand $R$ über die Formel
 \begin{equation}
   T = 0.00134R^2+2.296R+30.13
 \end{equation}
-gewonnen werden.
+gewonnen werden \cite{skript}.
 \input{build/Tabelle_messwerte.tex}
 
 \newpage
 
-\subsection{Berechnung der Molwärme}
+\subsection{Berechnung der molaren Wärmekapazität}
 Die der Probe zugeführte Energie $\Delta E$ wird aus dem Produkt aus Spannung, Stromstärke und Aufheizzeit $\Delta t$,
 \begin{equation}
   \Delta E =  U\cdot I\cdot \Delta t
 \end{equation}
 hergeleitet.\\
-Dabei werden jeweils die Messwerte zu Beginn der Heizperiode genommen.
-Für die Wärmekapazität bei konstantem Druck folgt
+Dabei werden für Spannug und Stromstärke jeweils die Messwerte zu Beginn der Heizperiode genommen.
+Für die molare Wärmekapazität bei konstantem Druck folgt
 \begin{equation}
-  C_{\text{p}} = \frac{M}{m}\frac{\Delta E}{\Delta T} = \frac{U\cdot I\cdot \Delta t}{\Delta T}.
+  C_{\text{p}} = \frac{M}{m}\frac{\Delta E}{\Delta T} = \frac{M}{m}\frac{U\cdot I\cdot \Delta t}{\Delta T}.
 \end{equation}
 Daraus resultiert einschließlich der Messwerte die Tabelle \ref{tab:3}.
 
@@ -150,22 +151,23 @@ Um auf die Molwärme bei konstantem Volumen zu kommen, wird der Zusammenhang
 \begin{equation}
   C_{\text{V}} = C_{\text{p}} - 9 \alpha^2 \kappa V_0 T
 \end{equation}
-verwendet.
-Hierbei entspricht $\alpha$ dem Ausdehnungskoeffizienten, dessen Beziehung zur Temperatur in Tabelle \ref{tab:alpha} im Anhang einzusehen ist.
+verwendet \cite{skript}.
+Hierbei entspricht $\alpha$ dem Ausdehnungskoeffizienten von Kupfer, dessen Abhängigkeit von der Temperatur in Abbildung \ref{fig:alphaa} im Anhang einzusehen ist.
 Es wird jeweils die mittlere Temperatur während einer Heizperiode genutzt und somit zwischen den angegebenen Werten des Ausdehnungskoeffizienten linear interpoliert.
-Die Ergebnisse sind in Tabelle \ref{tab:2} zu begutachten.
+Die Ausdehnungskoeffizienten sowie die daraus ermittelten spezifischen Wärmekapazitäten bei konstantem Volumen sind in Tabelle \ref{tab:2} zu begutachten.
 
 \input{build/Tabelle_ausdehnung.tex}
 
 \subsection{Debye-Temperatur und -Frequenz}
 
-Die Debye-Temperatur wird über die Tabelle \ref{tab:deb} im Anhang bestimmt, indem $(C_{\text{V}},T)$-Wertepaare abgeglichen werden.
+Die Debye-Temperatur wird über die Tabelle \ref{fig:mirfallenkeinelabelmehreinfuerdenganzenmistfuckthisshitimoutwarumtueichmirdasanundesistschonhalbzweinachtsdafuq} im Anhang bestimmt, indem zu jedem $C_{\text{V}}$ der passende Tabellenwert gesucht wird.
+Aus der dazugehörigen Messtemperatur wird daraus die Debye-Temperatur $\Theta_\text{D}$ ermittelt.
 Es werden hier jedoch nur Temperaturen bis $\SI{170}{\kelvin}$ berücksichtigt.
 In Tabelle \ref{tab:4} sind die Resultate aufgeführt.
 
 \input{build/Tabelle_temp.tex}
 
-Eine Mittelung führt auf eine Debye-Temperatur von
+Eine Mittelung der verschiedenen ermittelten Werte führt auf eine Debye-Temperatur von
 \begin{align*}
   \Theta_{\text{D,gem}} &= \input{build/Theta_deb.tex}.
 \end{align*}
@@ -174,7 +176,7 @@ Aus dem Zusammenhang \eqref{eqn:4} ergibt dies eine Debye-Frequenz von
   \omega_{\text{D,gem}} &= \input{build/omega_deb.tex}.
 \end{align*}
 
-Nach der Formel \eqref{eqn:3} lassen sich über die transversale und longitudinale Phasengeschwindigkeit von
+Nach der Formel \eqref{eqn:3} lassen sich über die transversale und longitudinale Phasengeschwindigkeit \cite{skript} von
 \begin{align*}
   v_{\text{l}}  &= \SI{4.7}{\kilo\meter\per\second},\\
   v_{\text{tr}} &= \SI{2.26}{\kilo\meter\per\second}
@@ -190,6 +192,6 @@ Zuletzt sind die Gesamtergebnisse in Plot \ref{plot:1} einzusehen.
 \begin{figure}
   \centering
   \includegraphics{build/fit.pdf}
-  \caption{Ergebnisse für die Molwärme und Theoriekurven.}
+  \caption{Ergebnisse für die spezifische Wärmekapazitäten und Theoriekurven, berechnet aus den experimentellen bzw. aus den theoretischen Ergebnissen für die Debye-Temperatur.}
   \label{plot:1}
 \end{figure}

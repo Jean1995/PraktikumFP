@@ -161,6 +161,12 @@ from scipy.integrate import quad
 # R = const.physical_constants["molar gas constant"]      # Array of value, unit, error
 
 
+
+
+plt.style.use('seaborn-darkgrid')
+plt.set_cmap('Set2')
+
+
 def Temp(R):
     return 0.00134*R**2+2.296*R-243.02
 
@@ -210,7 +216,7 @@ delta_t = t_r*0+1
 delta_u = u_r*0+0.1
 delta_i = i_r*0+0.1*10**(-3)
 R_r = Wie(x,a,b,c)  #das sind die Widerstände, die wir gemessen haben, bzw bei denen wir gemessen haben
-delta_R = R_r*0+1   #der Widerstand hat jedoch eine Ungenauigkeit und dieser muss hier berücksichtigt werden
+delta_R = R_r*0+0.1   #der Widerstand hat jedoch eine Ungenauigkeit und dieser muss hier berücksichtigt werden
 
 print(len(R_r))
 
@@ -226,7 +232,7 @@ T = Temp(R) +273.15    #aus dem Widerstand mit seiner Ungenauigkeit ergibt sich 
 print(T)
 write('build/messwerte.tex', make_table([R_r, T, t_r, u_tabelle, i_tabelle],[1, 2, 2, 1, 1, 1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_messwerte.tex', make_full_table(
-    'Messdaten.',
+    'Messdaten zur Bestimmung der temperaturabhängigen Wärmekapazität.',
     'tab:1',
     'build/messwerte.tex',
     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
@@ -275,7 +281,7 @@ C_m = E / (n * np.diff(T))
 
 write('build/cp.tex', make_table([u_r, i_r*10**3, np.diff(t), np.diff(T), C_m],[2, 2, 2, 2, 2, 2, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_cp.tex', make_full_table(
-    'Daten bezüglich der Molwärme von Kupfer bei konstantem Druck.',
+    'Daten bezüglich der molaren Wärmekapazität von Kupfer bei konstantem Druck.',
     'tab:3',
     'build/cp.tex',
     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
@@ -298,7 +304,7 @@ C_v = C_v(alpha_interpol, kappa, V_0, T_interpol, C_m)
 
 write('build/ausdehnung.tex', make_table([T_interpol, alpha_interpol*10**6, C_v],[2, 2, 2, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_ausdehnung.tex', make_full_table(
-    'Interpolierter Ausdehnungskoeffizient in Abhängigkeit der interpolierten Temperatur und dazugehöriger Molwärme.',
+    'Interpolierter Ausdehnungskoeffizient in Abhängigkeit der interpolierten Temperatur und dazugehörige molare Wärmekapazität bei konstantem Volumen..',
     'tab:2',
     'build/ausdehnung.tex',
     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
@@ -310,7 +316,7 @@ write('build/Tabelle_ausdehnung.tex', make_full_table(
     r'$C_{\text{V}} \:/\: \si{\joule\per\kelvin}$',
     r'$\delta C_{\text{V}} \:/\: \si{\joule\per\kelvin}$']))
 
-integralwerte = np.array([ 3.3, 2.8, 2.7, 2.6, 1.9, 2.2, 2.0, 1.8])
+integralwerte = np.array([ 3.1, 2.8, 2.7, 2.6, 2.0, 2.2, 2.1, 1.9])
 theta_deb = integralwerte * T_interpol[0:8]
 
 write('build/temp.tex', make_table([integralwerte, T_interpol[0:8], theta_deb],[1, 1, 1, 2, 2]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
@@ -321,7 +327,7 @@ write('build/Tabelle_temp.tex', make_full_table(
     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
                               # die Multicolumns sein sollen
     [#'Wert',
-    r'$\text{Integral}$',
+    r'$\text{Integralwert}$',
     r'$T_{\text{interp}} \:/\: \si{\kelvin}$',
     r'$\delta T_{\text{interp}} \:/\: \si{\kelvin}$',
     r'$\Theta_{\text{D}} \:/\: \si{\kelvin}$',
@@ -352,12 +358,12 @@ write('build/omega_deb_theo.tex', make_SI(w_theo*10**(-9), r'\giga\hertz', figur
 # plot this shit
 x = np.linspace(80,300)
 plt.plot(x, C_debye(x, unp.nominal_values(np.mean(theta_deb))), label=r'Theoriekurve mit $\Theta_{D,gem}$')
-plt.plot(x, C_debye(x, 345), label=r'Theoriekurve mit $\Theta_{D,lit} = \SI{345}{\kelvin}$')
+plt.plot(x, C_debye(x, theta_theo), label=r'Theoriekurve mit $\Theta_\text{D,Theorie}$')
 plt.errorbar(unp.nominal_values(T_interpol), unp.nominal_values(C_v), fmt='rx', xerr=unp.std_devs(T_interpol), yerr=unp.std_devs(C_v), label='Messdaten')
 #plt.plot(unp.nominal_values(T_interpol), unp.nominal_values(C_v), 'x')
 plt.axhline(y=3*const.R, color='y', label=r'Dulong-Petit')
 plt.xlim(80,300)
-plt.ylim(10,42)
+#plt.ylim(10,42)
 plt.xlabel(r'$T \:/\: \si{\kelvin}$')
 plt.ylabel(r'$C_V \:/\: \si{\joule\per\kelvin}$')
 plt.legend(loc='best')

@@ -49,7 +49,7 @@ Es gibt drei Ansätze diese Größe zu beschreiben: Das klassische, das Einstein
 Im klassischen Modell der Molwärme wird davon ausgegangen, dass sich die Wärme nach dem Äquipartitionstheorem im thermischen Gleichgewicht gleichmäßig auf alle Bewegungsfreiheitsgrade verteilt.
 Für die mittlere potentielle Energie eines Atoms pro Freiheitsgrad ergibt sich demnach
 \begin{equation}
-  <u>_{\text{kl}} = \frac{1}{2}k_{\text{B}}T,
+  \left\langle u \right\rangle_{\text{kl}} = \frac{1}{2}k_{\text{B}}T,
 \end{equation}
 wobei $T$ die Temperatur und $k_{\text{B}}$ die Boltzmann-Konstante \cite{scipy} ist.
 Aus dem Virialsatz geht hervor, dass die mittlere kinetische Energie der mittleren potentiellen Energie entspricht.
@@ -61,7 +61,7 @@ und für ein Mol
 \begin{equation}
   U = 3N_{\text{L}}k_{\text{B}}T = 3RT,
 \end{equation}
-mit der Loschmidtzahl $N_{\text{L}}$ und der allgemeinen Gaskonstante $R$. \cite{scipy}
+mit der Loschmidtzahl $N_{\text{L}}$ und der allgemeinen Gaskonstante $R$ \cite{scipy}.
 Die Molwärme bei konstantem Volumen ergibt sich zu
 \begin{equation}
   C_{\text{V}} = \frac{\partial U}{\partial T}\biggr|_V = 3R.
@@ -80,7 +80,7 @@ Aus der Boltzmann-Verteilung
 \end{equation}
 welche angibt, mit welcher Wahrscheinlichkeit ein Oszillator, der bei der Temperatur $T$ im Gleichgewicht mit seiner Umgebung steht, die Energie $n\hbar\omega$ besitzt, kann die mittlere Energie eines Oszillators pro Freiheitsgrad über die Formel
 \begin{equation}
-  <u>_{\text{E}} = \frac{\sum_{n=0}^{\infty}n\hbar\omega e^{-\frac{n\hbar\omega}{k_{\text{B}}T}}}{\sum_{n=0}^{\infty} e^{-\frac{n\hbar\omega}{k_{\text{B}}T}}}
+  \left\langle u \right\rangle_{\text{E}} = \frac{\sum_{n=0}^{\infty}n\hbar\omega e^{-\frac{n\hbar\omega}{k_{\text{B}}T}}}{\sum_{n=0}^{\infty} e^{-\frac{n\hbar\omega}{k_{\text{B}}T}}}
 \end{equation}
 errechnet werden.
 Hierbei wird die Summe über alle Energien multipliziert mit deren Wahrscheinlichkeit auf die Summe aller Wahrscheinlichkeiten normiert.
@@ -92,7 +92,7 @@ Daraus folgt, dass die Molwärme
 \begin{equation}
   C_{\text{V}} = 3R\frac{\hbar^2\omega^2}{k_{\text{B}}^2}\frac{1}{T^2}\frac{e^{\frac{\hbar\omega}{k_{\text{B}}T}}}{\left(e^{\frac{\hbar\omega}{k_{\text{B}}T}}-1\right)^2}.
 \end{equation}
-Die Annahme, dass alle Atome mit der selben Frequenz schwingen, ist jedoch eine grobe Näherung und wird im Debye-Modell aufgearbeitet.
+Die Annahme, dass alle Atome mit der selben Frequenz schwingen, ist jedoch eine grobe Näherung. Diese wird im Debye-Modell korrigiert.
 
 \subsection{Das Debye-Modell}
 
