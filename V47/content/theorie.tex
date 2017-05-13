@@ -41,7 +41,7 @@
 %     \label{fig:Schaltungen}
 % \end{figure*}
 
-Die molare Wärmekapazität eines Materials gibt an, wieviel Wärmemenge dem Material zugeführt werden muss, um es um einen Grad Kelvin zu erwärmen.
+Die molare Wärmekapazität eines Materials gibt an, wie viel Wärmemenge dem Material zugeführt werden muss, um es um einen Kelvin zu erwärmen.
 Es gibt drei Ansätze diese Größe zu beschreiben: Das klassische, das Einstein- und das Debye-Modell.
 
 \subsection{Das klassische Modell der molaren Wärmekapazität}
@@ -67,13 +67,13 @@ Die Molwärme bei konstantem Volumen ergibt sich zu
   C_{\text{V}} = \frac{\partial U}{\partial T}\biggr|_V = 3R.
 \end{equation}
 Diese ist temperatur- und materialunabhängig und genügt dem Dulong-Petit'schen Gesetz.
-Empirisch wird diese Annahme jedoch wiederlegt.
+Empirisch wird diese Annahme jedoch widerlegt.
 Bei hinreichend großen Temperaturen wird dieser Wert asymptotisch erreicht.
 
 \subsection{Das Einsteinmodell}
 
 Im Einsteinmodell wird beachtet, dass die atomaren Oszillatoren nur Energien in Einheiten von $\hbar\omega$ austauschen können.
-Zudem wird angenommen, dass alle Atome einheitlich mit der selben Frequenz $\omega$ schwingen.
+Zudem wird angenommen, dass alle Atome einheitlich mit derselben Frequenz $\omega$ schwingen.
 Aus der Boltzmann-Verteilung
 \begin{equation}
   W(n) = e^{-\frac{n\hbar\omega}{k_{\text{B}}T}}
@@ -92,7 +92,7 @@ Daraus folgt, dass die Molwärme
 \begin{equation}
   C_{\text{V}} = 3R\frac{\hbar^2\omega^2}{k_{\text{B}}^2}\frac{1}{T^2}\frac{e^{\frac{\hbar\omega}{k_{\text{B}}T}}}{\left(e^{\frac{\hbar\omega}{k_{\text{B}}T}}-1\right)^2}.
 \end{equation}
-Die Annahme, dass alle Atome mit der selben Frequenz schwingen, ist jedoch eine grobe Näherung. Diese wird im Debye-Modell korrigiert.
+Die Annahme, dass alle Atome mit derselben Frequenz schwingen, ist jedoch eine grobe Näherung. Diese wird im Debye-Modell korrigiert.
 
 \subsection{Das Debye-Modell}
 
@@ -133,15 +133,15 @@ lässt sich die Molwärme schreiben als
 \begin{equation}
   C_{\text{V}} = \frac{\mathrm{d}}{\mathrm{d}T} \left( 9N k_{\text{B}}T \left(\frac{T}{\Theta_{\text{D}}}\right)^3 \int_{0}^{\frac{\omega_{\text{D}}}{T}}\frac{x^3}{e^x-1}dx\right).
 \end{equation}
-Durch Nutzen der Leibnitz-Regel für Parameterintegrale lässt sich diese Formel auf
+Durch Nutzen der Leibniz-Regel für Parameterintegrale lässt sich diese Formel auf
 \begin{equation}
   C_{\text{V}} = 9R \left(\frac{T}{\Theta_{\text{D}}}\right)^3 \int_{0}^{\frac{\Theta_{\text{D}}}{T}} \frac{x^4e^x}{\left(e^x-1\right)^2}dx
 \end{equation}
 vereinfachen.
-Hierbei ist $\Theta_{\text{D}}$ die materialabhängige Debye-Temperatur, die Funktion $C_{\text{V}}\left(\frac{\Theta_{\text{D}}}{T}\right)$ hingegen ist universel.
+Hierbei ist $\Theta_{\text{D}}$ die materialabhängige Debye-Temperatur, die Funktion $C_{\text{V}}\left(\frac{\Theta_{\text{D}}}{T}\right)$ hingegen ist universell.
 Ihre Werte können im Anhang eingesehen werden.
 %\ref{tabelle}
-Die Molwärme nach Debye zeigt das selbe asymptotische Verhalten wie die des Einstein-Modells.
+Die Molwärme nach Debye zeigt dasselbe asymptotische Verhalten wie die des Einstein-Modells.
 Im Tieftemperaturbereich ist jene jedoch proportional zu $T^3$, die nach Einstein steigt exponentiell an.\\
 Das Debye-Modell ist aber auch nur eine Näherung.
 Um exakte Ergebnisse zu erhalten, müssen die wirklichen Dispersionsrelationen der Longitudinal- und Transversalwellen berücksichtigt werden.
