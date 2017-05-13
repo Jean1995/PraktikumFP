@@ -1,3 +1,8 @@
+\section{Zielsetzung}
+Im folgenden Experiment wird die molare Wärmekapazität von Kupfer bestimmt.
+Hierzu wird ein Versuchsaufbau verwendet, der es ermöglicht, dem Material eine fest definierte Wärmemenge in einem bestimmten Zeitintervall hinzuzufügen.
+Zudem wird aus den gemessenen Werten die Debye-Temperatur von Kupfer ermittelt.
+
 \section{Theorie}
 \label{sec:Theorie}
 
@@ -41,8 +46,8 @@
 %     \label{fig:Schaltungen}
 % \end{figure*}
 
-Die molare Wärmekapazität eines Materials gibt an, wie viel Wärmemenge dem Material zugeführt werden muss, um es um einen Kelvin zu erwärmen.
-Es gibt drei Ansätze diese Größe zu beschreiben: Das klassische, das Einstein- und das Debye-Modell.
+Die molare Wärmekapazität eines Materials gibt an, wie viel Wärmemenge dem Material zugeführt werden muss, um es um ein Kelvin zu erwärmen.
+Es gibt drei Modelle um diese Größe zu beschreiben: das klassische, das Einstein- und das Debye-Modell.
 
 \subsection{Das klassische Modell der molaren Wärmekapazität}
 
@@ -51,7 +56,7 @@ Für die mittlere potentielle Energie eines Atoms pro Freiheitsgrad ergibt sich 
 \begin{equation}
   \left\langle u \right\rangle_{\text{kl}} = \frac{1}{2}k_{\text{B}}T,
 \end{equation}
-wobei $T$ die Temperatur und $k_{\text{B}}$ die Boltzmann-Konstante \cite{scipy} ist.
+wobei $T$ die Temperatur und $k_{\text{B}}$ die Boltzmann-Konstante \cite{scipy} sind.
 Aus dem Virialsatz geht hervor, dass die mittlere kinetische Energie der mittleren potentiellen Energie entspricht.
 Daher lautet die Energie eines Atoms
 \begin{equation}
@@ -66,9 +71,10 @@ Die Molwärme bei konstantem Volumen ergibt sich zu
 \begin{equation}
   C_{\text{V}} = \frac{\partial U}{\partial T}\biggr|_V = 3R.
 \end{equation}
-Diese ist temperatur- und materialunabhängig und genügt dem Dulong-Petit'schen Gesetz.
-Empirisch wird diese Annahme jedoch widerlegt.
-Bei hinreichend großen Temperaturen wird dieser Wert asymptotisch erreicht.
+Diese Vorhersage einer temperatur- und materialunabhängigen molaren Wärmekapazität wird als Dulong-Petit'sches Gesetz bezeichnet.
+Empirisch wird jedoch festgestellt, dass die Wärmekapazität bei geringen Temperaturen und geringen Atommassen einerseits kleiner als die Vorhersage und andererseits stark temperaturabhängig ist.
+Erst bei hinreichend großen Temperaturen wird der Wert des Dulong-Petit'sches Gesetzes asymptotisch erreicht.
+Diese Diskrepanz wird mit den folgenden Modellen korrigiert.
 
 \subsection{Das Einsteinmodell}
 
@@ -90,8 +96,9 @@ Das führt zur Energie eines Mols von
 \end{equation}
 Daraus folgt, dass die Molwärme
 \begin{equation}
-  C_{\text{V}} = 3R\frac{\hbar^2\omega^2}{k_{\text{B}}^2}\frac{1}{T^2}\frac{e^{\frac{\hbar\omega}{k_{\text{B}}T}}}{\left(e^{\frac{\hbar\omega}{k_{\text{B}}T}}-1\right)^2}.
+  C_{\text{V}} = 3R\frac{\hbar^2\omega^2}{k_{\text{B}}^2}\frac{1}{T^2}\frac{e^{\frac{\hbar\omega}{k_{\text{B}}T}}}{\left(e^{\frac{\hbar\omega}{k_{\text{B}}T}}-1\right)^2}
 \end{equation}
+beträgt.
 Die Annahme, dass alle Atome mit derselben Frequenz schwingen, ist jedoch eine grobe Näherung. Diese wird im Debye-Modell korrigiert.
 
 \subsection{Das Debye-Modell}
@@ -145,4 +152,4 @@ Die Molwärme nach Debye zeigt dasselbe asymptotische Verhalten wie die des Eins
 Im Tieftemperaturbereich ist jene jedoch proportional zu $T^3$, die nach Einstein steigt exponentiell an.\\
 Das Debye-Modell ist aber auch nur eine Näherung.
 Um exakte Ergebnisse zu erhalten, müssen die wirklichen Dispersionsrelationen der Longitudinal- und Transversalwellen berücksichtigt werden.
-Das Einstein- und Debyemodell vernachlässigen jedoch beide den Beitrag von Leitungselektronen zur Molwärme, welcher bei tiefen Temperaturen einen Beitrag proportional zu $T$ liefert.\cite{skript}
+Das Einstein- und Debyemodell vernachlässigen jedoch beide den Beitrag von Leitungselektronen zur Molwärme, welcher bei tiefen Temperaturen einen Beitrag proportional zu $T$ liefert \cite{skript}.

@@ -144,15 +144,27 @@ Für die molare Wärmekapazität bei konstantem Druck folgt
   C_{\text{p}} = \frac{M}{m}\frac{\Delta E}{\Delta T} = \frac{M}{m}\frac{U\cdot I\cdot \Delta t}{\Delta T}.
 \end{equation}
 Daraus resultiert einschließlich der Messwerte die Tabelle \ref{tab:3}.
-Die Fehler für die $C_{\text{p}}$ berechnet sich nach der Gaußschen Fehlerfortpflanzung \eqref{eq:gauss} nach der Formel
+Der Fehler für die $C_{\text{p}}$ wird hier und bei allen weiteren Berechnungen nach dem Gaußschen Fehlerfortpflanzungsgesetz
 \begin{equation}
-  \delta C_\text{p} = \frac{M}{m} \sqrt{ \left(\frac{I \Delta t}{\Delta T} \delta U \right)^2 + \left( \frac{U \Delta t}{\Delta T} \delta I \right)^2 + \left(\frac{U I}{\Delta T} \delta(\Delta t) \right)^2 + \left( \frac{U I \Delta t}{(\Delta T)^2} \delta(\Delta T)\right)^2 }
+\label{eq:gauss}
+\delta f = \sqrt{\Bigl(\frac{\partial f}{\partial x_1}\delta x_1 \Bigr)^2 + \Bigl(\frac{\partial f}{\partial x_2}\delta x_2 \Bigr)^2 + \dotsc + \Bigl(\frac{\partial f}{\partial x_n}\delta x_n \Bigr)^2}
+\end{equation}
+bestimmt, wobei $f(x_1,x_2, \dotsc ,x_n)$ für eine Funktion steht, bei der die Größen $x_1, x_2, \dotsc , x_n$ voneinander unabhängig sind.
+Hieraus ergibt sich explizit die Fehlerformel
+\begin{equation}
+  \delta C_\text{p} = \frac{M}{m} \sqrt{ \left(\frac{I \Delta t}{\Delta T} \delta U \right)^2 + \left( \frac{U \Delta t}{\Delta T} \delta I \right)^2 + \left(\frac{U I}{\Delta T} \delta(\Delta t) \right)^2 + \left( \frac{U I \Delta t}{(\Delta T)^2} \delta(\Delta T)\right)^2 },
 \end{equation}
 wobei sich der Fehler der Temperatur aus dem Ablesefehler des Ohmmeters ergibt, so dass nach der Fehlerfortpflanzung
 \begin{equation}
  \delta T = 2 \cdot 0.00134 \cdot R \cdot \delta R + 2.296 \cdot \delta R
 \end{equation}
 folgt.
+Der Fehler der Zeitintervalle berechnet sich nach \eqref{eq:gauss} zu
+\begin{equation}
+  \delta (\Delta t) = \sqrt{ (\delta t_{i})^2 + (\delta t_{i-1})^2},
+\end{equation}
+da sowohl beim Messen des Startzeitpunktes als auch beim Messen des Endzeitpunktes des Zeitintervalles ein Messfehler von $t = \SI{1}{\second}$ angenommen wird.
+
 \input{build/Tabelle_cp.tex}
 
 Um auf die Molwärme bei konstantem Volumen zu kommen, wird der Zusammenhang
@@ -162,6 +174,10 @@ Um auf die Molwärme bei konstantem Volumen zu kommen, wird der Zusammenhang
 verwendet \cite{skript}.
 Hierbei entspricht $\alpha$ dem Ausdehnungskoeffizienten von Kupfer, dessen Abhängigkeit von der Temperatur in Abbildung \ref{fig:alphaa} im Anhang einzusehen ist.
 Es wird jeweils die mittlere Temperatur während einer Heizperiode genutzt und somit zwischen den angegebenen Werten des Ausdehnungskoeffizienten linear interpoliert.
+Für die Temperaturinterpolation \footnote{$T_\text{interpol} = \frac{T_{i} - T_{i-1}}{2} + T_{i-1}$ } ergibt sich der Fehler nach \eqref{eq:gauss} zu
+\begin{equation}
+  \delta T_\text{interpol} = \sqrt{ \left(\left(1 - \frac{1}{2}\right) \delta T_{i-1}\right)^2 + \left(\frac{\delta T_{i}}{2}\right)^2 }.
+\end{equation}
 Die Ausdehnungskoeffizienten sowie die daraus ermittelten spezifischen Wärmekapazitäten bei konstantem Volumen sind in Tabelle \ref{tab:2} zu begutachten.
 
 \input{build/Tabelle_ausdehnung.tex}
@@ -175,27 +191,34 @@ In Tabelle \ref{tab:4} sind die Resultate aufgeführt.
 
 \input{build/Tabelle_temp.tex}
 
-Eine Mittelung der verschiedenen ermittelten Werte führt auf eine Debye-Temperatur von
+Eine Mittelung der verschiedenen ermittelten Werte führt auf eine experimentelle Debye-Temperatur von
 \begin{align*}
-  \Theta_{\text{D,gem}} &= \input{build/Theta_deb.tex}.
+  \Theta_{\text{D,exp}} &= \input{build/Theta_deb.tex}.
 \end{align*}
-Aus dem Zusammenhang \eqref{eqn:4} ergibt dies eine Debye-Frequenz von
+Aus dem Zusammenhang \eqref{eqn:4} ergibt dies eine experimentelle Debye-Frequenz von
 \begin{align*}
-  \omega_{\text{D,gem}} &= \input{build/omega_deb.tex}.
+  \omega_{\text{D,exp}} &= \input{build/omega_deb.tex}.
 \end{align*}
+Mithilfe dieser experimentell ermittelten Debye-Temperatur ist in Abbildung \ref{plot:1} eine Vorhersagekurve des Verlaufes der Wärmekapazität nach dem Debye-Modell aufgetragen.
 
-Nach der Formel \eqref{eqn:3} lassen sich über die transversale und longitudinale Phasengeschwindigkeit \cite{skript} von
+Nach der Formel \eqref{eqn:3} lassen sich außerdem über die transversale und longitudinale Phasengeschwindigkeit \cite{skript} von
 \begin{align*}
   v_{\text{l}}  &= \SI{4.7}{\kilo\meter\per\second},\\
   v_{\text{tr}} &= \SI{2.26}{\kilo\meter\per\second}
 \end{align*}
-Theoriewerte von
+die von unserer Messung unabhängigen Werte von
 \begin{align*}
-  \Theta_{\text{D,Theorie}} &= \input{build/Theta_deb_theo.tex},\\
-  \omega_{\text{D,Theorie}} &= \input{build/omega_deb_theo.tex}
+  \Theta_{\text{D,Modell}} &= \input{build/Theta_deb_theo.tex},\\
+  \omega_{\text{D,Modell}} &= \input{build/omega_deb_theo.tex}
 \end{align*}
 berechnen.
-Zuletzt sind die Gesamtergebnisse in Plot \ref{plot:1} einzusehen.
+Diese Werte beruhen lediglich auf der Kenntnis der Phasengeschwindigkeiten und der im Debye-Modell vorhergesagten $3N$ Eigenschwingungen im Kristall.
+Auch mit diesem Wert ist eine Vorhersage des Kurvenverlaufes in Plot \ref{plot:1} abgebildet.
+Hier ist auch eine Theoriekurve abgetragen, welche den Verlauf der Wärmekapazität im Debye-Modell unter Verwendung des Literaturwertes \cite{fuck}
+\begin{align*}
+  \Theta_{\text{D,Theorie}} = \SI{345}{\kelvin}
+\end{align*}
+zeigt.
 
 \begin{figure}
   \centering

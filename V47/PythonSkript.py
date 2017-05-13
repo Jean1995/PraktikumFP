@@ -253,7 +253,8 @@ alpha = alpha*10**(-6)
 alpha_interpol = np.diff(alpha)/2 + alpha[:-1]
 T_interpol = np.diff(T)/2 + T[:-1]
 
-
+print(T)
+print(T_interpol)
 
 m = 342/1000 # Masse kilgo
 M = 63/1000 # kilogramm Pro Mol
@@ -304,7 +305,7 @@ C_v = C_v(alpha_interpol, kappa, V_0, T_interpol, C_m)
 
 write('build/ausdehnung.tex', make_table([T_interpol, alpha_interpol*10**6, C_v],[1, 1, 1, 1, 1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_ausdehnung.tex', make_full_table(
-    'Interpolierter Ausdehnungskoeffizient in Abhängigkeit der interpolierten Temperatur und dazugehörige molare Wärmekapazität bei konstantem Volumen..',
+    'Interpolierter Ausdehnungskoeffizient in Abhängigkeit der interpolierten Temperatur und dazugehörige molare Wärmekapazität bei konstantem Volumen.',
     'tab:2',
     'build/ausdehnung.tex',
     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
@@ -359,9 +360,10 @@ write('build/omega_deb_theo.tex', make_SI(w_theo*10**(-9), r'\giga\hertz', figur
 
 # plot this shit
 x = np.linspace(80,300)
-plt.plot(x, C_debye(x, unp.nominal_values(np.mean(theta_deb))), label=r'Theoriekurve mit $\Theta_{D,gem}$')
-plt.plot(x, C_debye(x, theta_theo), label=r'Theoriekurve mit $\Theta_\text{D,Theorie}$')
-plt.errorbar(unp.nominal_values(T_interpol), unp.nominal_values(C_v), fmt='rx', xerr=unp.std_devs(T_interpol), yerr=unp.std_devs(C_v), label='Messdaten')
+plt.plot(x, C_debye(x, unp.nominal_values(np.mean(theta_deb))), label=r'Vorhergesagter Verlauf mit $\Theta_{D,exp}$')
+plt.plot(x, C_debye(x, theta_theo), label=r'Vorhergesagter Verlauf mit $\Theta_\text{D,Modell}$')
+plt.plot(x, C_debye(x, 345), label=r'Theoriekurve mit $\Theta_\text{D,Theorie}$')
+plt.errorbar(unp.nominal_values(T_interpol), unp.nominal_values(C_v), fmt=',', xerr=unp.std_devs(T_interpol), yerr=unp.std_devs(C_v), label='Messdaten')
 #plt.plot(unp.nominal_values(T_interpol), unp.nominal_values(C_v), 'x')
 plt.axhline(y=3*const.R, color='y', label=r'Dulong-Petit')
 plt.xlim(80,300)
@@ -378,5 +380,5 @@ print(const.R)
 print(Wie(x,a,b,c)/1000)
 
 #diskussion
-err_deb = np.abs(theta_theo - np.mean(theta_deb))/theta_theo
+err_deb = np.abs(345 - np.mean(theta_deb))/345
 write('build/err_deb.tex', make_SI(err_deb*100, r'\percent', figures=1))
