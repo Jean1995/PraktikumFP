@@ -1,2 +1,33 @@
-\subsection{Durchführung}
+\section{Durchführung}
 \label{sec:durchführung}
+\subsection{Vorbereitung}
+Eine halbe Stunde vor Beginn des Versuchs wird die Heizung der Dampfzelle eingeschaltet.
+
+\subsubsection{Justierung des Strahlenganges}
+Um die Intensität des auf den Lichtdetektor einfallenden Lichtes zu maximieren, werden zunächst der "Gain","Gain-Multiplier" und "Meter-Multiplier" am Steuerelement auf 1, sowie die Zeitkonstante auf $\SI{100}{\milli\second}$ gestellt.
+Daraufhin werden die beiden Sammellinsen so platziert, dass die Lichtintensität maximiert wird.
+Dies wird an einem Galvanometer abgelesen, welches bei vollem Ausschlag durch einen DC-Offset-Regler geeicht werden kann.
+Ist das Maximum erreicht, werden die restlichen optischen Elemente eingebaut und die gesamte Apparatur durch eine schwarze Decke von externer Strahlung abgeschirmt.
+
+\subsubsection{Kompensation des Erdmagnetfeldes}
+Zunächst muss das typische Signalbild erzeugt werden.
+Dafür werden die Potentiometer für das horizontale und vertikale Spulenpaar auf Null gestellt, das Start-Feld für das horizontale "Sweep"-Spulenpaar ist ebenfalls auf Null zu setzen.
+Es wird ein kontinuierlicher Durchlauf von zwei Sekunden bei maximaler Reichweite des Spulenpaares eingestellt.
+Der "Recorder"-Ausgang des horizontalen "Sweep"-Spulenpaares wird auf den ersten und die Diodenspannung an den zweiten Kanal des Oszilloskops angeschlossen.
+Das Oszilloskop wird in den XY-Modus gestellt, wobei beide Kanäle auf DC-Kopplung eingestellt werden.
+Ist nun ein Leuchtpunkt zu sehen, welcher über die gesamte Reichweite des "Sweep"-Spulenpaares läuft, werden der "Gain" auf zwanzig, der "Gain-Multiplier" auf das Zehnfache und der "Meter-Multiplier" auf das Zweifache eingestellt.\\
+Das typische Signalbild weist nun einen breiten Peak auf, welcher durch die Kompensation des Erdmagnetfeldes schmaler gemacht werden soll.
+Hierzu wird der Tisch in Nord-Süd-Richtung gedreht, um den Einfluss des horizontalen Erdmagnetfeldes zu kompensieren.
+Durch Einstellen des vertikalen Spulenpaares wird die vertikale Komponente kompensiert; dieser Wert wird notiert.
+
+\subsection{Aufnahme der Resonanzen in Abhängigkeit der Frequenz}
+Um die Resonanzen durch induzierte Emission zu beobachten, wird ein Frequenzgenerator benötigt.
+Dieser wird an den Eingang "RF-Amplifier-input" angeschlossen.
+Der "RF-Amplifier-Gain" wird auf zwei gestellt.
+Es wird eine Sinusspannung mit einer Amplitude von $\SI{4}{\volt}$ und einer Frequenz von $\SI{100}{\kilo\hertz}$ eingestellt.
+Die Resonanzen können nun beobachtet werden.
+Durch grobe Einstellung des Horizontal- und feiner Einstellung des "Sweep"-Feldes können die Resonanzen angepeilt werden.
+Die Werte für die Felder werden nun für verschiedene Frequenzen bis $\SI{1}{\mega\hertz}$ notiert.
+
+\subsection{Aufnahme eines Signalbildes}
+Abschließend wird ein Signalbild bei $\SI{100}{\kilo\hertz}$ über das Oszilloskop abgespeichert.
