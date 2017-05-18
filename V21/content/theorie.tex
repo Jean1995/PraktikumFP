@@ -69,6 +69,7 @@ Die Energiedifferenzen zwischen verschiedenen Zeeman-Niveaus sind zunächst unab
 Diese Energiedifferenzen betragen
 \begin{equation}
   \Delta U = g_F \mu_B \lvert \vec{B} \rvert
+  \label{eqn:0}
 \end{equation}
 mit dem Land\'{e}-Faktor $g_F$ des Gesamtdrehimpules des Atoms
 \begin{equation}
@@ -116,6 +117,59 @@ Nach der Inversion findet dieser Absorption nicht mehr statt, so dass der Verlau
   \label{fig:theorie2}
 \end{figure}
 
+\subsection{Messung Zeeman-Aufspaltung mittels Hochfrequenz-Spektroskopie}
+
+
+\subsubsection{Übergangsarten zwischen Energienievaus}
+Insgesamt können drei verschiedene Arten von Niveauübergängen unterschieden werden, welche in Abbildung \ref{fig:theorie3} dargestellt sind und zur Vermessung der Energieaufspaltung verwendet werden.
+
+\begin{figure}
+  \centering
+  \includegraphics[height=3cm]{ressources/theorie3.png}
+  \caption{Mögliche Übergänge zwischen verschiedenen Energieniveaus im Atom \cite{skript}.}
+  \label{fig:theorie3}
+\end{figure}
+
+Bei der Absorption führt die Einstrahlung eines Lichtquantes passender Energie $\Delta W = W_2 - W_1$ dazu, dass ein Übergang von einem niedrigen Energieniveau $W_1$ in ein höheres Energieniveau $W_2$ stattfindet.
+Andererseits kann ein einfallender Lichtquant, welcher ebenfalls die Energie $\Delta W$ besitzt, zu einer Emission führen, falls sich das Atom bereits im angeregten Zustand der Energie $W_2$ befindet.
+Dieser Vorgang wird induzierte Emission genannt, wobei am Ende zwei Lichtquanten der Energie $W_2$ abgestrahlt werden.
+Zuletzt existiert die spontane Emission, bei der ein Übergang von $W_2$ zu $W_1$ ohne äußere Einwirkung und unter Abstrahlung eines Lichtquantes der Energie $\Delta W$ stattfindet.
+Die Wahrscheinlichkeit für die spontane Emission besitzt eine $\nu^3$-Abhängigkeit und wird damit erst für hohe Frequenzen relevant.
+Da wir im vorliegenden Versuch Energien im Bereich der Zeeman-Aufspaltung betrachten, sind auch die betrachten Frequenzen relativ gering.
+Die spontane Emission ist somit gegenüber der induzieren Emission, welche beispielsweise durch ein angelegtes Hochfrequenzfeld angeregt werden kann, vernachlässigbar.
+
+\subsubsection{Einfluss eines Hochfrequenzfeldes auf die Transparenz}
+
+In Abbildung \ref{fig:theorie4} ist die typische Verlaufskurve der Transparenz einer Zelle, in der sich die anregbaren Atome befinden, in Abhängigkeit eines äußeren Magnetfeldes gezeigt.
+
+\begin{figure}
+  \centering
+  \includegraphics[height=6cm]{ressources/theorie4.png}
+  \caption{Typische Verlaufskurve der Zelltransparenz in Abhängigkeit eines äußeren Magnetfeldes. Das zweite Peak entsteht beim zusätzlichen Anlegen eines Hochfrequenzfeldes \cite{skript}.}
+  \label{fig:theorie4}
+\end{figure}
+
+Falls kein äußeres Magnetfeld angelegt ist, verschwindet die Zeeman-Aufspaltung der Energieniveaus.
+Dementsprechend kann kein optisches Pumpen stattfinden, und die Transparenz der Zelle bricht zusammen.
+Wenn nun ein äußeres Magnetfeld angelegt wird, was auch das Erdmagnetfeld sein kann, führt das optische Pumpen zu einer Transparenz der Zelle.
+Werden die Atome einem Hochfrequenzfeld mit einer festen Frequenz $\nu$ ausgesetzt, tritt ein weiterer Effekt auf.
+Nach Gleichung \eqref{eqn:0} ist die Energiedifferenz proportional zum angelegten Magnetfeld $\lvert \vec{B} \rvert$.
+Sobald die Energiedifferenz mit der Frequenz des Hochfrequenzfeldes übereinstimmt, tritt induzierte Emission ein.
+Das optische Pumpen findet also weiter statt, so dass es zur Absorption des Lichtes kommt und die Transparenz der Zelle wieder abnimmt.
+Dementsprechend kommt es bei einer passenden Kombination von $\nu$ und $\lvert \vec{B} \rvert$, nämlich
+\begin{equation}
+  \lvert \vec{B} \rvert = \frac{4 \pi m}{e g_J} \nu
+\end{equation}
+zu einem Peak in der Transparenz.
+
+\subsection{Quadratischer Zeeman-Effekt}
+Bei größeren äußeren Magnetfeldern $\lvert \vec{B} \rvert$ wird die Energieaufspaltung abhägig von $M_F$, was daraus folgt, dass sowohl die Spin-Bahn-Wechselwirkung als auch die Wechselwirkung von $\lvert \vec{B} \rvert$ mit $\vec{ \mu_J}$ und $\vec{ \mu_I}$ berücksichtigt werden muss.
+Dies führt zu einer Korrektur der Formel \eqref{eqn:0} zu
+\begin{equation}
+  \Delta U = g_F \mu_B \lvert \vec{B} \rvert + g_f^2 \mu_B ^2 B^2 \frac{1 - 2 M_F}{\Delta E_\text{Hy}}
+\end{equation}
+mit der Hyperfeinstrukturaufspaltung $\Delta E_\text{Hy}$.
+Dies wird auch als Quadratischer Zeeman-Effekt bezeichnet, der bei hinreichend schwachen Magnetfeldern gegenüber dem linearen Term vernachlässigt werden kann.
 
 
 %\cite{sample}
