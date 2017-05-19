@@ -15,6 +15,7 @@ Zu Bahndrehimpuls und Spin existiert jeweils ein magnetisches Moment, welches ü
 verknüpft ist.
 Hierbei steht $\mu_B$ für das Bohrsche Magneton und $g_i$ beschreibt die Land\'{e}-Faktoren, welche für das freie Elektron durch
 \begin{align}
+  \label{eqn:5}
   g_L &= 1 & g_S &\approx \num{2.00232}
 \end{align}
 gegeben sind.
@@ -73,6 +74,7 @@ Diese Energiedifferenzen betragen
 \end{equation}
 mit dem Land\'{e}-Faktor $g_F$ des Gesamtdrehimpules des Atoms
 \begin{equation}
+  \label{eqn:gruen}
   g_f \approx g_J \frac{ F \left( F+1 \right) + J \left( J+1 \right) - I \left( I+1 \right)}{2F \left( F+1 \right)}.
 \end{equation}
 Dieser Faktor berechnet sich widerum aus der geometischen Anschauung der vektoriellen Kopplung, wobei das Kernmagneton $\mu_K$ gegenüber dem Bohrschen Magneton $\mu_B$ vernachlässigt wird.
@@ -158,7 +160,8 @@ Sobald die Energiedifferenz mit der Frequenz des Hochfrequenzfeldes übereinstim
 Das optische Pumpen findet also weiter statt, so dass es zur Absorption des Lichtes kommt und die Transparenz der Zelle wieder abnimmt.
 Dementsprechend kommt es bei einer passenden Kombination von $\nu$ und $\lvert \vec{B} \rvert$, nämlich
 \begin{equation}
-  \lvert \vec{B} \rvert = \frac{4 \pi m}{e g_J} \nu
+  \lvert \vec{B} \rvert = \frac{4 \pi m_\text{e}}{e g_J} \nu
+  \label{eqn:resonanz}
 \end{equation}
 zu einem Peak in der Transparenz.
 
@@ -166,6 +169,7 @@ zu einem Peak in der Transparenz.
 Bei größeren äußeren Magnetfeldern $\lvert \vec{B} \rvert$ wird die Energieaufspaltung abhägig von $M_F$, was daraus folgt, dass sowohl die Spin-Bahn-Wechselwirkung als auch die Wechselwirkung von $\lvert \vec{B} \rvert$ mit $\vec{ \mu_J}$ und $\vec{ \mu_I}$ berücksichtigt werden muss.
 Dies führt zu einer Korrektur der Formel \eqref{eqn:0} zu
 \begin{equation}
+  \label{eqn:zee}
   \Delta U = g_F \mu_B \lvert \vec{B} \rvert + g_f^2 \mu_B ^2 B^2 \frac{1 - 2 M_F}{\Delta E_\text{Hy}}
 \end{equation}
 mit der Hyperfeinstrukturaufspaltung $\Delta E_\text{Hy}$.
