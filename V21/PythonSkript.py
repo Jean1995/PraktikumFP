@@ -196,6 +196,10 @@ B_vert = B(I_vert, 20, 0.11735)
 
 write('build/I_vert.tex', make_SI(I_vert, r'\ampere', figures=1))
 write('build/B_vert.tex', make_SI(B_vert*10**6, r'\micro\tesla', figures=1))
+write('build/B_err.tex', make_SI(abs(unp.nominal_values(B_vert)*10**6-45.07)/45.07 * 100, r'\percent', figures=1))
+
+
+
 
 ### Resonanzfrequenzen
 
@@ -289,6 +293,8 @@ I_1 = KSpin(0.5, g_1)
 I_2 = KSpin(0.5, g_2) # Formel muss noch hergeleitet werden, habe ich so angenommen
 write('build/I_1.tex', make_SI(I_1, r'', figures=1))
 write('build/I_2.tex', make_SI(I_2, r'', figures=1)) #hat das zeug ne Einheit? eigentlich schon, oder?
+write('build/I_2_err.tex', make_SI(abs(I_2.n-5/2)/(5/2)*100, r'\percent', figures=1))
+write('build/I_1_err.tex', make_SI(abs(I_1.n-3/2)/(3/2)*100, r'\percent', figures=1))
 
 ### Amplitudenverhältnis
 
@@ -305,6 +311,7 @@ write('build/Rb_85.tex', make_SI(Rb_85, r'\percent', figures=2))
 write('build/Rb_87.tex', make_SI(Rb_87, r'\percent', figures=2))
 Rb_V = Rb_85/Rb_87
 write('build/Rb_V.tex', make_SI(Rb_V, r'', figures=1))
+write('build/Rb_V_err.tex', make_SI(abs(Rb_V-A_V)/Rb_V * 100, r'\percent', figures=1))
 
 #Quadraaatischer Zeeman-Effekt
 

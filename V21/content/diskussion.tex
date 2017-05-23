@@ -1,2 +1,58 @@
 \section{Diskussion}
 \label{sec:Diskussion}
+
+\subsection{Bestimmung der Vertikalkomponente des Erdmagnetfeldes}
+Das Erdmagnetfeld wurde auf den Wert
+\begin{align*}
+  B_\text{komp,gem} &= \input{build/B_vert.tex}
+\end{align*}
+bestimmt.
+Der Literaturwert \cite{magnet} beträgt ungefähr
+\begin{align*}
+  B_\text{komp,lit} &= \SI{45,07}{\micro\tesla},
+\end{align*}
+dies entspricht einer Abweichung von
+\begin{align*}
+  \delta B_\text{komp} &= \input{build/B_err}.
+\end{align*}
+Die Abweichung kann durch die schwierige Feineinstellung der Spule erklärt werden.%und versuch kacke
+
+\subsection{Bestimmung der Kernspins der Isotope}
+Die Kernspins der Isotope wurden zu
+\begin{align*}
+  I_1 &= \input{build/I_1.tex} & I_2 &= \input{build/I_2.tex}
+\end{align*}
+bestimmt.
+Dies lässt sich gerundet mit den Kernspins $I_1 = \frac{3}{2}$ und $I_2 = \frac{5}{2}$ identifizieren \cite{iaea}.
+In diesem Falle bilden sich Abweichungen von
+\begin{align*}
+  \delta I_1 &= \input{build/I_1_err.tex} & \delta I_2 &= \input{build/I_2_err.tex},
+\end{align*}
+welche relativ gering sind.
+
+\subsection{Berechnung des Isotopenverhältnisses}
+Aus dem Versuch geht ein Isotopenverhältnis von
+\begin{align*}
+  \frac{A_2}{A_1} &= \input{build/A_V.tex}
+\end{align*}
+hervor, während die Literatur ein Verhältnis von
+\begin{align*}
+  \frac{P\left(^{85}\text{Rb}\right)}{P\left(^{87}\text{Rb}\right)} &= \input{build/Rb_V.tex}
+\end{align*}
+angibt.
+Der ermittelte Wert weicht daher zu
+\begin{align*}
+  \delta \frac{P\left(^{85}\text{Rb}\right)}{P\left(^{87}\text{Rb}\right)} &= \input{build/Rb_V_err.tex}
+\end{align*}
+von der Literatur ab.
+Diese große Abweichung ist daher begründet, dass die Amplituden am sich durch kleinste Störungen ändernden Signalbild abgelesen werden mussten.
+
+\subsection{Einfluss des quadratischen Zeeman-Effekts}
+
+Die Verhältnisse wurden auf
+\begin{align*}
+  \left(\frac{U_\text{lin}}{U_\text{quad}}\right)_{87} &= \input{build/zeeman_1.tex} & \left(\frac{U_\text{lin}}{U_\text{quad}}\right)_{85} &= \input{build/zeeman_2.tex}
+\end{align*}
+bestimmt.
+Somit unterscheiden sich die beiden Effekte um ca. drei Größenordnungen mit deutlich stärkerem Einfluss durch den linearen Term.
+Der quadratische Zeeman-Effekt kann daher vernachlässigt werden.

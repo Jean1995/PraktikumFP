@@ -3,10 +3,10 @@
 
 \subsection{Bestimmung der Vertikalkomponente des Erdmagnetfeldes}
 
-Wie in Kapitel \ref{sec:erdmagnetfeld} beschrieben wird zunächst das Erdmagnetfeld durch das Anlegen eines entgegengesetzten Magnetfeles ausgeglichen.
-Aus der Stärke des kompensierenden Magnetfeld kann somit die vertikale Komponente des Erdmagnetfeldes abgeschätzt werden.
-Im gesamten Versuchsaufbau werden sogenannte Helmholtz-Spulen verwendet, die ein möglichst homogenes Magnetfeld erzeugen.
-Dessen Magnetfeldstärke berechnet sich nach der Formel
+Wie in Kapitel \ref{sec:erdmagnetfeld} beschrieben wird zunächst das Erdmagnetfeld durch das Anlegen eines entgegengesetzten Magnetfeldes ausgeglichen.
+Aus der Stärke des kompensierenden Magnetfeldes kann somit die vertikale Komponente des Erdmagnetfeldes abgeschätzt werden.
+Im gesamten Versuchsaufbau werden Helmholtz-Spulen verwendet, die ein möglichst homogenes Magnetfeld erzeugen.
+Deren Magnetfeldstärke berechnet sich nach der Formel
 \begin{equation}
   \label{eqn:helmh}
   \lvert \vec{B} \rvert = \mu_0 \frac{8 I N}{\sqrt{125} R}
@@ -38,7 +38,7 @@ Die benötigte Stromstärke zur Kompensation beträgt
 wobei der Fehler von $I$ aufgrund des Stromgenerators zu $\SI{0.001}{\ampere}$ abgeschätzt wird.
 Aus Formel \eqref{eqn:helmh} lässt sich die Vertikalkomponente des Erdmagnetfeldes somit zu
 \begin{align*}
-  I_\text{komp} &= \input{build/B_vert.tex}
+  B_\text{komp} &= \input{build/B_vert.tex}
 \end{align*}
 abschätzen, wobei der Fehler hier und in allen folgenden Rechnungen nach der Gaußschen Fehlerfortpflanzung
 \begin{equation}
@@ -49,7 +49,7 @@ für eine Funktion $f(x_1,x_2, \dotsc ,x_n)$, bei der die Größen $x_1, x_2, \d
 \subsection{Bestimmung der Resonanzfrequenzen}
 
 Als nächstes werden, wie in Kapitel \ref{sec:resonanzen} angegeben, Resonanzen durch induzierte Emission für verschiedene Frequenzen $\nu$ gesucht.
-Dabei können für jede Frequenz jeweils zwei Resonanzen, welche für die verschiedenen Rubiumisotope stehen, beobachtet werden.
+Dabei können für jede Frequenz jeweils zwei Resonanzen, welche für die verschiedenen Rubidiumisotope stehen, beobachtet werden.
 Die Messdaten sind in Tabelle \ref{tab:2} angegeben, wobei $I_{i,j}$ für die Stromstärke der angelegten Spule steht.
 
 \begin{table}
@@ -68,7 +68,7 @@ Die Messdaten sind in Tabelle \ref{tab:2} angegeben, wobei $I_{i,j}$ für die St
 
 Hierbei bestimmt der erste Index $i$ die jeweilige Resonanz und der zweite Index $j$ das verwendete Magnetfeld: $j=1$ bezeichnet das "Sweep"-Feld, $j=2$ das Horizontalfeld.
 Als Messfehler wird für die "Sweep"-Spule $\SI{0.001}{\ampere}$, für die Horizontalspule $\SI{0.003}{\ampere}$ angenommen.
-Hieraus lässt sich nach Formel \eqref{eqn:helmh} und den Daten aus Tabelle \ref{tab:1} das Gesamtmagnetfeld $B_i$, der Index beschreibt wieder die Resonanzen, in Abhängigkeit von der Freuqenz $\nu$ bestimmen.
+Hieraus lässt sich nach Formel \eqref{eqn:helmh} und den Daten aus Tabelle \ref{tab:1} das Gesamtmagnetfeld $B_i$ in Abhängigkeit von der Freuqenz $\nu$ bestimmen.
 
 \subsection{Bestimmung der Land\'{e}-Faktoren}
 Aus den ermittelten Magnetfeldstärken und den dazugehörigen Resonanzfrequenzen kann nun nach Gleichung \ref{eqn:resonanz} der Land\'{e}-Faktor $g_F$ bestimmt werden.
@@ -122,9 +122,9 @@ Es folgt somit für die Kernspins der beiden Isotope
 \begin{align*}
   I_1 &= \input{build/I_1.tex} & I_2 &= \input{build/I_2.tex}.
 \end{align*}
-Dies lässt sich gerundet mit den Kernspins $I_1 = \frac{1}{2}$ und $I_2 = \frac{3}{2}$ identifizieren.
+%Dies lässt sich gerundet mit den Kernspins $I_1 = \frac{1}{2}$ und $I_2 = \frac{3}{2}$ identifizieren.
 
-\subsection{Bestimmung des Isotopenverhältnis}
+\subsection{Bestimmung des Isotopenverhältnisses}
 
 In Abbildung \ref{fig:typisch} ist das Signalbild des Oszilloskops bei $\nu = \SI{100}{\kilo\hertz}$ gezeigt.
 Das äußere Magnetfeld wird dabei im Bereich der zur Frequenz passenden Resonanzen variiert, so dass die beiden Resonanzen rechts zu sehen sind.
@@ -170,7 +170,7 @@ Werden diese Abschätzungen genutzt, ergibt sich ein Verhältnis vom linearen Te
 \begin{align*}
   \left(\frac{U_\text{lin}}{U_\text{quad}}\right)_{87} &= \input{build/zeeman_1.tex} & \left(\frac{U_\text{lin}}{U_\text{quad}}\right)_{85} &= \input{build/zeeman_2.tex}.
 \end{align*}
-Somit unterscheiden sich die beiden Effekte um ca. drei Größenordnungen mit deutlich stärkerem Einfluss durch den linearen Term.
+%Somit unterscheiden sich die beiden Effekte um ca. drei Größenordnungen mit deutlich stärkerem Einfluss durch den linearen Term.
 
 % % Examples
 % \begin{equation}
