@@ -70,8 +70,8 @@ Hierbei bestimmt der erste Index $i$ die jeweilige Resonanz und der zweite Index
 Als Messfehler wird für die "Sweep"-Spule $\SI{0.001}{\ampere}$, für die Horizontalspule $\SI{0.003}{\ampere}$ angenommen.
 Hieraus lässt sich nach Formel \eqref{eqn:helmh} und den Daten aus Tabelle \ref{tab:1} das Gesamtmagnetfeld $B_i$ in Abhängigkeit von der Frequenz $\nu$ bestimmen.
 
-\subsection{Bestimmung der Land\'{e}-Faktoren}
-Aus den ermittelten Magnetfeldstärken und den dazugehörigen Resonanzfrequenzen kann nun nach Gleichung \ref{eqn:resonanz} der Land\'{e}-Faktor $g_F$ bestimmt werden.
+\subsection{Bestimmung der Land\'{e}-Faktoren und der Horizontalkomponente des Erdmagnetfeldes}
+Aus den ermittelten Magnetfeldstärken und den dazugehörigen Resonanzfrequenzen kann nun die Horizontalkomponente des Erdmagnetfeldes sowie nach Gleichung \ref{eqn:resonanz} der Land\'{e}-Faktor $g_F$ bestimmt werden.
 Dazu wird für beide Resonanzen jeweils $\lvert \vec{B} \rvert$ gegen $\nu$ abgetragen und die Daten linear gefittet.
 Der Fit wird in Python mithilfe von SciPy durchgeführt.
 Es ergeben sich die Parameter
@@ -108,9 +108,14 @@ Man erhält somit die Vorhersagen
   g_{F,1} &= \input{build/g_1.tex} & g_{F,2} &= \input{build/g_2.tex}
 \end{align*}
 für die erste bzw. für die zweite Resonanz.
+Zudem ermöglicht der Offset des Magnetfeldes, welcher durch die Achsenabschnitte $b_1$ und $b_2$ beschrieben wird, eine Aussage über die horizontale Komponente des Erdmagnetfeldes.
+Die Mittelung beider Werte ergibt einen Wert von
+\begin{align*}
+  B_\text{erd, hor} &= \input{build/b_2_mit.tex}.
+\end{align*}
 
 \subsection{Bestimmung des Kernspins}
-
+\label{sec:ks}
 Ein Verhältnis zwischen den Land\'{e} Faktoren $g_F$ und $g_J$ sowie den Drehimpulsen $F$, $I$ und $J$ ist durch Formel \eqref{eqn:gruen} in guter Näherung gegeben.
 Unter der Annahme $F = J+I$ kann hieraus die Formel
 \begin{equation}
@@ -138,7 +143,9 @@ Das äußere Magnetfeld wird dabei im Bereich der zur Frequenz passenden Resonan
 
 Je nachdem wie stark das zur Resonanz gehörige Isotop vertreten ist, ist die Abnahme der Transparenz der Zelle stärker.
 Somit kann über das Verhältnis der beiden Amplituden eine grobe Abschätzung für das Isotopenverhältnis getroffen werden.
-In willkürlichen Einheiten können die linke Amplitude $A_1$ und die rechte Amplitude $A_2$ abgelesen werden als
+Die linke Amplitude $A_1$ und die rechte Amplitude $A_2$ werden dabei mithilfe eines Grafikprogrammes ausgelesen.
+Dazu wird der Abstand der beiden Minima zum oberen Ende der Bildbereiches in Pixeln ermittelt.
+Dies ergibt einen Abstand von
 \begin{align*}
   A_1 &= \input{build/A_1.tex} & A_2 &= \input{build/A_2.tex}
 \end{align*}

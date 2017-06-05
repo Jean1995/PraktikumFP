@@ -1,8 +1,8 @@
 \section{Diskussion}
 \label{sec:Diskussion}
 
-\subsection{Bestimmung der Vertikalkomponente des Erdmagnetfeldes}
-Das Erdmagnetfeld wurde auf den Wert
+\subsection{Bestimmung des Erdmagnetfeldes}
+Das vertikale Erdmagnetfeld wurde auf den Wert
 \begin{align*}
   B_\text{komp,gem} &= \input{build/B_vert.tex}
 \end{align*}
@@ -15,7 +15,39 @@ dies entspricht einer Abweichung von
 \begin{align*}
   \delta B_\text{komp} &= \input{build/B_err}.
 \end{align*}
-Die Abweichung kann durch die schwierige Feineinstellung der Spule erklärt werden.%und versuch kacke
+Für das horizontale Erdmagnetfeld hat sich ein Wert von
+\begin{align*}
+  B_\text{erd, hor} &= \input{build/b_2_mit.tex}.
+\end{align*}
+ergeben.
+Verglichen mit dem Literaturwert
+\begin{align*}
+  B_\text{hor,lit} &= \SI{19,33}{\micro\tesla},
+\end{align*}
+entspricht dies einer Abweichung von
+\begin{align*}
+  \delta B_\text{erd, hor} &= \input{build/B_err2}.
+\end{align*}
+
+Die Abweichung kann durch die schwierige Feineinstellung der Spule erklärt werden.%und versuch kack
+
+\subsection{Bestimmung der Land\'{e}-Faktoren}
+Als Land\'{e}-Faktoren der beiden Isotope wurden die Werte
+\begin{align*}
+  g_{F,1} &= \input{build/g_1.tex} & g_{F,2} &= \input{build/g_2.tex}
+\end{align*}
+ermittelt.
+Unter der Verwendung der Annahmen $J = \num{0.5}$, $S = \num{0.5}$, $L=\num{0}$ sowie den Ergebnissen $I_1 = \num{1.5}$ und $I_2 = \num{2.5}$ aus Kapitel \ref{sec:ks} lassen sich Theoriewerte ermitteln.
+Unter Verwendung der Formeln \eqref{eqn:gj} und \eqref{eqn:gruen} könnten Theoriewerte von
+\begin{align*}
+  g_{F,1,\text{theo}} &= \input{build/gf_1.tex} & g_{F,2,\text{theo}} &= \input{build/gf_2.tex}
+\end{align*}
+bestimmt werden.
+Dies entspricht einer Abweichung von Theoriewert zum experimentellen Wert von
+\begin{align*}
+  \delta g_{F,1} &= \input{build/gf_1_err.tex} & \delta g_{F,2} &= \input{build/gf_2_err.tex}.
+\end{align*}
+Diese Betrachtung ist jedoch mit Vorsicht zu sehen, da die Theorie lediglich eine Näherung darstellt.
 
 \subsection{Bestimmung der Kernspins der Isotope}
 Die Kernspins der Isotope wurden zu

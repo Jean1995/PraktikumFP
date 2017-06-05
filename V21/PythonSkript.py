@@ -201,6 +201,7 @@ write('build/B_err.tex', make_SI(abs(unp.nominal_values(B_vert)*10**6-45.07)/45.
 
 
 
+
 ### Resonanzfrequenzen
 
 Umd_1_1_n = np.array([5.66, 6.8, 4.12, 3.52, 2.06, 1.0, 0.65, 2.54, 4.22, 3.4]) # 1. Resonanz Sweep
@@ -285,6 +286,12 @@ write('build/b_2.tex', make_SI(b_2*10**6, r'\micro\tesla', figures=1))
 g_2 = 4*np.pi * const.m_e / (const.e * m_2)
 write('build/g_2.tex', make_SI(g_2, r'', figures=1))
 
+write('build/b_2_mit.tex', make_SI((b_2+b_1)/2*10**6, r'\micro\tesla', figures=1))
+
+
+write('build/B_err2.tex', make_SI(abs(unp.nominal_values(b_2+b_1)/2*10**6-19.33)/19.33 * 100, r'\percent', figures=1))
+
+
 plt.clf()
 
 ### Kernspin
@@ -326,3 +333,28 @@ quad_1 = zee_quad(B_max, g_f, E_1)
 quad_2 = zee_quad(B_max, g_f, E_2)
 write('build/zeeman_1.tex', make_SI(np.abs(lin_1/quad_1), r'', figures=0))
 write('build/zeeman_2.tex', make_SI(np.abs(lin_2/quad_2), r'', figures=0))
+
+
+### ganz viel raten für die letzte Teilaufgabe
+
+J = 0.5
+S = 0.5
+L = 0
+I = 1.5
+F = I + J
+
+g_j =(3.0023*J*(J+1) + 1.0023 * ((S)*(S+1) - L * (L+1)))/(2*J*(J+1))
+g_f = g_j * (F*(F+1) + J*(J+1) - I*(I+1))/(2*F*(F+1))
+
+write('build/gf_1.tex', make_SI(g_f, r'', figures=2))
+write('build/gf_1_err.tex', make_SI(abs(g_f-g_1.n)/g_f * 100, r'\percent', figures=2))
+
+
+I = 2.5
+F = I + J
+
+g_j =(3.0023*J*(J+1) + 1.0023 * ((S)*(S+1) - L * (L+1)))/(2*J*(J+1))
+g_f = g_j * (F*(F+1) + J*(J+1) - I*(I+1))/(2*F*(F+1))
+
+write('build/gf_2.tex', make_SI(g_f, r'', figures=2))
+write('build/gf_2_err.tex', make_SI(abs(g_f-g_2.n)/g_f * 100, r'\percent', figures=2))

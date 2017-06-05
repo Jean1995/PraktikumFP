@@ -36,6 +36,7 @@ Aus der geometrischen Anschauung folgt nun, dass das Verhältnis von $\vec{J}$ u
 \end{equation}
 wobei
 \begin{equation}
+  \label{eqn:gj}
   g_J = \frac{ \num{3.0023} J \left(J+1\right) + \num{1.0023} \left( S \left( S+1 \right) - L \left(L+1\right) \right) }{ 2 J \left(J+1\right) }
 \end{equation}
 gilt. \\
@@ -104,14 +105,14 @@ Dies wird durch gezieltes Anregen von Zuständen durchgeführt, wie im Folgenden
 
 In hier besprochenen Beispiel existieren die beiden Zustände $^2 \text{P}_{\sfrac{1}{2}}$ und $ ^2 \text{S}_{\sfrac{1}{2}}$ \footnote{Es wird die spektroskopische Notation $^{2S+1} L_J$ verwendet.}, wobei die Zustände aufgrund eines äußeren Magnetfeldes jeweils in $M_J = \pm \sfrac{1}{2}$ aufgespalten sind.
 Es existieren verschiedene Strahlungsübergänge zwischen den Niveaus, welche durch Energie sowie Polarisation gekennzeichnet sind.
-Beim $\sigma^+$-Übergang lautet die Auswahlregel $\Delta M_J = + 1$ und die involvierten Lichtquanten sind rechts-polarisiert, während bei einem $\sigma^-$-Übergang $\Delta M_J = - 1$ gilt und Spin und Ausbreitungsrichtung der Lichtquanten parallel sind.
+Beim $\sigma^+$-Übergang lautet die Auswahlregel $\Delta M_J = + 1$ und die involvierten Lichtquanten sind rechtszirkular-polarisiert, während bei einem $\sigma^-$-Übergang $\Delta M_J = - 1$ gilt und Spin und Ausbreitungsrichtung der Lichtquanten parallel sind.
 Zudem existieren sogenannte $\pi$-Übergänge, bei denen $\Delta M_J = 0$ ist und das Licht linear polarisiert ist.
 Die Polarisationsrichtung ist hier parallel zu $\vec{B}$.
 Im thermischen Gleichgewicht ist im hier betrachteten System laut Gleichung \eqref{eqn:1} der energetisch niedrigste Zustand, hier $^2 \text{S}_{\sfrac{1}{2}}, \Delta M_J = -\sfrac{1}{2}$ am stärksten besetzt.
-Das optische Pumpen besteht nun darin, die Atome mit rechtszirkular-polarisierten $D_1$-Licht zu bestrahlen, so dass $\sigma^-$-Übergänge induziert werden.
+Das optische Pumpen besteht nun darin, die Atome mit rechtszirkular-polarisierten $D_1$-Licht zu bestrahlen, so dass $\sigma^+$-Übergänge induziert werden.
 Hierdurch wird der Zustand $^2 \text{P}_{\sfrac{1}{2}}, \Delta M_J = + \sfrac{1}{2}$ besetzt.
 Von dort findet spontane Emission statt, so dass der angeregte Zustand bereits nach kurzer Zeit wieder in einem der beiden $ ^2 \text{S}_{\sfrac{1}{2}}$-Zustände übergeht.
-Da die $\sigma^-$ Anregung jedoch nicht dazu in der Lage ist, die Atome im $M_J = + \sfrac{1}{2}$-Zustand wieder anzuregen und auch kein direkter Übergang zwischen den beiden Grundzuständen möglich ist, findet eine Ansammlung im energetisch höheren Grundzustand statt.
+Da die $\sigma^+$ Anregung jedoch nicht dazu in der Lage ist, die Atome im $M_J = + \sfrac{1}{2}$-Zustand wieder anzuregen und auch kein direkter Übergang zwischen den beiden Grundzuständen möglich ist, findet eine Ansammlung im energetisch höheren Grundzustand statt.
 Diese Inversion kann experimentell daran beobachtet werden, dass die Transparenz der Zelle, in dem sich die Atome befinden, zunimmt:
 Bevor das optische Pumpen erfolgt ist, wurde das zirkular-polarisierte Licht absorbiert.
 Nach der Inversion findet dieser Absorption nicht mehr statt, so dass der Verlauf der Transparenz, dargestellt in Abbildung \ref{fig:theorie2}, ein Indiz für das erfolgreiche optische Pumpen ist.
@@ -164,7 +165,7 @@ Sobald die Energiedifferenz mit der Frequenz des Hochfrequenzfeldes übereinstim
 Das optische Pumpen findet also weiter statt, so dass es zur Absorption des Lichtes kommt und die Transparenz der Zelle wieder abnimmt.
 Dementsprechend kommt es bei einer passenden Kombination von $\nu$ und $\lvert \vec{B} \rvert$, nämlich
 \begin{equation}
-  \lvert \vec{B} \rvert = \frac{4 \pi m_\text{e}}{e g_J} \nu
+  \lvert \vec{B} \rvert = \frac{4 \pi m_\text{e}}{e g_F} \nu
   \label{eqn:resonanz}
 \end{equation}
 zu einem Peak in der Transparenz.
