@@ -3,7 +3,7 @@
 
 \section{Theorie}
 \label{sec:Theorie}
-\subsection{Allgemeine Theorie zum Reflexklystron}
+\subsection{Allgemeine Theorie eines Reflexklystrons}
 
 Das Frequenzspektrum von Mikrowellen erstreckt sich von $\SI{300}{\mega\hertz}$ bis $\SI{300}{\giga\hertz}$.
 In diesem Versuch wird zur Umwandlung von elektrischer in Mikrowellenenergie ein Reflexklystron benutzt.
@@ -70,11 +70,57 @@ Ein Peak entspricht dabei einem Modus, welcher durch $(n+3/4)T$, der Aufenthalts
 
 \subsection{Wellen in einem Hohlleiter}
 
+In dem Hohlleiter breiten sich die vom Klystron erzeugten Mikrowellen aus.
+Die elektromagnetische Welle wird an jeder Unstetigkeit bzw nicht charakteristischen Impedanz im Leiter reflektiert.
+Bei einer homogenen Leitung unendlicher Ausdehnung, sowie einer Leitung die mit einem Widerstand abgeschlossen ist der die charakteristische Impedanz der Leitung besitzt, treten keine Reflexionen auf.
+Im Falle von Reflexionen ergibt sich die Feldstärke durch Addition der Amplituden der einlaufenden und reflektierten Welle, wobei die Amplitude und Phase letzterer von der Amplitude und Phase der reflektierenden Impedanz abhängen.
+Durch die Addition bilden sich stehende Wellen im Leiter aus.
+Maxima entstehen dort, wo sich die Wellen gleicher Phase addieren, bei Minima haben sie entgegengesetzte Phasen.
+Der halbe Abstand zwischen zwei Maxima bzw. Minima definiert die Wellenlänge im Hohlleiter.
+Für einen mit Luft gefüllten Hohlleiter gilt für die Wellenlänge
+\begin{equation}
+  \lambda_\text{g} = \frac{\lambda_0}{\sqrt{1-\left(\frac{\lambda_0}{\lambda_\text{c}}\right)^2}},
+\end{equation}
+wobei $\lambda_0$ die Wellenlänge im freien Raum und
+\begin{equation}
+  \lambda_\text{c} = 2a%\frac{2}{\sqrt{\left(\frac{m}{a}\right)^2 + \left(\frac{n}{b}\right)^2}}
+\end{equation}
+die kritische Wellenlänge für eine Halbwellen-Änderung in eine Richtung eines rechteckigen Hohlleiters mit Breite $a$ ist.
+Daher gilt
+\begin{equation}
+  \lambda_0 = \frac{1}{\sqrt{\left(\frac{1}{\lambda_\text{g}}\right)^2+\left(\frac{1}{2a}\right)^2}} \label{eqn:1}
+\end{equation}
+und dadurch für die Frequenz
+\begin{equation}
+  f = \frac{c}{\lambda_0} = c \sqrt{\left(\frac{1}{\lambda_\text{g}}\right)^2+\left(\frac{1}{2a}\right)^2} \label{eqn:2}
+\end{equation}
+mit der Lichtgeschwindigkeit $c$ im freien Raum.
 
+\subsection{Stehwellenverhältnis}
 
-
-
-\cite{sample}
+Das Stehwellenverhältnis bzw die Welligkeit $S$ ist das Verhältnis von maximaler und minimaler Feldstärke im Hohlleiter
+\begin{equation}
+  S = \frac{E_\text{max}}{E_\text{min}}.
+\end{equation}
+Es drei verschiedene Methoden die Welligkeit zu messen; die direkte, die "3 db-Methode" und die "Abschwächer-Methode".\\
+Bei allen Methoden ist es üblich einen kleinen Teil der Leistung an der Leitung mit einer Sonde abzugreifen.
+Das Signal wird an einen Detektor weitergegeben.
+Bei der direkten Methode kann die Welligkeit direkt an einem SWR-Meter abgelesen werden.
+Diese Methode ist jedoch nur genau bei kleinen Welligkeiten, da bei großen die Sondentiefe erhöht werden muss, was zu Störungen führt.
+Die anderen beiden Methoden bieten dabei eine genauere Alternative.\\
+Bei der "3 db-Methode" wird der Abstand zwischen zwei Punkten gemessen, an denen die Ausgangsspannung am Detektor den doppelten Wert des Minimums erreicht.
+Die Welligkeit ergibt sich dann aus der Formel
+\begin{equation}
+  S = \sqrt{1+\frac{1}{\sin^2\left(\frac{\pi (d_1-d_2)}{\lambda_\text{g}}\right)}}, \label{eqn:3}
+\end{equation}
+wobei $d_1$ und $d_2$ die oben beschriebenen Punkte darstellen.\\
+Bei der "Abschwächer-Methode" wird das Maximum am Detektor dem Minimum über Einstellen eines Dämpfungsgliedes gleichgemacht.
+Dadurch folgt für die Welligkeit die Formel
+\begin{equation}
+  A_2-A_1 = 20\log(S),
+\end{equation}
+dabei sind $A_1$ und $A_2$ die Einstellungen des Abschwächers vor und nach der Anpassung.
+\cite{skript}
 
 % 2x2 Plot
 % \begin{figure*}
