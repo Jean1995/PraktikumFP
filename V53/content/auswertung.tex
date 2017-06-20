@@ -41,7 +41,7 @@ Die Minima des Signals zur Bestimmung der Wellenlänge $\lambda_g$ im luftgefül
   \text{Min}_1 &= \SI{115.9}{\milli\meter} \: \text{und}\\
   \text{Min}_2 &= \SI{90.8}{\milli\meter},
 \end{align*}
-wobei die Lage des Schlittens auf $\delta l = \SI{0.1}{\milli\meter}$ bestimmt werden kann.
+wobei die Lage des Schlittens auf $\SI{0.1}{\milli\meter}$ genau bestimmt werden kann.
 Das Doppelte der Differenz,
 \begin{align*}
   \lambda_g &= \input{lambda_g.tex},
@@ -55,15 +55,17 @@ bestimmen.
 
 \subsection{Bestimmung der Dämpfungskurve}
 Die Messergebnisse zur Bestimmung der Dämpfungskurve sind in Tabelle \ref{tab:daempfung} wiedergegeben.
+Die Ungenauigkeit der Mikrometerschraube wird auf $\SI{0.01}{\milli\meter}$ gesetzt und kann deshalb vernachlässigt werden.
 \input{build/daempfung.tex}
 Diese werden in Plot \ref{plot:daempfung} gefittet.
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{build/daempfung.pdf}
-  \caption{Modus-Diagramm über die ersten drei Moden.}
+  \caption{Dämpfungskurve.}
   \label{plot:daempfung}
 \end{figure}
 
+\subsection{Bestimmung der Welligkeit}
 
 
 % % Examples
