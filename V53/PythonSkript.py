@@ -230,6 +230,17 @@ f_el = np.array([9000, 8985, 9017])*10**6
 f_el_err = np.array([1, 1, 1])*10**6
 V_el = np.array([215, 205, 225])
 V_el_err = np.array([3,3,3])
+
+write('build/brt.tex', make_table([V_el, f_el*10**(-6)],[0, 0]))
+write('build/breite.tex', make_full_table(
+     'Messdaten Elektronische Abstimmung.',
+     'tab:breite',
+     'build/brt.tex',
+     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                               # die Multicolumns sein sollen
+     [r'$V_\text{Ref} \:/\: \si{\volt}$',
+     r'$f \:/\: \si{\mega\hertz}$']))
+
 f_el = unp.uarray(f_el, f_el_err)
 V_el = unp.uarray(V_el, V_el_err)
 
@@ -241,6 +252,8 @@ write('build/A.tex', make_SI(abstimmempf*10**(-6),  r'\mega\hertz\per\volt', fig
 
 print("Bandbreite =", bandbreite)
 print("Abstimmempfindlichkeit =", abstimmempf)
+
+
 
 ## Versuchs 2 - Wellenlängen
 
@@ -343,3 +356,8 @@ write('build/S_abs.tex', make_SI(S_abs, r'\decibel', figures=2))
 
 abw_S = 100*(S_abs.n - uff.n)/uff.n
 write('build/abw_S.tex', make_SI(abw_S, r'\percent', figures=1))
+
+### Versuch 2
+
+abw_f = np.abs((f.n-9000*10**6)/(9000*10**6)*100)
+write('build/abw_f.tex', make_SI(abw_f, r'\percent', figures=1))
