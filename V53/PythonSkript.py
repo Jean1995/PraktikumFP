@@ -178,21 +178,21 @@ V_null = np.array([215, 140, 85])
 V_eins = np.array([230, 150, 90])
 V_zwei = np.array([205, 120, 70])
 A = np.array([18, 20, 14])
-f = np.array([9000, 9005, 9010])
+f = np.array([9000, 9005, 9010]) # megahertz
 
-write('build/dmb.tex', make_table([mode, V_1, V_2, V_3, A, f],[0, 0, 0, 0, 0, 0]))
-write('build/daempfung.tex', make_full_table(
-     'Messdaten Kapazitätsmessbrücke.',
-     'tab:daempfung',
-     'build/dmb.tex',
+write('build/md.tex', make_table([mode, V_null, V_eins, V_zwei, A, f],[0, 0, 0, 0, 0, 0]))
+write('build/moden.tex', make_full_table(
+     'Messdaten Modenbestimmung.',
+     'tab:moden',
+     'build/md.tex',
      [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
                                # die Multicolumns sein sollen
      [r'Mode',
-     r'$V_0 \:/\: \si{\nano\farad}$',
-     r'$V_ \:/\: \si{\nano\farad}$',
-     r'$R_2 \:/\: \si{\ohm}$',
-     r'$R_2 \:/\: \si{\ohm}$'
-     r'$C_x \:/\: \si{\nano\farad}$']))
+     r'$V_0 \:/\: \si{\volt}$',
+     r'$V_1 \:/\: \si{\volt}$',
+     r'$V_2 \:/\: \si{\volt}$',
+     r'$A \:/\: \si{\milli\volt}$'
+     r'$f \:/\: \si{\mega\hertz}$']))
 
 
 plt.plot(V_1, A_1, 'rx', label='1. Modus')
@@ -222,6 +222,7 @@ plt.ylabel(r'Leistung')
 plt.legend(loc='best')
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/moden.pdf')
+plt.clf()
 
 ## Versuch 1 - Elektronische Abstimmung
 
@@ -253,3 +254,50 @@ write('build/lambda_g.tex', make_SI(lambda_g*10**(3),  r'\milli\metre', figures=
 
 f = const.c * unp.sqrt( (1/lambda_g)**2 + (1/(2*a))**2 )
 write('build/f.tex', make_SI(f*10**(-6),  r'\mega\hertz', figures=1))
+
+### Versuch 2 Dämpfung
+
+SWR = np.array([0,2,4,6,8,10])
+dmpf_mm = np.array([0.6, 1.32, 1.61, 1.95, 2.2, 2.59]) # milli meter
+dmpf_mm_err = np.array([0.01, 0.01, 0.01, 0.01, 0.01, 0.01]) # milli meter
+SWR_real = np.array([ 1, 3.5, 5, 7.5, 9.5, 12.5  ])
+
+write('build/dmp.tex', make_table([SWR, dmpf_mm],[0, 2]))
+write('build/daempfung.tex', make_full_table(
+     'Messdaten Dämpfung.',
+     'tab:daempfung',
+     'build/dmp.tex',
+     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                               # die Multicolumns sein sollen
+     [r'$\text{SWR-Ausschlag} \:/\: \si{\decibel}$',
+     r'$\text{Schraubenstellung} \:/\: \si{\milli\metre}$']))
+
+
+plt.plot(dmpf_mm, SWR, 'rx', label='Messdaten')
+#plt.errorbar(dmpf_mm, SWR, fmt='rx', xerr=dmpf_mm_err, label='Messdaten')
+
+def fd(x, a, b, c):
+    return a*np.exp(x*b) + c
+
+params_d, cov_d = curve_fit(fd, dmpf_mm, SWR)
+
+
+x_plotd = np.linspace(np.min(dmpf_mm), np.max(dmpf_mm))
+
+
+plt.plot(x_plotd, fd(x_plotd, *noms(params_d)), 'r--')
+
+
+plt.xlabel(r'$\text{Schraubenstellung} \:/\: \si{\milli\metre}$')
+plt.ylabel(r'$\text{SWR-Ausschlag} \:/\: \si{\decibel}$')
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/daempfung.pdf')
+plt.clf()
+
+
+
+
+
+
+dmpf_mm = unp.uarray(dmpf_mm, dmpf_mm_err)
