@@ -191,7 +191,7 @@ write('build/moden.tex', make_full_table(
      r'$V_0 \:/\: \si{\volt}$',
      r'$V_1 \:/\: \si{\volt}$',
      r'$V_2 \:/\: \si{\volt}$',
-     r'$A \:/\: \si{\milli\volt}$'
+     r'$A \:/\: \si{\milli\volt}$',
      r'$f \:/\: \si{\mega\hertz}$']))
 
 
@@ -250,6 +250,7 @@ min2 = ufloat(90.8, 0.1) * 10**(-3)
 delta_min = min1-min2
 
 lambda_g = 2*delta_min
+print(type(lambda_g))
 write('build/lambda_g.tex', make_SI(lambda_g*10**(3),  r'\milli\metre', figures=1))
 
 f = const.c * unp.sqrt( (1/lambda_g)**2 + (1/(2*a))**2 )
@@ -274,18 +275,22 @@ write('build/daempfung.tex', make_full_table(
 
 
 plt.plot(dmpf_mm, SWR, 'rx', label='Messdaten')
+plt.plot(dmpf_mm, SWR_real, 'gx', label='Theoriewerte')
+
 #plt.errorbar(dmpf_mm, SWR, fmt='rx', xerr=dmpf_mm_err, label='Messdaten')
 
 def fd(x, a, b, c):
     return a*np.exp(x*b) + c
 
 params_d, cov_d = curve_fit(fd, dmpf_mm, SWR)
+params_d_real, cov_d_real = curve_fit(fd, dmpf_mm, SWR_real)
 
 
 x_plotd = np.linspace(np.min(dmpf_mm), np.max(dmpf_mm))
 
 
 plt.plot(x_plotd, fd(x_plotd, *noms(params_d)), 'r--')
+plt.plot(x_plotd, fd(x_plotd, *noms(params_d_real)), 'g--')
 
 
 plt.xlabel(r'$\text{Schraubenstellung} \:/\: \si{\milli\metre}$')
@@ -295,9 +300,46 @@ plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/daempfung.pdf')
 plt.clf()
 
-
-
-
-
-
 dmpf_mm = unp.uarray(dmpf_mm, dmpf_mm_err)
+
+### Versuch 3 direkte Methode
+
+sondentiefe = np.array([3, 5, 7, 9]) * 10**(-3) #in meter
+SWS = np.array([1.05, 1.25, 1.85, 4.0])
+
+write('build/wgk.tex', make_table([sondentiefe, SWS],[0, 2]))
+write('build/welligkeit.tex', make_full_table(
+     'Messung der Welligkeit über die direkte Methode.',
+     'tab:welligkeit',
+     'build/wgk.tex',
+     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                               # die Multicolumns sein sollen
+     [r'$\text{Sondentiefe} \:/\: \si{\decibel}$',
+     r'$S$']))
+
+### Versuch 3 3db Methode
+
+d1 = ufloat(112.7, 0.1) * 10**(-3)
+d2 = ufloat(110.9, 0.1) * 10**(-3)
+
+uff = unp.sqrt( 1 + 1/(unp.sin( np.pi*(d1-d2)/lambda_g )**2 ) )
+uff = ufloat(unp.nominal_values(uff), unp.std_devs(uff))
+
+
+
+write('build/S_3db.tex', make_SI(uff, r'\decibel', figures=2))
+
+### Versuch 3 Abschwächer Methode
+
+A2 = ufloat(38,1)
+A1 = ufloat(20,1)
+S_abs = (A2-A1)/2
+
+write('build/S_abs.tex', make_SI(S_abs, r'\decibel', figures=2))
+
+# Diskussion
+
+### Versuch 3
+
+abw_S = 100*(S_abs.n - uff.n)/uff.n
+write('build/abw_S.tex', make_SI(abw_S, r'\percent', figures=1))
