@@ -66,6 +66,29 @@ Diese werden in Plot \ref{plot:daempfung} gefittet.
 \end{figure}
 
 \subsection{Bestimmung der Welligkeit}
+Die Messergebnisse bezüglich des direkten Ablesens sind in Tabelle \ref{tab:welligkeit} einzusehen, wobei der Wert bei der Sondentiefe von $\SI{9}{\milli\meter}$ nicht hinreichend genau abgelesen werden konnte.
+\input{build/welligkeit.tex}
+Für diese Sondentiefe lauten die Schlittenpositionen für die 3db-Methode
+\begin{align*}
+  d_1 &= \SI{112.7}{\milli\meter} \: \text{und}\\
+  d_2 &= \SI{110.9}{\milli\meter}.
+\end{align*}
+Aus der Formel \ref{eqn:3} berechnet sich die Welligkeit zu
+\begin{align*}
+  S &= \input{build/S_3db.tex}.
+\end{align*}
+Die Abschwächermethode liefert Dämpfungen von
+\begin{align*}
+  A_1 &= \SI{20}{\decibel} \: \text{und}\\
+  A_2 &= \SI{38}{\decibel},\\
+\end{align*}
+wobei diesen Werten jeweils eine Ungenauigkeit von $\SI{1}{\decibel}$ zugetragen wird.
+Dies führt durch Formel \ref{eqn:4} auf eine Welligkeit von
+\begin{align*}
+  S &= \input{build/S_abs.tex}.
+\end{align*}
+
+
 
 
 % % Examples
