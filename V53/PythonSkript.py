@@ -45,8 +45,13 @@ from error_calculation import(
 )
 ################################################ Finish importing custom libraries #################################################
 
+from scipy.optimize import curve_fit
+from numpy import random
 
+from scipy.interpolate import UnivariateSpline
 
+plt.style.use('seaborn-darkgrid')
+plt.set_cmap('Set2')
 
 
 
@@ -157,3 +162,94 @@ from error_calculation import(
 
 ########## DIFFERENT STUFF ##########
 # R = const.physical_constants["molar gas constant"]      # Array of value, unit, error
+
+def f3(x, a, b, c):
+    return a*(b-x)**2 + c
+
+V_1 = np.array([205, 215, 230]) # in Volt
+A_1 = np.array([0, 18, 0])
+V_2 = np.array([120, 140, 150])
+A_2 = np.array([0, 20, 0])
+V_3 = np.array([70, 85, 90])
+A_3 = np.array([0, 14, 0])
+
+mode = np.array([1,2,3])
+V_null = np.array([215, 140, 85])
+V_eins = np.array([230, 150, 90])
+V_zwei = np.array([205, 120, 70])
+A = np.array([18, 20, 14])
+f = np.array([9000, 9005, 9010])
+
+write('build/dmb.tex', make_table([mode, V_1, V_2, V_3, A, f],[0, 0, 0, 0, 0, 0]))
+write('build/daempfung.tex', make_full_table(
+     'Messdaten Kapazitätsmessbrücke.',
+     'tab:daempfung',
+     'build/dmb.tex',
+     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                               # die Multicolumns sein sollen
+     [r'Mode',
+     r'$V_0 \:/\: \si{\nano\farad}$',
+     r'$V_ \:/\: \si{\nano\farad}$',
+     r'$R_2 \:/\: \si{\ohm}$',
+     r'$R_2 \:/\: \si{\ohm}$'
+     r'$C_x \:/\: \si{\nano\farad}$']))
+
+
+plt.plot(V_1, A_1, 'rx', label='1. Modus')
+plt.plot(V_2, A_2, 'bx', label='2. Modus')
+plt.plot(V_3, A_3, 'yx', label='3. Modus')
+
+plt.rcParams['lines.linewidth'] = 1
+
+params_1, cov_1 = curve_fit(f3, V_1, A_1)
+params_2, cov_2 = curve_fit(f3, V_2, A_2)
+params_3, cov_3 = curve_fit(f3, V_3, A_3)
+
+x_plot1 = np.linspace(np.min(V_1), np.max(V_1))
+
+x_plot2 = np.linspace(np.min(V_2), np.max(V_2))
+
+x_plot3 = np.linspace(np.min(V_3), np.max(V_3))
+
+
+plt.plot(x_plot1, f3(x_plot1, *noms(params_1)), 'r--')
+plt.plot(x_plot2, f3(x_plot2, *noms(params_2)), 'b--')
+plt.plot(x_plot3, f3(x_plot3, *noms(params_3)), 'y--')
+
+
+plt.xlabel(r'$V_\text{Ref}$')
+plt.ylabel(r'Leistung')
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/moden.pdf')
+
+## Versuch 1 - Elektronische Abstimmung
+
+f_el = np.array([9000, 8985, 9017])*10**6
+f_el_err = np.array([1, 1, 1])*10**6
+V_el = np.array([215, 205, 225])
+V_el_err = np.array([3,3,3])
+f_el = unp.uarray(f_el, f_el_err)
+V_el = unp.uarray(V_el, V_el_err)
+
+bandbreite = np.max(f_el) - np.min(f_el)
+write('build/B.tex', make_SI(bandbreite*10**(-6),  r'\mega\hertz', figures=1))
+
+abstimmempf = (np.max(f_el) - np.min(f_el)) / (np.max(V_el) - np.min(V_el) )
+write('build/A.tex', make_SI(abstimmempf*10**(-6),  r'\mega\hertz\per\volt', figures=1))
+
+print("Bandbreite =", bandbreite)
+print("Abstimmempfindlichkeit =", abstimmempf)
+
+## Versuchs 2 - Wellenlängen
+
+a = ufloat( 22.860, 0.046 ) *10**(-3)
+min1 = ufloat(115.9, 0.1) * 10**(-3)
+min2 = ufloat(90.8, 0.1) * 10**(-3)
+delta_min = min1-min2
+
+lambda_g = 2*delta_min
+write('build/lambda_g.tex', make_SI(lambda_g*10**(3),  r'\milli\metre', figures=1))
+
+f = const.c * unp.sqrt( (1/lambda_g)**2 + (1/(2*a))**2 )
+write('build/f.tex', make_SI(f*10**(-6),  r'\mega\hertz', figures=1))
