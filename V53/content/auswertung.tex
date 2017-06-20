@@ -1,6 +1,71 @@
 \section{Auswertung}
 \label{sec:Auswertung}
 
+
+\subsection{Untersuchung der Moden}
+
+Zur Untersuchung der Moden wurden die Werte aus Tabelle \ref{tab:moden} aufgenommen.
+\input{build/moden.tex}
+Dabei steht $V_0$ für die Reflektorspannung, bei der das Maximum des Modus liegt, $V_1$ und $V_2$ stehen für den Anfang und das Ende, $A_0$ für die Amplitude und $f$ für die Frequenz zum Maximum des Modus.
+Die Reflektorspannung hat jeweils eine Ungenauigkeit von $\delta V_\text{Ref} = \SI{3}{\volt}$ und die Frequenz wird mit einer Ungenauigkeit von $\delta f = \SI{1}{\mega\hertz}$ abgelesen.
+Diese Werte resultieren in dem Modus-Diagramm aus Plot \ref{plot:modus}.
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{build/moden.pdf}
+  \caption{Modus-Diagramm über die ersten drei Moden.}
+  \label{plot:modus}
+\end{figure}
+Die Frequenzen und Spannungen halber Leistung des ersten Modus zur Berechnung der elektronischen Bandbreite und Abstimm-Empfindlichkeit sind in Tabelle \ref{tab:breite} abgetragen.
+Die elektronische Bandbreite berechnet sich nach
+\begin{equation}
+  B = f_2-f_1
+\end{equation}
+zu
+\begin{align*}
+  B &= \input{B.tex}.
+\end{align*}
+Die Abstimm-Empfindlichkeit wird über
+\begin{equation}
+  A = \frac{f_2-f_1}{V_2-V_1}
+\end{equation}
+auf
+\begin{align*}
+  A &= \input{A.tex}
+\end{align*}
+bestimmt.
+
+\subsection{Bestimmung der Frequenz aus der Wellenlängenmessung}
+
+Die Minima des Signals zur Bestimmung der Wellenlänge $\lambda_g$ im luftgefüllten Hohlleiter liegen bei
+\begin{align*}
+  \text{Min}_1 &= \SI{115.9}{\milli\meter} \: \text{und}\\
+  \text{Min}_2 &= \SI{90.8}{\milli\meter},
+\end{align*}
+wobei die Lage des Schlittens auf $\delta l = \SI{0.1}{\milli\meter}$ bestimmt werden kann.
+Das Doppelte der Differenz,
+\begin{align*}
+  \lambda_g &= \input{lambda_g.tex},
+\end{align*}
+entspricht dabei der Wellenlänge $\lambda_g$.\\
+Aus dieser lässt sich nach Formel \ref{eqn:2} die Frequenz mit einer Breite des Hohlleiters von $a = \SI{22.860 \pm 0.046}{\milli\meter}$ auf
+\begin{align*}
+  f &= \input{build/f.tex}
+\end{align*}
+bestimmen.
+
+\subsection{Bestimmung der Dämpfungskurve}
+Die Messergebnisse zur Bestimmung der Dämpfungskurve sind in Tabelle \ref{tab:daempfung} wiedergegeben.
+\input{build/daempfung.tex}
+Diese werden in Plot \ref{plot:daempfung} gefittet.
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{build/daempfung.pdf}
+  \caption{Modus-Diagramm über die ersten drei Moden.}
+  \label{plot:daempfung}
+\end{figure}
+
+
+
 % % Examples
 % \begin{equation}
 %   U(t) = a \sin(b t + c) + d
