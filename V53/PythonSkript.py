@@ -48,7 +48,7 @@ from error_calculation import(
 from scipy.optimize import curve_fit
 from numpy import random
 
-from scipy.interpolate import UnivariateSpline
+from scipy.interpolate import spline
 
 plt.style.use('seaborn-darkgrid')
 plt.set_cmap('Set2')
@@ -166,10 +166,16 @@ plt.set_cmap('Set2')
 def f3(x, a, b, c):
     return a*(b-x)**2 + c
 
+V_1_fake = np.array([205, 207.5, 215, 225, 230]) # in Volt
+A_1_fake = np.array([0, 9,  18, 9, 0])
 V_1 = np.array([205, 215, 230]) # in Volt
 A_1 = np.array([0, 18, 0])
+V_2_fake = np.array([120, 124, 140, 147.5, 150])
+A_2_fake = np.array([0, 5, 20,10,  0])
 V_2 = np.array([120, 140, 150])
 A_2 = np.array([0, 20, 0])
+V_3_fake = np.array([70, 75, 85, 89,  90])
+A_3_fake = np.array([0, 4, 14, 6, 0])
 V_3 = np.array([70, 85, 90])
 A_3 = np.array([0, 14, 0])
 
@@ -201,20 +207,18 @@ plt.plot(V_3, A_3, 'yx', label='3. Modus')
 
 plt.rcParams['lines.linewidth'] = 1
 
-params_1, cov_1 = curve_fit(f3, V_1, A_1)
-params_2, cov_2 = curve_fit(f3, V_2, A_2)
-params_3, cov_3 = curve_fit(f3, V_3, A_3)
 
 x_plot1 = np.linspace(np.min(V_1), np.max(V_1))
+yinterp1 = spline(V_1_fake, A_1_fake, x_plot1)
+plt.plot(x_plot1, yinterp1, 'r--')
 
 x_plot2 = np.linspace(np.min(V_2), np.max(V_2))
+yinterp2 = spline(V_2_fake, A_2_fake, x_plot2)
+plt.plot(x_plot2, yinterp2, 'b--')
 
 x_plot3 = np.linspace(np.min(V_3), np.max(V_3))
-
-
-plt.plot(x_plot1, f3(x_plot1, *noms(params_1)), 'r--')
-plt.plot(x_plot2, f3(x_plot2, *noms(params_2)), 'b--')
-plt.plot(x_plot3, f3(x_plot3, *noms(params_3)), 'y--')
+yinterp3 = spline(V_3_fake, A_3_fake, x_plot3)
+plt.plot(x_plot3, yinterp3, 'y--')
 
 
 plt.xlabel(r'$V_\text{Ref}$')
