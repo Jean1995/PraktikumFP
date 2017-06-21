@@ -1,2 +1,44 @@
 \section{Diskussion}
 \label{sec:Diskussion}
+
+\subsection{Modus-Diagramm und elektrische Kenngrößen}
+Bezüglich des Modus-Diagramms in plot \ref{plot:modus} fällt auf, dass der erste Modus deutlich kleiner ist als der zweite.
+Der Theorie nach müsste der erste Modus das größte Maximum besitzen, da die Elektronen in dieser Einstellung die größte kinetische Energie besitzen aufgrund der größten Reflektorspannung.
+Eine Erklärung könnte sein, dass bei einer so großen Reflekorspannung manche Elektronen, die den Glühdraht mit nicht hinreichend großer Energie verlassen, den Resonator nicht passieren können.?
+Die Intensität wäre daher abgeschwächt.\\
+Der sonstige Verlauf der Moden bestätigt die Theorie, obgleich die aufgenommenen Kurven nicht ganz symmetrisch sind.
+Dies ist jedoch weniger ein Ablesefehler, als mehr ein systematischer Fehler gegeben durch den Versuchsaufbau.\\
+Bei der Bestimmung der Abstimm-Empfindlichkeit,
+\begin{align*}
+  A &= \input{build/A.tex},
+\end{align*}
+ist ein systematischer Fehler beim Ablesen der Reflektorspannungen halber Leistung unterlaufen, da der Wert der linken Seite $V_\text{Ref} = \SI{205}{\volt}$ dem Anfangswert des Modus entspricht.
+Der Wert hätte irgendwo zwischen $\SI{205}{\volt}$ und $\SI{215}{\volt}$ liegen sollen.
+\subsection{Frequenzmessung}
+Die Werte für die Frequenzmessung lauten
+\begin{align*}
+  f_\text{gem} = \input{build/f.tex} \:\: \text{und}& \:\: f_\text{app} = \SI{9000 \pm 1}{\mega\hertz}.
+\end{align*}
+Dies entspricht einer Abweichung von
+\begin{align*}
+  \delta f = \input{build/abw_f.tex}.
+\end{align*}
+Diese Abweichung ist relativ klein, jedoch schneiden sich die Fehlerintervalle der Werte nicht.
+\subsection{Dämpfungskurve}
+Die aufgenommene Dämpfungskurve \ref{plot:daempfung} entspricht in guter Näherung der wahren mit einem konstanten Offset.
+Dies lässt sich erneut nur durch einen systematischen Fehler im Aufbau erklären, die Skala an der Schraube des Dämpfungsgliedes könnte falsch geeicht sein oder es gibt einen Offset im SWR-Meter.
+\subsection{Welligkeitsmessung}
+Bei der direkten Messung der Welligkeit konnte der letzte Wert \ref{tab:welligkeit} aufgrund der logarithmischen Skala sehr schlecht abgelesen werden, daher hat dieser keine Wertigkeit.
+Die 3db- und Abschwächermethode liefern eine Welligkeit von
+\begin{align*}
+  S_{3\text{db}} = \input{build/S_3db.tex} \:\: \text{und}& \:\: S_\text{abs} = \input{build/S_abs.tex}.
+\end{align*}
+Dabei weist die 3db-Methode den kleineren Fehler auf.
+Der Unterschied ist jedoch nicht signifikant genug, daher wird willkürlich die relative Abweichung von der Abschwächer- zur 3db-Methode berechnet.
+Sie beträgt
+\begin{align*}
+  \delta S = \input{build/abw_S.tex}.
+\end{align*}
+Diese Abweichung ist sehr klein und desweiteren schneiden sich beide Fehlerintervalle.\\
+Insgesamt weist dieser Versuch einige systematische Fehler auf, welche durch Ausschluss von Ablesefehlern nur durch den Aufbau erklärt werden können.
+Die 3db-Methode und die Abschwächer-Methode liefern beide unabhängig den selben Wert für die Welligkeit, daher kann nicht entschieden werden, welche Methode besser ist.
