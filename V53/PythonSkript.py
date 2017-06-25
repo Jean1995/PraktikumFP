@@ -324,14 +324,14 @@ dmpf_mm = unp.uarray(dmpf_mm, dmpf_mm_err)
 sondentiefe = np.array([3, 5, 7, 9]) * 10**(-3) #in meter
 SWS = np.array([1.05, 1.25, 1.85, 4.0])
 
-write('build/wgk.tex', make_table([sondentiefe, SWS],[0, 2]))
+write('build/wgk.tex', make_table([sondentiefe*10**(3), SWS],[0, 2]))
 write('build/welligkeit.tex', make_full_table(
      'Messung der Welligkeit über die direkte Methode.',
      'tab:welligkeit',
      'build/wgk.tex',
      [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
                                # die Multicolumns sein sollen
-     [r'$\text{Sondentiefe} \:/\: \si{\decibel}$',
+     [r'$\text{Sondentiefe} \:/\: \si{\milli\metre}$',
      r'$S$']))
 
 ### Versuch 3 3db Methode

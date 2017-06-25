@@ -6,16 +6,17 @@
 
 Zur Untersuchung der Moden wurden die Werte aus Tabelle \ref{tab:moden} aufgenommen.
 \input{build/moden.tex}
-Dabei steht $V_0$ für die Reflektorspannung, bei der das Maximum des Modus liegt, $V_1$ und $V_2$ stehen für den Anfang und das Ende, $A_0$ für die Amplitude und $f$ für die Frequenz zum Maximum des Modus.
-Die Reflektorspannung hat jeweils eine Ungenauigkeit von $\delta V_\text{Ref} = \SI{3}{\volt}$ und die Frequenz wird mit einer Ungenauigkeit von $\delta f = \SI{1}{\mega\hertz}$ abgelesen.
-Diese Werte resultieren in dem Modus-Diagramm aus Plot \ref{plot:modus}.
+Dabei steht $V_0$ für die Reflektorspannung, bei der das Maximum des Modus liegt, $V_1$ und $V_2$ stehen für den Anfang und das Ende der Modenkurve, $A_0$ für die Amplitude und $f$ für die dazugehörige Frequenz zum Maximum des Modus.
+Der Reflektorspannung wird jeweils eine Messungenauigkeit von $\delta V_\text{Ref} = \SI{3}{\volt}$ zugeordnet und der Frequenz eine Ungenauigkeit von $\delta f = \SI{1}{\mega\hertz}$.
+Aus diesen Werten resultiert das Modus-Diagramm aus Plot \ref{plot:modus}.
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{build/moden.pdf}
   \caption{Modus-Diagramm über die ersten drei Moden.}
   \label{plot:modus}
 \end{figure}
-Die Frequenzen und Spannungen halber Leistung des ersten Modus zur Berechnung der elektronischen Bandbreite und Abstimm-Empfindlichkeit sind in Tabelle \ref{tab:breite} abgetragen.
+
+Die Frequenzen und Spannungen halber Leistung des ersten Modus zur Berechnung der elektronischen Bandbreite und Abstimm-Empfindlichkeit sind in Tabelle \ref{tab:breite} angegeben.
 \input{build/breite.tex}
 Die elektronische Bandbreite berechnet sich nach
 \begin{equation}
@@ -29,7 +30,7 @@ Die Abstimm-Empfindlichkeit wird über
 \begin{equation}
   A = \frac{f_2-f_1}{V_2-V_1}
 \end{equation}
-auf
+zu
 \begin{align*}
   A &= \input{A.tex}
 \end{align*}
@@ -39,16 +40,17 @@ bestimmt.
 
 Die Minima des Signals zur Bestimmung der Wellenlänge $\lambda_g$ im luftgefüllten Hohlleiter liegen bei
 \begin{align*}
-  \text{Min}_1 &= \SI{115.9}{\milli\meter} \: \text{und}\\
-  \text{Min}_2 &= \SI{90.8}{\milli\meter},
+  \text{r}_1 &= \SI{115.9}{\milli\meter}, \\
+  \text{r}_2 &= \SI{90.8}{\milli\meter},
 \end{align*}
 wobei die Lage des Schlittens auf $\SI{0.1}{\milli\meter}$ genau bestimmt werden kann.
 Das Doppelte der Differenz,
 \begin{align*}
   \lambda_g &= \input{lambda_g.tex},
 \end{align*}
-entspricht dabei der Wellenlänge $\lambda_g$.\\
-Aus dieser lässt sich nach Formel \ref{eqn:2} die Frequenz mit einer Breite des Hohlleiters von $a = \SI{22.860 \pm 0.046}{\milli\meter}$ auf
+entspricht dabei der Wellenlänge $\lambda_g$.
+
+Aus dieser lässt sich nach Formel \ref{eqn:2} die Frequenz des Hohlleiters mit einer Breite von $a = \SI{22.860 \pm 0.046}{\milli\meter}$ zu
 \begin{align*}
   f &= \input{build/f.tex}
 \end{align*}
@@ -56,9 +58,9 @@ bestimmen.
 
 \subsection{Bestimmung der Dämpfungskurve}
 Die Messergebnisse zur Bestimmung der Dämpfungskurve sind in Tabelle \ref{tab:daempfung} wiedergegeben.
-Die Ungenauigkeit der Mikrometerschraube wird auf $\SI{0.01}{\milli\meter}$ gesetzt und kann deshalb vernachlässigt werden.
+Die Ungenauigkeit der Mikrometerschraube wird zu $\SI{0.01}{\milli\meter}$ geschätzt und kann deshalb im Plot vernachlässigt werden.
 \input{build/daempfung.tex}
-Diese werden in Plot \ref{plot:daempfung} gefittet.
+Die diskreten Werte für die Dämpfung werden in Plot \ref{plot:daempfung} an eine allgemeine Exponentialfunktion gefittet.
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{build/daempfung.pdf}
@@ -67,9 +69,9 @@ Diese werden in Plot \ref{plot:daempfung} gefittet.
 \end{figure}
 
 \subsection{Bestimmung der Welligkeit}
-Die Messergebnisse bezüglich des direkten Ablesens sind in Tabelle \ref{tab:welligkeit} einzusehen, wobei der Wert bei der Sondentiefe von $\SI{9}{\milli\meter}$ nicht hinreichend genau abgelesen werden konnte.
+Die Messergebnisse bezüglich des direkten Ablesens der Welligkeit sind in Tabelle \ref{tab:welligkeit} einzusehen, wobei der Wert bei der Sondentiefe von $\SI{9}{\milli\meter}$ nicht hinreichend genau abgelesen werden konnte.
 \input{build/welligkeit.tex}
-Für diese Sondentiefe lauten die Schlittenpositionen für die 3db-Methode
+Für die Sondentiefe $\SI{9}{\milli\meter}$ lauten die Schlittenpositionen für die 3db-Methode
 \begin{align*}
   d_1 &= \SI{112.7}{\milli\meter} \: \text{und}\\
   d_2 &= \SI{110.9}{\milli\meter}.
@@ -78,13 +80,13 @@ Aus der Formel \ref{eqn:3} berechnet sich die Welligkeit zu
 \begin{align*}
   S &= \input{build/S_3db.tex}.
 \end{align*}
-Die Abschwächermethode liefert Dämpfungen von
+Zuletzt liefert die Abschwächermethode Dämpfungen von
 \begin{align*}
   A_1 &= \SI{20}{\decibel} \: \text{und}\\
   A_2 &= \SI{38}{\decibel},
 \end{align*}
-wobei diesen Werten jeweils eine Ungenauigkeit von $\SI{1}{\decibel}$ zugetragen wird.
-Dies führt durch Formel \ref{eqn:4} auf eine Welligkeit von
+für die Sondentiefe $\SI{9}{\milli\meter}$, wobei diesen Werten jeweils eine Ungenauigkeit von $\SI{1}{\decibel}$ zugeordnet wird.
+Dies führt nach Formel \ref{eqn:4} auf eine Welligkeit von
 \begin{align*}
   S &= \input{build/S_abs.tex}.
 \end{align*}
