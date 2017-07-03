@@ -273,3 +273,5 @@ plt.xlabel(r'$U / \si{\volt}$')
 plt.legend(loc='best')
 plt.savefig('build/plot8.pdf')
 plt.clf()
+
+print(len(l0)+len(l1)+len(l2)+len(l3)+len(l4)+len(l5)+len(l6)+len(l7)+len(l8))
