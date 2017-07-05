@@ -1,3 +1,46 @@
 \section{Zielsetzung}
 
+\section{Theorie}
+\subsection{Theorie des magnetischen Momentes im Magnetfeld}
 \label{sec:Theorie}
+Atome verfügen über ein magetisches Moment $\vec{\mu}$ welches im Allgemeinen aus verschiedenen Anteilen
+\begin{equation}
+  \vec{\mu} = \vec{\mu_S} + \vec{\mu_L} + \vec{\mu_I}
+\end{equation}
+zusammengesetzt ist.
+Diese einzelnen magnetischen Momente sind, unter Vernachlässigung der Kopplung untereinander, parallel bzw. antiparallel zu der jeweils dazugehörigen Größe $\vec{S}$, $\vec{L}$ oder $\vec{I}$.
+Das magnetische Moment des Kernspins $\vec{\mu_I}$ ist im vorliegenden Versuch vernachlässigbar klein.
+Zusätzlich trägt das magnetische Moment des Bahndrehimpulses $\vec{\mu_L}$ keinen Anteil bei, da hier lediglich Atome im Grundzustand betrachtet werden, d.h. $L = 0 = \lvert \mu_L \rvert$ gilt.
+Somit muss ausschließlich das magnetische Moment des Spins berücksichtigt werden, welches mit dem Spin $\vec{S}$ über
+\begin{equation}
+  \vec{\mu_s} = - \underbrace{\frac{e \hbar}{2m}}_{\mu_B} g_S \frac{\vec{S}}{\hbar}
+\end{equation}
+verknüpft ist.
+Hierbei ist $\mu_B$ das Bohrsche Magneton sowie $g_S$ der Land\'{e}-Faktor, wobei für Elektronen $g_S \approx 2$ gilt.
+Bei diesem Versuchsaufbau wird ein Teilchenstrahl aus Kalium-Atomen verwendet.
+Dieses Alkalimetall besitzt ein äußeres Valenzelektron, welches dementsprechend die Eigenschaften des magnetischen Momentes des Kaliumatoms bestimmt.
+
+Befindet sich das Atom mit dem magnetische Moment innerhalb eines inhomogenen Magnetfeldes, so tritt eine Wechselwirkung von $\vec{\mu_S}$ mit dem Magnetfeld auf.
+Verläuft das $\vec{B}$-Feld beispielsweise in $z$-Richtung und ist das magnetische Moment parallel zu den Feldlinien ausgerichtet, so wirkt auf das Atom eine Kraft von
+\begin{equation}
+  \vec{F} = \vec{\nabla}\!\left( \vec{\mu_S} \vec{B} \right) = -g_S \mu_B m_s \frac{\partial B}{\partial z}.
+\end{equation}
+Hierbei gilt $S=m_s \hbar$ mit der Spinquantenzahl $m_s$.
+Klassisch ist $m_s$ als kontinuierliche Größe zu erwarten, quantenmechanisch nimmt die Spinquantenzahl jedoch nur diskrete Werte an.
+Für das Kaliumatom, welches ein Valenzelektron besitzt, können beispielsweise nur die Werte $m_s = \pm \num{0.5}$ angenommen werden.
+Dieses Verhalten führt zu der Aufspaltung des Teilchenstrahles in zwei Richtungen, die im Stern-Gerlach-Versuch beobachtet werden sollen.
+
+\subsection{Theorie der Maxwell-Verteilung}
+
+Im vorliegenden Versuchsaufbau wird ein Ofen zum Verdampfen der Kaliumatome verwendet.
+Die Geschwindigkeitsverteilung $\rho(v)$ der Atome im thermischen Gleichgewicht wird dabei durch die Maxwell-Boltzmann-Verteilung
+\begin{equation}
+  \rho(v) = \frac{4 v^2}{\sqrt{\pi}\alpha^3} \exp{\left(-\frac{v^2}{\alpha^2} \right)}
+\end{equation}
+beschrieben.
+Hierbei gibt die Größe
+\begin{align*}
+  \alpha = \sqrt{ \frac{2 k_\text{B} T}{m}}
+\end{align*}
+an, welche Teilchengeschwindigkeit bei einer Temperatur von $T$ sowie einem Atommasse von $m$ am wahrscheinlichsten ist.
+Hieraus kann auch der Teilchenstrom $I(v) = \rho(v) v$ berechnet werden, welcher vom Detektor aufgenommen wird.
