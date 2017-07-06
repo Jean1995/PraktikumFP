@@ -211,6 +211,93 @@ l8 = np.array([ 2.0, 3.0, 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 5.0,
 I8 = np.array([ 0.061, 0.076, 0.127, 0.134, 0.141, 0.149, 0.160, 0.172, 0.185, 0.199, 0.213, 0.226, 0.237, 0.251, 0.253, 0.253, 0.254, 0.256, 0.259, 0.261, 0.263, 0.265, 0.268, 0.271, 0.272, 0.275, 0.279, 0.280, 0.281, 0.282, 0.285, 0.284, 0.284, 0.284, 0.283, 0.281, 0.277, 0.276, 0.272, 0.250, 0.219, 0.187, 0.159, 0.137, 0.117, 0.101, 0.096, 0.102, 0.121, 0.147, 0.173, 0.203, 0.223, 0.241, 0.258, 0.259, 0.261, 0.265, 0.267, 0.272, 0.273, 0.274, 0.274, 0.274, 0.276, 0.276, 0.275, 0.274, 0.273, 0.274, 0.270, 0.268, 0.265, 0.261, 0.261, 0.252, 0.240, 0.227, 0.216, 0.130, 0.091 ])
 
 
+mu_0 = const.mu_0
+mu_r = 1-6.4*10**(-6)
+a    = 2.5*10**(-3)
+r    = 1.3*a #vielleicht
+
+
+def B(I_b):
+    return mu_0*mu_r*I_b/np.pi * a/(r**2)
+
+def db(I_b):
+    return 0.968*B(I_b)/a
+
+def s(m):
+    return m*x
+
+def gauss(x,mu,sigma):
+    return np.exp(-1/2 * ((x-mu)/sigma)**2)
+
+params0 = curve_fit(gauss,l0*1.8,I0)
+
+#dumme Idee -.-
+
+l1_1 = l1[0:20]
+l1_2 = l1[20:len(l1)-1]
+#l2_1 =
+#l2_2 =
+#l3_1 =
+#l3_2 =
+#l4_1 =
+#l4_2 =
+#l5_1 =
+#l5_2 =
+#l6_1 =
+#l6_2 =
+#l7_1 =
+#l7_2 =
+#l8_1 =
+#l8_2 =
+I1_1 = I1[0:20]
+I1_2 = I1[20:len(l1)-1]
+#I2_1 =
+#I2_2 =
+#I3_1 =
+#I3_2 =
+#I4_1 =
+#I4_2 =
+#I5_1 =
+#I5_2 =
+#I6_1 =
+#I6_2 =
+#I7_1 =
+#I7_2 =
+#I8_1 =
+#I8_2 =
+
+params1_1 = curve_fit(gauss,l1_1*1.8,I1_1)
+params1_2 = curve_fit(gauss,l1_2*1.8,I1_2)
+#params2_1 = curve_fit(gauss,l2_1*1.8,I2_1)
+#params2_2 = curve_fit(gauss,l2_2*1.8,I2_2)
+#params3_1 = curve_fit(gauss,l3_1*1.8,I3_1)
+#params3_2 = curve_fit(gauss,l3_2*1.8,I3_2)
+#params4_1 = curve_fit(gauss,l4_1*1.8,I4_1)
+#params4_2 = curve_fit(gauss,l4_2*1.8,I4_2)
+#params5_1 = curve_fit(gauss,l5_1*1.8,I5_1)
+#params5_2 = curve_fit(gauss,l5_2*1.8,I5_2)
+#params6_1 = curve_fit(gauss,l6_1*1.8,I6_1)
+#params6_2 = curve_fit(gauss,l6_2*1.8,I6_2)
+#params7_1 = curve_fit(gauss,l7_1*1.8,I7_1)
+#params7_2 = curve_fit(gauss,l7_2*1.8,I7_2)
+#params8_1 = curve_fit(gauss,l8_1*1.8,I8_1)
+#params8_2 = curve_fit(gauss,l8_2*1.8,I8_2)
+print("mu_1 = ",params1_1[0][0],", mu_2 = ",params1_2[0][0])
+
+Null = ufloat(params0[0][0],np.sqrt(params0[1][0][0]))
+
+#def ab(l1,l2):
+#    s1 = abs(l1-Null)
+#    s2 = abs(l2-Null)
+#    return (s1+s2)/2
+
+#y = unp.uarray([unp.nominal_values(ab(l1[13]*1.8,l1[33]*1.8)),unp.nominal_values(ab(l2[22]*1.8,l2[52]*1.8)),unp.nominal_values(ab(l3[24]*1.8,l3[]*1.8)),unp.nominal_values(ab(l4[]*1.8,l4[]*1.8)),unp.nominal_values(ab(l5[]*1.8,l5[]*1.8)),unp.nominal_values(ab(l6[]*1.8,l6[]*1.8)),unp.nominal_values(ab(l7[]*1.8,l7[]*1.8)),unp.nominal_values(ab(l8[]*1.8,l8[]*1.8))],[unp.std_devs(ab(l1[]*1.8,l1[]*1.8)),unp.std_devs(ab(l2[]*1.8,l2[]*1.8)),unp.std_devs(ab(l3[]*1.8,l3[]*1.8)),unp.std_devs(ab(l4[]*1.8,l4[]*1.8)),unp.std_devs(ab(l5[]*1.8,l5[]*1.8)),unp.std_devs(ab(l6[]*1.8,l6[]*1.8)),unp.std_devs(ab(l7[]*1.8,l7[]*1.8)),unp.std_devs(ab(l8[]*1.8,l8[]*1.8))])
+
+
+
+x_space = np.linspace(l0[0]*1.8,np.amax(l0)*1.8,1000)
+
+plt.plot(x_space,gauss(x_space,params0[0][0],params0[0][1]))
 plt.plot(l0*1.8, I0, '.', markersize=3,label=r'$I = \SI{0}{\ampere}$') # so richtig mit der 1.8? oder */10 ?
 plt.xlabel(r'$l / \si{\milli\metre}$')
 plt.xlabel(r'$U / \si{\volt}$')
