@@ -293,6 +293,12 @@ s1_8 = 7.42 * 1.8
 s8_l_h = abs(min(s0_8, s1_8) - s_mitte)
 s8_r_h = abs(max(s0_8, s1_8) - s_mitte)
 
+mu1_h_ges = np.array([ min(s0_1, s1_1),min(s0_2, s1_2),min(s0_3, s1_3),min(s0_4, s1_4),min(s0_5, s1_5),min(s0_6, s1_6),min(s0_7, s1_7), min(s0_8, s1_8)])
+mu2_h_ges = np.array([ max(s0_1, s1_1),max(s0_2, s1_2),max(s0_3, s1_3),max(s0_4, s1_4),max(s0_5, s1_5),max(s0_6, s1_6),max(s0_7, s1_7), max(s0_8, s1_8)])
+
+s_l_h_ges = np.array([ s1_l_h.n, s2_l_h.n, s3_l_h.n, s4_l_h.n, s5_l_h.n, s6_l_h.n, s7_l_h.n, s8_l_h.n ])
+s_r_h_ges = np.array([ s1_r_h.n, s2_r_h.n, s3_r_h.n, s4_r_h.n, s5_r_h.n, s6_r_h.n, s7_r_h.n, s8_r_h.n ])
+
 s_g_l_h_n = np.array([s2_l_h.n, s4_l_h.n, s6_l_h.n, s8_l_h.n]) * 10**(-3) # s_g_l_h_n = S-werte, die Gerade sind, die für die Linken Maxima stehen, die per Hand abgelesen wurden, und davon die Nominellen Werte
 s_g_r_h_n = np.array([s2_r_h.n, s4_r_h.n, s6_r_h.n, s8_r_h.n]) * 10**(-3)
 s_g_l_h_s = np.array([s2_l_h.s, s4_l_h.s, s6_l_h.s, s8_l_h.s]) * 10**(-3)
@@ -411,7 +417,7 @@ s5_l = abs(min( ufloat(params5[0], np.sqrt(cov5[0,0])), ufloat(params5[1], np.sq
 s6_l = abs(min( ufloat(params6[0], np.sqrt(cov6[0,0])), ufloat(params6[1], np.sqrt(cov6[1,1])) ) - s_mitte)
 s7_l = abs(min( ufloat(params7[0], np.sqrt(cov7[0,0])), ufloat(params7[1], np.sqrt(cov7[1,1])) ) - s_mitte)
 s8_l = abs(min( ufloat(params8[0], np.sqrt(cov8[0,0])), ufloat(params8[1], np.sqrt(cov8[1,1])) ) - s_mitte)
-mu1_ges = np.array([min(params1[0],params1[1]),min(params2[0],params2[1]),min(params3[0],params3[1]),min(params4[0],params4[1]),min(params5[0],params5[1]),min(params6[0],params6[1]),min(params7[0],params7[1]),min(params8[0],params8[1]])
+mu1_ges = np.array([min(params1[0],params1[1]),min(params2[0],params2[1]),min(params3[0],params3[1]),min(params4[0],params4[1]),min(params5[0],params5[1]),min(params6[0],params6[1]),min(params7[0],params7[1]),min(params8[0],params8[1])])
 
 s1_r = abs(max( ufloat(params1[0], np.sqrt(cov1[0,0])), ufloat(params1[1], np.sqrt(cov1[1,1])) ) - s_mitte)
 s2_r = abs(max( ufloat(params2[0], np.sqrt(cov2[0,0])), ufloat(params2[1], np.sqrt(cov2[1,1])) ) - s_mitte)
@@ -421,6 +427,9 @@ s5_r = abs(max( ufloat(params5[0], np.sqrt(cov5[0,0])), ufloat(params5[1], np.sq
 s6_r = abs(max( ufloat(params6[0], np.sqrt(cov6[0,0])), ufloat(params6[1], np.sqrt(cov6[1,1])) ) - s_mitte)
 s7_r = abs(max( ufloat(params7[0], np.sqrt(cov7[0,0])), ufloat(params7[1], np.sqrt(cov7[1,1])) ) - s_mitte)
 s8_r = abs(max( ufloat(params8[0], np.sqrt(cov8[0,0])), ufloat(params8[1], np.sqrt(cov8[1,1])) ) - s_mitte)
+
+
+
 mu2_ges = np.array([max(params1[0],params1[1]),max(params2[0],params2[1]),max(params3[0],params3[1]),max(params4[0],params4[1]),max(params5[0],params5[1]),max(params6[0],params6[1]),max(params7[0],params7[1]),max(params8[0],params8[1])])
 
 s_g_l_n = np.array([s2_l.n, s4_l.n, s6_l.n, s8_l.n]) *10**(-3) # jetzt in Meter
@@ -449,7 +458,7 @@ Vorf_g = l * L * (1-L/(2*l))/(6*const.k * T_g) * dB(B_abgelesen_g)
 Vorf_u = l * L * (1-L/(2*l))/(6*const.k * T_u) * dB(B_abgelesen_u)
 
 
-params9_g, cov9_g = curve_fit(linear_fit,Vorf_g,s_g_l_n, p0=[9*10**(a,b,c,d,e-24), 0], sigma=s_g_l_s)
+params9_g, cov9_g = curve_fit(linear_fit,Vorf_g,s_g_l_n, p0=[9*10**(-24), 0], sigma=s_g_l_s)
 params10_g, cov10_g = curve_fit(linear_fit,Vorf_g,s_g_r_n, p0=[9*10**(-24), 0], sigma=s_g_r_s)
 params11_g, cov11_g = curve_fit(linear_fit,Vorf_g,s_g_l_h_n, p0=[9*10**(-24), 0], sigma=s_g_l_h_s)
 params12_g, cov12_g = curve_fit(linear_fit,Vorf_g,s_g_r_h_n, p0=[9*10**(-24), 0], sigma=s_g_r_h_s)
@@ -471,8 +480,8 @@ plt.errorbar(Vorf_u, s_u_l_n*10**3,yerr=s_u_l_s*10**3, fmt='r.')
 plt.errorbar(Vorf_g, s_g_l_h_n*10**3,yerr=s_g_l_h_s*10**3, fmt='b.')
 plt.errorbar(Vorf_u, s_u_l_h_n*10**3,yerr=s_u_l_h_s*10**3, fmt='b.')
 
-plt.ylabel(r'$l / \si{\milli\metre}$')
-plt.xlabel(r'$U / \si{\tesla\metre\per\joule}$')
+plt.ylabel(r'$s / \si{\milli\metre}$')
+plt.xlabel(r'$\zeta / \si{\tesla\metre\per\joule}$')
 plt.legend(loc='best')
 plt.savefig('build/plot_links.pdf')
 plt.clf()
@@ -487,37 +496,73 @@ plt.errorbar(Vorf_u, s_u_r_n*10**3,yerr=s_u_r_s*10**3, fmt='r.')
 
 plt.errorbar(Vorf_g, s_g_r_h_n*10**3,yerr=s_g_r_h_s*10**3, fmt='b.')
 plt.errorbar(Vorf_u, s_u_r_h_n*10**3,yerr=s_u_r_h_s*10**3, fmt='b.')
-plt.ylabel(r'$l / \si{\milli\metre}$')
-plt.xlabel(r'$U / \si{\tesla\metre\per\joule}$')
+plt.ylabel(r'$s / \si{\milli\metre}$')
+plt.xlabel(r'$\zeta / \si{\tesla\metre\per\joule}$')
 plt.legend(loc='best')
 plt.savefig('build/plot_rechts.pdf')
 plt.clf()
 
 ### Das sollte im Bestenfall direkt das Bohrsche Magneton ergeben, da mu_sz = 0.5*2 * mu_b
-print("Per fit")
-print(params9_g[0])
-print(params9_u[0])
-print(params10_g[0])
-print(params10_u[0])
-print("Per Hand")
-print(params11_g[0])
-print(params11_u[0])
-print(params12_g[0])
-print(params12_u[0])
 
+## Ergebnisse
+
+mu_l_f_g = ufloat(params9_g[0], np.sqrt(cov9_g[0,0]))
+mu_l_f_u = ufloat(params9_u[0], np.sqrt(cov9_u[0,0]))
+mu_r_f_g = ufloat(params10_g[0], np.sqrt(cov10_g[0,0]))
+mu_r_f_u = ufloat(params10_u[0], np.sqrt(cov10_u[0,0]))
+
+mu_l_h_g = ufloat(params11_g[0], np.sqrt(cov11_g[0,0]))
+mu_l_h_u = ufloat(params11_u[0], np.sqrt(cov11_u[0,0]))
+mu_r_h_g = ufloat(params12_g[0], np.sqrt(cov12_g[0,0]))
+mu_r_h_u = ufloat(params12_u[0], np.sqrt(cov12_u[0,0]))
+
+write('build/mu_l_f_g.tex', make_SI(mu_l_f_g*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_l_f_u.tex', make_SI(mu_l_f_u*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_r_f_g.tex', make_SI(mu_r_f_g*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_r_f_u.tex', make_SI(mu_r_f_u*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_l_h_g.tex', make_SI(mu_l_h_g*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_l_h_u.tex', make_SI(mu_l_h_u*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_r_h_g.tex', make_SI(mu_r_h_g*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_r_h_u.tex', make_SI(mu_r_h_u*10**24, r'\joule\per\tesla','e-24', figures=1))
+
+mu_f_mittel = ufloat( np.mean(np.array([mu_l_f_g.n, mu_l_f_u.n, mu_r_f_g.n, mu_r_f_u.n])), np.std(np.array([mu_l_f_g.n, mu_l_f_u.n, mu_r_f_g.n, mu_r_f_u.n]))  )
+
+mu_h_mittel = ufloat( np.mean(np.array([mu_l_h_g.n, mu_l_h_u.n, mu_r_h_g.n, mu_r_h_u.n])), np.std(np.array([mu_l_h_g.n, mu_l_h_u.n, mu_r_h_g.n, mu_r_h_u.n]))  )
+
+write('build/mu_f_mittel.tex', make_SI(mu_f_mittel*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_h_mittel.tex', make_SI(mu_h_mittel*10**24, r'\joule\per\tesla','e-24', figures=1))
+
+bohr_lit = 9.247009994*10**(-24)
+write('build/mu_lit.tex', make_SI(bohr_lit*10**24, r'\joule\per\tesla','e-24', figures=1))
+write('build/mu_f_abw.tex', make_SI(abs(mu_f_mittel.n-bohr_lit)/bohr_lit*100, r'\percent', figures=1))
+write('build/mu_h_abw.tex', make_SI(abs(mu_h_mittel.n-bohr_lit)/bohr_lit*100, r'\percent', figures=1))
 
 ## Tabellenstuff
 
-write('build/Tabelle_a.tex', make_table([I, B_ges, mu1_ges, mu2_ges, s_l_ges, s_r_ges ],[1, 1, 1, 1, 1,1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/Tabelle_a.tex', make_table([I, B_ges, mu1_ges, mu2_ges, s_l_ges, s_r_ges ],[1, 2,3, 3,3,3]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
 write('build/Tabelle_a_texformat.tex', make_full_table(
-     'Messdaten Kapazitätsmessbrücke.',
-     'table:A2',
+     'Messdaten mit Magnetfeld. Werte ermittelt per Fit.',
+     'table:tab1',
      'build/Tabelle_a.tex',
      [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
                                # die Multicolumns sein sollen
-     [r'$I  \:/\:  \si{ampere}$',
+     [r'$I  \:/\:  \si{\ampere}$',
      r'$B \:/\: \si{\tesla}$',
-     r'$\mu_1 \:/\: \si{\metre}$',
-     r'$\mu_2 \:/\: \si{\metre}$',
-     r'$s_1 \:/\: \si{\metre}$',
-     r'$s_2 \:/\: \si{\metre}$']))
+     r'$\mu_1 \:/\: \si{\milli\metre}$',
+     r'$\mu_2 \:/\: \si{\milli\metre}$',
+     r'$s_\text{L} \:/\: \si{\milli\metre}$',
+     r'$s_\text{R} \:/\: \si{\milli\metre}$']))
+
+write('build/Tabelle_b.tex', make_table([I, B_ges, mu1_h_ges, mu2_h_ges, s_l_h_ges, s_r_h_ges ],[1, 2,3, 3,3,3]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/Tabelle_b_texformat.tex', make_full_table(
+     'Messdaten mit Magnetfeld. Werte abgelesen per Hand.',
+     'table:tab2',
+     'build/Tabelle_b.tex',
+     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                               # die Multicolumns sein sollen
+     [r'$I  \:/\:  \si{\ampere}$',
+     r'$B \:/\: \si{\tesla}$',
+     r'$\mu_{1,\text{H}} \:/\: \si{\milli\metre}$',
+     r'$\mu_{2,\text{H}} \:/\: \si{\milli\metre}$',
+     r'$s_\text{L, \text{H}} \:/\: \si{\milli\metre}$',
+     r'$s_\text{R, \text{H}} \:/\: \si{\milli\metre}$']))

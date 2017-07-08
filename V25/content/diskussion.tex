@@ -1,2 +1,31 @@
 \section{Diskussion}
 \label{sec:Diskussion}
+
+Die Ergebnisse für das Bohrsche Magneton aus der durchgeführten Rechnung lauten
+\begin{align*}
+  \mu_{\text{B,F,mittel}} &= \input{build/mu_f_mittel.tex}\\
+  \mu_{\text{B,H,mittel}} &= \input{build/mu_h_mittel.tex}.
+\end{align*}
+Verglichen mit dem Literaturwert \cite{Konstanten}
+\begin{align*}
+  \mu_{\text{B,lit}} &= \input{build/mu_lit.tex}
+\end{align*}
+entspricht dies Abweichungen von
+\begin{align*}
+  \delta \mu_{\text{B,F,mittel}} &= \input{build/mu_f_abw.tex}\\
+  \delta \mu_{\text{B,H,mittel}} &= \input{build/mu_h_abw.tex}.
+\end{align*}
+Dieses Ergebnis entspricht signifikanten Abweichungen von Literaturwert nach unten, liegt trotz allem in der gleichen Größenordnung.
+Bei der Bewertung der Ergebnisse sind vor allem zwei entscheidende Faktoren zu nennen.
+Der erste Faktor ist der Sachverhalt, dass zur Ermittlung des Magnetfeldes $B$ ein vorgegebener Graph verwendet wurde.
+Einerseits ist das Ablesen dieses handgeschriebenen Graphen über Millimeterpaper relativ ungenau, andererseits sind die verwendeten Ergebnisse zum Zeitpunkt der Versuchsdurchführung über 15 Jahre alt gewesen.
+Ob die Daten somit nach wie vor gültig sind kann somit hinterfragt werden.
+Eine signifikante Verbesserung der Umrechnung wäre bei genauer Kenntnis der Premeabilitätszahl $\mu_r$ des verwendeten Magneten möglich, da dann ausgehend von der bekannten Geometrie das Magnetfeld $B$ aus $I$ ermittelt werden könnte.
+
+Der zweite Faktor ist die Tatsache, dass das Ablesen der Maxima schwierig war.
+Auch wenn die Bestimmung der Maxima über Fits bei erster Betrachtung ungenauer schienen, sind die daraus folgenden Ergebnisse für $\mu_\text{B}$ genauer als die Ergebnisse, wenn die Maxima per Hand abgelesen werden.
+Eine Verbesserung der Fitmethode würde das Ergebnis weiterhin verbessern.
+
+Auch weitere Faktoren wie beispielsweise ein nicht vollständiges Vakuum oder die Bewegung des Detektors führen zu Ungenauigkeiten.
+Letzteres hat zu einem systematischen Fehler geführt, welches dazu geführt hat, dass die Messergebnisse aufgeteilt weden mussten.
+Ohne diesen Fehler wäre eine höhere Genauigkeit möglich gewesen.
