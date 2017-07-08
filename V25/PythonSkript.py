@@ -220,11 +220,11 @@ l = 0.445 #meter
 L = 7 * 10 ** (-2)
 
 
-def B(I_b):
-    return mu_0*mu_r*I_b/np.pi * a/(r**2)
+#def B(I_b):
+#    return mu_0*mu_r*I_b/np.pi * a/(r**2)
 
-def dB(I_b):
-    return 0.968*B(I_b)/a
+def dB(B_tmp):
+    return 0.968*B_tmp/a
 
 def s(m):
     return m*x
@@ -249,39 +249,59 @@ params7, cov7 = curve_fit(doppel_gauss,l7,I7, p0=[9.3,12.3,0.8,1,0.8,1,0])
 params8, cov8 = curve_fit(doppel_gauss,l8,I8, p0=[9.8,13.3,0.8,1,0.8,1,0])
 print(params6)
 
+s_mitte = ufloat(params0[0], np.sqrt(cov0[0,0]))
+write('build/s_mitte.tex', make_SI(s_mitte, r'\milli\metre', figures=1))
+
 #Maxima von Hand
 s0_1 = 6.56 * 1.8
 s1_1 = 5.68 * 1.8
-s1_h = abs(s0_1 - s1_1)
+s1_l_h = abs(min(s0_1, s1_1) - s_mitte)
+s1_r_h = abs(max(s0_1, s1_1) - s_mitte)
 
 s0_2 = 5.86 * 1.8
 s1_2 = 6.98 * 1.8
-s2_h = abs(s0_2 - s1_2)
+s2_l_h = abs(min(s0_2, s1_2) - s_mitte)
+s2_r_h = abs(max(s0_2, s1_2) - s_mitte)
 
 s0_3 = 6.82 * 1.8
 s1_3 = 5.51 * 1.8
-s3_h = abs(s0_3 - s1_3)
+s3_l_h = abs(min(s0_3, s1_3) - s_mitte)
+s3_r_h = abs(max(s0_3, s1_3) - s_mitte)
 
 s0_4 = 5.69 * 1.8
 s1_4 = 7.17 * 1.8
-s4_h = abs(s0_4 - s1_4)
+s4_l_h = abs(min(s0_4, s1_4) - s_mitte)
+s4_r_h = abs(max(s0_4, s1_4) - s_mitte)
 
 s0_5 = 6.92 * 1.8
 s1_5 = 5.38 * 1.8
-s5_h = abs(s0_5 - s1_5)
+s5_l_h = abs(min(s0_5, s1_5) - s_mitte)
+s5_r_h = abs(max(s0_5, s1_5) - s_mitte)
 
 s0_6 = 5.57 * 1.8
 s1_6 = 7.34 * 1.8
-s6_h = abs(s0_6 - s1_6)
+s6_l_h = abs(min(s0_6, s1_6) - s_mitte)
+s6_r_h = abs(max(s0_6, s1_6) - s_mitte)
 
 s0_7 = 7.08 * 1.8
 s1_7 = 5.25 * 1.8
-s7_h = abs(s0_7 - s1_7)
+s7_l_h = abs(min(s0_7, s1_7) - s_mitte)
+s7_r_h = abs(max(s0_7, s1_7) - s_mitte)
 
 s0_8 = 5.47 * 1.8
 s1_8 = 7.42 * 1.8
-s8_h = abs(s0_8 - s1_8)
-s_h = np.array([s1_h,s2_h,s3_h,s4_h,s5_h,s6_h,s7_h,s8_h]) * 10**(-3)
+s8_l_h = abs(min(s0_8, s1_8) - s_mitte)
+s8_r_h = abs(max(s0_8, s1_8) - s_mitte)
+
+s_g_l_h_n = np.array([s2_l_h.n, s4_l_h.n, s6_l_h.n, s8_l_h.n]) * 10**(-3) # s_g_l_h_n = S-werte, die Gerade sind, die für die Linken Maxima stehen, die per Hand abgelesen wurden, und davon die Nominellen Werte
+s_g_r_h_n = np.array([s2_r_h.n, s4_r_h.n, s6_r_h.n, s8_r_h.n]) * 10**(-3)
+s_g_l_h_s = np.array([s2_l_h.s, s4_l_h.s, s6_l_h.s, s8_l_h.s]) * 10**(-3)
+s_g_r_h_s = np.array([s2_r_h.s, s4_r_h.s, s6_r_h.s, s8_r_h.s]) * 10**(-3)
+
+s_u_l_h_n = np.array([s1_l_h.n ,s3_l_h.n, s5_l_h.n, s7_l_h.n]) * 10**(-3)
+s_u_r_h_n = np.array([s1_r_h.n ,s3_r_h.n, s5_r_h.n, s7_r_h.n]) * 10**(-3)
+s_u_l_h_s = np.array([s1_l_h.s ,s3_l_h.s, s5_l_h.s, s7_l_h.s]) * 10**(-3)
+s_u_r_h_s = np.array([s1_r_h.s ,s3_r_h.s, s5_r_h.s, s7_r_h.s]) * 10**(-3)
 
 x_space_0 = np.linspace(np.amin(l0),np.amax(l0),1000)
 plt.plot(x_space_0,gauss(x_space_0, *params0), linewidth=1)
@@ -291,6 +311,7 @@ plt.ylabel(r'$U / \si{\volt}$')
 plt.legend(loc='best')
 plt.savefig('build/plot0.pdf')
 plt.clf()
+
 
 x_space_1 = np.linspace(np.amin(l1),np.amax(l1),1000)
 plt.plot(x_space_1,doppel_gauss(x_space_1, *params1), linewidth=1)
@@ -382,35 +403,121 @@ plt.savefig('build/plot8.pdf')
 plt.clf()
 
 #  Bestimme Stuff
-s1 = abs(params1[0] - params1[1])
-s2 = abs(params2[0] - params2[1])
-s3 = abs(params3[0] - params3[1])
-s4 = abs(params4[0] - params4[1])
-s5 = abs(params5[0] - params5[1])
-s6 = abs(params6[0] - params6[1])
-s7 = abs(params7[0] - params7[1])
-s8 = abs(params8[0] - params8[1])
-s = np.array([s1, s2, s3, s4, s5, s6, s7, s8]) *10**(-3) # jetzt in Meter
-T = np.array([197, 198, 198, 198, 198, 198, 198, 198 ]) + 273.15 # Celsius oder Ke(l)vin?!
+s1_l = abs(min( ufloat(params1[0], np.sqrt(cov1[0,0])), ufloat(params1[1], np.sqrt(cov1[1,1])) ) - s_mitte)
+s2_l = abs(min( ufloat(params2[0], np.sqrt(cov2[0,0])), ufloat(params2[1], np.sqrt(cov2[1,1])) ) - s_mitte)
+s3_l = abs(min( ufloat(params3[0], np.sqrt(cov3[0,0])), ufloat(params3[1], np.sqrt(cov3[1,1])) ) - s_mitte)
+s4_l = abs(min( ufloat(params4[0], np.sqrt(cov4[0,0])), ufloat(params4[1], np.sqrt(cov4[1,1])) ) - s_mitte)
+s5_l = abs(min( ufloat(params5[0], np.sqrt(cov5[0,0])), ufloat(params5[1], np.sqrt(cov5[1,1])) ) - s_mitte)
+s6_l = abs(min( ufloat(params6[0], np.sqrt(cov6[0,0])), ufloat(params6[1], np.sqrt(cov6[1,1])) ) - s_mitte)
+s7_l = abs(min( ufloat(params7[0], np.sqrt(cov7[0,0])), ufloat(params7[1], np.sqrt(cov7[1,1])) ) - s_mitte)
+s8_l = abs(min( ufloat(params8[0], np.sqrt(cov8[0,0])), ufloat(params8[1], np.sqrt(cov8[1,1])) ) - s_mitte)
+mu1_ges = np.array([min(params1[0],params1[1]),min(params2[0],params2[1]),min(params3[0],params3[1]),min(params4[0],params4[1]),min(params5[0],params5[1]),min(params6[0],params6[1]),min(params7[0],params7[1]),min(params8[0],params8[1]])
+
+s1_r = abs(max( ufloat(params1[0], np.sqrt(cov1[0,0])), ufloat(params1[1], np.sqrt(cov1[1,1])) ) - s_mitte)
+s2_r = abs(max( ufloat(params2[0], np.sqrt(cov2[0,0])), ufloat(params2[1], np.sqrt(cov2[1,1])) ) - s_mitte)
+s3_r = abs(max( ufloat(params3[0], np.sqrt(cov3[0,0])), ufloat(params3[1], np.sqrt(cov3[1,1])) ) - s_mitte)
+s4_r = abs(max( ufloat(params4[0], np.sqrt(cov4[0,0])), ufloat(params4[1], np.sqrt(cov4[1,1])) ) - s_mitte)
+s5_r = abs(max( ufloat(params5[0], np.sqrt(cov5[0,0])), ufloat(params5[1], np.sqrt(cov5[1,1])) ) - s_mitte)
+s6_r = abs(max( ufloat(params6[0], np.sqrt(cov6[0,0])), ufloat(params6[1], np.sqrt(cov6[1,1])) ) - s_mitte)
+s7_r = abs(max( ufloat(params7[0], np.sqrt(cov7[0,0])), ufloat(params7[1], np.sqrt(cov7[1,1])) ) - s_mitte)
+s8_r = abs(max( ufloat(params8[0], np.sqrt(cov8[0,0])), ufloat(params8[1], np.sqrt(cov8[1,1])) ) - s_mitte)
+mu2_ges = np.array([max(params1[0],params1[1]),max(params2[0],params2[1]),max(params3[0],params3[1]),max(params4[0],params4[1]),max(params5[0],params5[1]),max(params6[0],params6[1]),max(params7[0],params7[1]),max(params8[0],params8[1])])
+
+s_g_l_n = np.array([s2_l.n, s4_l.n, s6_l.n, s8_l.n]) *10**(-3) # jetzt in Meter
+s_g_r_n = np.array([s2_r.n, s4_r.n, s6_r.n, s8_r.n]) *10**(-3) # jetzt in Meter
+s_g_l_s = np.array([s2_l.s, s4_l.s, s6_l.s, s8_l.s]) *10**(-3) # jetzt in Meter
+s_g_r_s = np.array([s2_r.s, s4_r.s, s6_r.s, s8_r.s]) *10**(-3) # jetzt in Meter
+
+s_u_l_n = np.array([s1_l.n, s3_l.n, s5_l.n, s7_l.n]) *10**(-3) # jetzt in Meter
+s_u_r_n = np.array([s1_r.n, s3_r.n, s5_r.n, s7_r.n]) *10**(-3) # jetzt in Meter
+s_u_l_s = np.array([s1_l.s, s3_l.s, s5_l.s, s7_l.s]) *10**(-3) # jetzt in Meter
+s_u_r_s = np.array([s1_r.s, s3_r.s, s5_r.s, s7_r.s]) *10**(-3) # jetzt in Meter
+
+s_l_ges = np.array([s1_l.n,s2_l.n,s3_l.n,s4_l.n,s5_l.n,s6_l.n,s7_l.n,s8_l.n])
+s_r_ges = np.array([s1_r.n,s2_r.n,s3_r.n,s4_r.n,s5_r.n,s6_r.n,s7_r.n,s8_r.n])
+
+
+T_g = np.array([198, 198, 198, 198]) + 273.15 # Celsius oder Ke(l)vin?!
+T_u = np.array([197, 198, 198, 198]) + 273.15 # Celsius oder Ke(l)vin?!
 I = np.array([0.3,0.4,0.5,0.6,0.7,0.8,0.9,1])
 
-Vorf = l * L * (1-L/(2*l))/(6*const.k * T) * dB(I)
+B_abgelesen_g = np.array([0.3, 0.45, 0.595, 0.72 ]) # von 0.3 bis 1 die abgelesenen werte
+B_abgelesen_u = np.array([0.22, 0.38, 0.525, 0.66]) # von 0.3 bis 1 die abgelesenen werte
+B_ges = np.array(([0.22, 0.3, 0.38, 0.45, 0.525, 0.595, 0.66, 0.72]))
+
+Vorf_g = l * L * (1-L/(2*l))/(6*const.k * T_g) * dB(B_abgelesen_g)
+Vorf_u = l * L * (1-L/(2*l))/(6*const.k * T_u) * dB(B_abgelesen_u)
 
 
-params9, cov9 = curve_fit(linear_fit,Vorf,s, p0=[9*10**(-24), 0])
-params10, cov10 = curve_fit(linear_fit,Vorf,s_h, p0=[9*10**(-24), 0])
+params9_g, cov9_g = curve_fit(linear_fit,Vorf_g,s_g_l_n, p0=[9*10**(a,b,c,d,e-24), 0], sigma=s_g_l_s)
+params10_g, cov10_g = curve_fit(linear_fit,Vorf_g,s_g_r_n, p0=[9*10**(-24), 0], sigma=s_g_r_s)
+params11_g, cov11_g = curve_fit(linear_fit,Vorf_g,s_g_l_h_n, p0=[9*10**(-24), 0], sigma=s_g_l_h_s)
+params12_g, cov12_g = curve_fit(linear_fit,Vorf_g,s_g_r_h_n, p0=[9*10**(-24), 0], sigma=s_g_r_h_s)
 
-x_space_9 = np.linspace(np.amin(Vorf),np.amax(Vorf),1000)
-plt.plot(x_space_9,linear_fit(x_space_9, *params9)*10**3, 'r-',linewidth=1, label=r'Abstände mit Fits')
-plt.plot(x_space_9,linear_fit(x_space_9, *params10)*10**3, 'b-', linewidth=1, label=r'Abstände per Hand abgelesen')
-plt.plot(Vorf, s*10**3, 'r.', label=r'Werte per Fit')
-plt.plot(Vorf, s_h*10**3, 'b.', label=r'Werte per Hand')
+params9_u, cov9_u = curve_fit(linear_fit,Vorf_u,s_u_l_n, p0=[9*10**(-24), 0], sigma=s_u_l_s)
+params10_u, cov10_u = curve_fit(linear_fit,Vorf_u,s_u_r_n, p0=[9*10**(-24), 0], sigma=s_u_r_s)
+params11_u, cov11_u = curve_fit(linear_fit,Vorf_u,s_u_l_h_n, p0=[9*10**(-24), 0], sigma=s_u_l_h_s)
+params12_u, cov12_u = curve_fit(linear_fit,Vorf_u,s_u_r_h_n, p0=[9*10**(-24), 0], sigma=s_u_r_h_s)
+
+x_space_9 = np.linspace(np.amin(Vorf_u),np.amax(Vorf_g),1000)
+plt.plot(x_space_9,linear_fit(x_space_9, *params9_g)*10**3, 'r-',linewidth=1, label=r'Abstände mit Fits - Linke Maxima')
+plt.plot(x_space_9,linear_fit(x_space_9, *params11_g)*10**3, 'b-', linewidth=1, label=r'Abstände per Hand - Linke Maxima')
+plt.plot(x_space_9,linear_fit(x_space_9, *params9_u)*10**3, 'r-',linewidth=1)
+plt.plot(x_space_9,linear_fit(x_space_9, *params11_u)*10**3, 'b-', linewidth=1)
+
+plt.errorbar(Vorf_g, s_g_l_n*10**3,yerr=s_g_l_s*10**3, fmt='r.')
+plt.errorbar(Vorf_u, s_u_l_n*10**3,yerr=s_u_l_s*10**3, fmt='r.')
+
+plt.errorbar(Vorf_g, s_g_l_h_n*10**3,yerr=s_g_l_h_s*10**3, fmt='b.')
+plt.errorbar(Vorf_u, s_u_l_h_n*10**3,yerr=s_u_l_h_s*10**3, fmt='b.')
+
 plt.ylabel(r'$l / \si{\milli\metre}$')
 plt.xlabel(r'$U / \si{\tesla\metre\per\joule}$')
 plt.legend(loc='best')
-plt.savefig('build/plot9.pdf')
+plt.savefig('build/plot_links.pdf')
+plt.clf()
+
+plt.plot(x_space_9,linear_fit(x_space_9, *params10_g)*10**3, 'r-',linewidth=1, label=r'Abstände mit Fits - Rechts Maxima')
+plt.plot(x_space_9,linear_fit(x_space_9, *params12_g)*10**3, 'b-', linewidth=1, label=r'Abstände per Hand abgelesen - Rechts Maxima')
+plt.plot(x_space_9,linear_fit(x_space_9, *params10_u)*10**3, 'r-',linewidth=1)
+plt.plot(x_space_9,linear_fit(x_space_9, *params12_u)*10**3, 'b-', linewidth=1)
+
+plt.errorbar(Vorf_g, s_g_r_n*10**3,yerr=s_g_r_s*10**3, fmt='r.')
+plt.errorbar(Vorf_u, s_u_r_n*10**3,yerr=s_u_r_s*10**3, fmt='r.')
+
+plt.errorbar(Vorf_g, s_g_r_h_n*10**3,yerr=s_g_r_h_s*10**3, fmt='b.')
+plt.errorbar(Vorf_u, s_u_r_h_n*10**3,yerr=s_u_r_h_s*10**3, fmt='b.')
+plt.ylabel(r'$l / \si{\milli\metre}$')
+plt.xlabel(r'$U / \si{\tesla\metre\per\joule}$')
+plt.legend(loc='best')
+plt.savefig('build/plot_rechts.pdf')
 plt.clf()
 
 ### Das sollte im Bestenfall direkt das Bohrsche Magneton ergeben, da mu_sz = 0.5*2 * mu_b
-print(params9[0])
-print(params10[0])
+print("Per fit")
+print(params9_g[0])
+print(params9_u[0])
+print(params10_g[0])
+print(params10_u[0])
+print("Per Hand")
+print(params11_g[0])
+print(params11_u[0])
+print(params12_g[0])
+print(params12_u[0])
+
+
+## Tabellenstuff
+
+write('build/Tabelle_a.tex', make_table([I, B_ges, mu1_ges, mu2_ges, s_l_ges, s_r_ges ],[1, 1, 1, 1, 1,1]))     # Jeder fehlerbehaftete Wert bekommt zwei Spalten
+write('build/Tabelle_a_texformat.tex', make_full_table(
+     'Messdaten Kapazitätsmessbrücke.',
+     'table:A2',
+     'build/Tabelle_a.tex',
+     [],              # Hier aufpassen: diese Zahlen bezeichnen diejenigen resultierenden Spaltennummern,
+                               # die Multicolumns sein sollen
+     [r'$I  \:/\:  \si{ampere}$',
+     r'$B \:/\: \si{\tesla}$',
+     r'$\mu_1 \:/\: \si{\metre}$',
+     r'$\mu_2 \:/\: \si{\metre}$',
+     r'$s_1 \:/\: \si{\metre}$',
+     r'$s_2 \:/\: \si{\metre}$']))
