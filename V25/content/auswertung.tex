@@ -5,13 +5,8 @@
 Zunächst wird die Intensitätsverteilung im Detektor ohne Magnetfeld, d.h. ohne Ablenkung des Teilchenstrahls bestimmt.
 Dabei wird, um die Position des Detektors aus der Lage des Potentiometers zu ermitteln, der Umrechnungsfaktor $\SI{1.8}{\milli\metre}$ verwendet.
 Die Spannung des Detektors wird gegen seine Lage $l$ aufgetragen, was in Abbildung \ref{fig:plot0} graphisch dargestellt wird.
-\begin{figure}
-  \centering
-  \includegraphics[height=7cm]{build/plot0.pdf}
-  \caption{Messung der Intensitäten ohne Magneteld.}
-  \label{fig:plot0}
-\end{figure}
-Um die Lage des Maximums exakt zu ermitteln, wird ein Fit an eine Gaußfunktion
+
+Um die Lage des Maximums exakt zu ermitteln, wird ein Fit an eine Gaußfunktion der Form
 \begin{equation}
   a \exp{\left( -\frac{1}{2} \left( \frac{l - \mu}{\sigma}\right)^2 \right)} + b
 \end{equation}
@@ -21,11 +16,17 @@ Aus dem Fit ergibt sich
 \begin{align*}
   \mu = \input{build/s_mitte.tex},
 \end{align*}
-was der Lage des Intensitätsmaxiums entspricht.
+was der Lage des Intensitätsmaximums entspricht und im folgenden als Referenzwert verwendet wird.
+\begin{figure}
+  \centering
+  \includegraphics[height=7cm]{build/plot0.pdf}
+  \caption{Messung der Intensitäten ohne Magnetfeld.}
+  \label{fig:plot0}
+\end{figure}
 
 \subsection{Bestimmung der Lagen der Maxima mit Magnetfeld}
-Im Folgenden wird das Magnetfeld eingeschaltet, so dass eine Ablenkung stattfindet.
-Die Umrechnung von der Stromstärke $I$ der Spule in das Magnetfeld $B$ folgt über ein dem Verusch beiliegendem Diagramm.
+Im Folgenden wird das Magnetfeld eingeschaltet, sodass eine Ablenkung des Teilchenstrahles stattfindet.
+Die Umrechnung von der Stromstärke $I$ der Spule in das Magnetfeld $B$ folgt über eine dem Versuch beiliegenden Hysteresekurve.
 Für die verschiedenen Magnetfelder werden zunächst die Spannungen des Detektors gegen seine Lage abgetragen.
 Daraufhin wird jeweils ein Fit an die Summe zweier Gaußfunktionen,
 \begin{equation}
@@ -103,16 +104,17 @@ Diese Ergebnisse für $\mu_{1, \text{H}}$, $\mu_{2, \text{H}}$ beziehungsweise $
 
 Zur Bestimmung des Bohrschen Magnetons kann der Zusammenhang
 \begin{equation}
+  \label{eqn:namebittehierergaenzen}
   s = \mu_{sz} \frac{l L \left( 1 - \frac{L}{2l} \right)}{6 k_\text{B} T} \frac{\partial B}{\partial z}
 \end{equation}
 verwendet werden, welcher aus den Angaben in Theorie und Durchführung folgt.
-Hierbei steht s für den Abstand zwischen Intensitätsmaximum ohne Magnetfeld und linkem oder rechtem Intensitätsmaximum mit Magnetfeld und $T$ für die Temperatur des Ofens.
+Hierbei steht s für den Abstand zwischen dem Intensitätsmaximum ohne Magnetfeld und dem linkem oder rechtem Intensitätsmaximum mit Magnetfeld sowie $T$ für die Temperatur des Ofens.
 Als Temperatur wird bei der ersten Messung $T = \SI{197}{\celsius}$ verwendet, in allen weiteren Messungen $T = \SI{198}{\celsius}$.
-Der Feldgradient kann im vorliegenden Versuchsaufbau als
+Der Feldgradient wird im vorliegenden Versuchsaufbau durch
 \begin{equation}
   \frac{\partial B}{\partial z} = \num{0.968} \frac{B}{a}
 \end{equation}
-angegeben werden.
+beschrieben \cite{skript}.
 Zudem werden die Daten des Aufbaus
 \begin{align*}
   L &= \SI{7e-2}{\metre}\\
@@ -122,10 +124,10 @@ Zudem werden die Daten des Aufbaus
 zur Auswertung benötigt \cite{skript}.
 Der Faktor $\mu_{sz}$ setzt sich zusammen aus
 \begin{align*}
-  \lvert \mu_{sz} \rvert = \lvert \mu_B g_s mc_s \rvert \approx \lvert \mu_b \rvert
+  \lvert \mu_{sz} \rvert = \lvert \mu_B g_s m_s \rvert \approx \lvert \mu_b \rvert
 \end{align*}
 und ist somit im vorliegenden Fall betragsmäßig identisch zum zu bestimmenden Bohrschen Magneton.
-Somit kann die Größe s gegen den Faktor
+Somit kann, der Gleichung \eqref{eqn:namebittehierergaenzen} folgend, die Größe s gegen den Faktor
 \begin{align*}
   \zeta \coloneq \frac{l L \left( 1 - \frac{L}{2l} \right)}{6 k_\text{B} T} \frac{\partial B}{\partial z}
 \end{align*}
@@ -137,7 +139,7 @@ Aus einen linearen Fit an die Funktion
 ergibt sich somit das Bohrsche Magneton als $m = \mu_B$.
 
 Hierbei wird zunächst zwischen den Daten für das linke Maximum und den Daten für das rechte Maximum unterschieden.
-Die Ergebnisse, die sich auf die linken Maxima beziehen sind in Abbildung \ref{fig:plotlinks} dargestellt, die Ergebnisse welche sich auf die rechten Maxima beziehen sind in Abbildung \ref{fig:plotrechts} dargestellt.
+Die Ergebnisse, die sich auf die linken Maxima beziehen, sind in Abbildung \ref{fig:plotlinks} dargestellt. Die Ergebnisse, welche sich auf die rechten Maxima beziehen, sind in Abbildung \ref{fig:plotrechts} dargestellt.
 \begin{figure}
   \centering
   \includegraphics[height=7cm]{build/plot_links.pdf}
@@ -152,7 +154,7 @@ Die Ergebnisse, die sich auf die linken Maxima beziehen sind in Abbildung \ref{f
   \label{fig:plotrechts}
 \end{figure}
 
-In den jeweilgen Plots sind in rot die Ergebnisse für $s$, die durch das Fitten entstanden sind abgetragen und in blau die Ergebnisse für $s$, welche durch das Ablesen per Hand ermittelt wurden.
+In den jeweiligen Plots sind in Rot die Ergebnisse für $s$, die durch das Fitten entstanden sind abgetragen und in Blau die Ergebnisse für $s$, welche durch das Ablesen per Hand ermittelt wurden.
 Beide Wertemengen werden unabhängig voneinander bearbeitet.
 
 Bei Betrachtung der Messwerte wird deutlich, dass es deutliche Sprünge zwischen den Messwerten gibt.
@@ -162,23 +164,23 @@ Um diesen Fehler zu beheben, werden die nach oben abweichenden Messwerte und die
 
 Für die Fits, bei denen die Abstände per Fit ausgelesen werden (F), ergeben sich aus den linearen Fit für das Bohrsche Magneton
 \begin{align*}
-  \mu_{\text{B,L,G,F}} &= \input{build/mu_l_f_g.tex}\\
-  \mu_{\text{B,L,U,F}} &= \input{build/mu_l_f_u.tex}\\
-  \mu_{\text{B,R,G,F}} &= \input{build/mu_r_f_g.tex}\\
-  \mu_{\text{B,R,U,F}} &= \input{build/mu_r_f_u.tex}
+  \mu_{\text{B,L,G,F}} &= \input{build/mu_l_f_g.tex},\\
+  \mu_{\text{B,L,U,F}} &= \input{build/mu_l_f_u.tex},\\
+  \mu_{\text{B,R,G,F}} &= \input{build/mu_r_f_g.tex},\\
+  \mu_{\text{B,R,U,F}} &= \input{build/mu_r_f_u.tex},
 \end{align*}
 wobei entweder die geraden (G) oder ungeraden (U) Messwerte, beziehungsweise entweder die Werte für die linken Maxima (R) oder für die rechten Maxima (R) betrachtet werden.
 
-Für die Fits, bei denen die Abstände per Hand (H) ausgelesen werden, ergeben sich widerum aus den linearen Fits für das Bohrsche Magneton
+Für die Fits, bei denen die Abstände per Hand (H) ausgelesen werden, ergeben sich wiederum aus den linearen Fits für das Bohrsche Magneton
 \begin{align*}
-  \mu_{\text{B,L,G,H}} &= \input{build/mu_l_h_g.tex}\\
-  \mu_{\text{B,L,U,H}} &= \input{build/mu_l_h_u.tex}\\
-  \mu_{\text{B,R,G,H}} &= \input{build/mu_r_h_g.tex}\\
-  \mu_{\text{B,R,U,H}} &= \input{build/mu_r_h_u.tex}
+  \mu_{\text{B,L,G,H}} &= \input{build/mu_l_h_g.tex},\\
+  \mu_{\text{B,L,U,H}} &= \input{build/mu_l_h_u.tex},\\
+  \mu_{\text{B,R,G,H}} &= \input{build/mu_r_h_g.tex},\\
+  \mu_{\text{B,R,U,H}} &= \input{build/mu_r_h_u.tex},
 \end{align*}
-wobei die Notation ansonsten identsich zum obrigen Fall ist.
+wobei die Notation ansonsten identisch zum obigen Fall ist.
 Werden die jeweiligen vier Ergebnisse gemittelt, erhält man für das Bohrsche Magneton
 \begin{align*}
-  \mu_{\text{B,F,mittel}} &= \input{build/mu_f_mittel.tex}\\
+  \mu_{\text{B,F,mittel}} &= \input{build/mu_f_mittel.tex},\\
   \mu_{\text{B,H,mittel}} &= \input{build/mu_h_mittel.tex}.
 \end{align*}
