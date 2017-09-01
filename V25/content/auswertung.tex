@@ -8,7 +8,7 @@ Die Spannung des Detektors wird gegen seine Lage $l$ aufgetragen, was in Abbildu
 
 Um die Lage des Maximums exakt zu ermitteln, wird ein Fit an eine Gaußfunktion der Form
 \begin{equation}
-  a \exp{\left( -\frac{1}{2} \left( \frac{l - \mu}{\sigma}\right)^2 \right)} + b
+  U(l) = a \exp{\left( -\frac{1}{2} \left( \frac{l - \mu}{\sigma}\right)^2 \right)} + b
 \end{equation}
 durchgeführt.
 Der Fit wird dabei mithilfe von SciPy von Python durchgeführt.
@@ -30,7 +30,7 @@ Die Umrechnung von der Stromstärke $I$ der Spule in das Magnetfeld $B$ folgt ü
 Für die verschiedenen Magnetfelder werden zunächst die Spannungen des Detektors gegen seine Lage abgetragen.
 Daraufhin wird jeweils ein Fit an die Summe zweier Gaußfunktionen,
 \begin{equation}
-  a \exp{\left( -\frac{1}{2} \left(\frac{l - \mu_1}{\sigma_1}\right)^2 \right)} +  b \exp{\left( -\frac{1}{2} \frac{l - \mu_2}{\sigma_2^2} \right)} + c
+  U(l) = a \exp{\left( -\frac{1}{2} \left(\frac{l - \mu_1}{\sigma_1}\right)^2 \right)} +  b \exp{\left( -\frac{1}{2} \frac{l - \mu_2}{\sigma_2^2} \right)} + c
 \end{equation}
 durchgeführt.
 Somit entsprechen $\mu_1$ und $\mu_2$ den Lagen der beiden Intensitätsmaxima.
@@ -105,9 +105,9 @@ Diese Ergebnisse für $\mu_{1, \text{H}}$, $\mu_{2, \text{H}}$ beziehungsweise $
 Zur Bestimmung des Bohrschen Magnetons kann der Zusammenhang
 \begin{equation}
   \label{eqn:namebittehierergaenzen}
-  s = \mu_{sz} \frac{l L \left( 1 - \frac{L}{2l} \right)}{6 k_\text{B} T} \frac{\partial B}{\partial z}
+  s = \mu_{sz} \frac{l \cdot L \left( 1 - \frac{L}{2l} \right)}{6 k_\text{B} T} \frac{\partial B}{\partial z}
 \end{equation}
-verwendet werden, welcher aus den Angaben in Theorie und Durchführung folgt.
+verwendet werden, welcher aus den Angaben in Theorie und Aufbau folgt.
 Hierbei steht s für den Abstand zwischen dem Intensitätsmaximum ohne Magnetfeld und dem linkem oder rechtem Intensitätsmaximum mit Magnetfeld sowie $T$ für die Temperatur des Ofens.
 Als Temperatur wird bei der ersten Messung $T = \SI{197}{\celsius}$ verwendet, in allen weiteren Messungen $T = \SI{198}{\celsius}$.
 Der Feldgradient wird im vorliegenden Versuchsaufbau durch
@@ -136,7 +136,7 @@ Aus einen linearen Fit an die Funktion
 \begin{equation}
   f(\zeta) = m \zeta + b
 \end{equation}
-ergibt sich somit das Bohrsche Magneton als $m = \mu_B$.
+ergibt sich somit das Bohrsche Magneton direkt aus der Steigung der Graphen $m = \mu_B$.
 
 Hierbei wird zunächst zwischen den Daten für das linke Maximum und den Daten für das rechte Maximum unterschieden.
 Die Ergebnisse, die sich auf die linken Maxima beziehen, sind in Abbildung \ref{fig:plotlinks} dargestellt. Die Ergebnisse, welche sich auf die rechten Maxima beziehen, sind in Abbildung \ref{fig:plotrechts} dargestellt.

@@ -1,27 +1,29 @@
 \section{Zielsetzung}
 
-Im vorliegenden Versuch soll die Quantisierung des Spins von Elektronen in zwei Richtungen nachvollzogen werden.
+Im vorliegenden Versuch soll die Quantisierung des Spins von Elektronen in zwei Richtungen nachgewiesen werden.
 Hierzu wird ein Teilchenstrahl, bestehend aus Kalium, durch ein inhomogenes Magnetfeld bewegt und die Ablenkung des Strahles gemessen und interpretiert.
 
 \section{Theorie}
 \subsection{Theorie des magnetischen Momentes im Magnetfeld}
 \label{sec:Theorie}
-Atome verfügen über ein magnetisches Moment $\vec{\mu}$ welches im Allgemeinen aus verschiedenen Anteilen
+Atome verfügen über ein magnetisches Moment $\vec{\mu}$ welches aus verschiedenen Anteilen
 \begin{equation}
   \vec{\mu} = \vec{\mu_S} + \vec{\mu_L} + \vec{\mu_I}
 \end{equation}
 zusammengesetzt ist.
-Diese einzelnen magnetischen Momente sind, unter Vernachlässigung der Kopplung untereinander, parallel bzw. antiparallel zu der jeweils dazugehörigen Größe $\vec{S}$, $\vec{L}$ oder $\vec{I}$.
+Diese einzelnen magnetischen Momente sind, unter Vernachlässigung der Kopplung untereinander, parallel bzw. antiparallel zu den jeweils dazugehörigen Drehimpulsen $\vec{S}$, $\vec{L}$ oder $\vec{I}$.
 Das magnetische Moment des Kernspins $\vec{\mu_I}$ ist im vorliegenden Versuch vernachlässigbar klein.
-Zusätzlich trägt das magnetische Moment des Bahndrehimpulses $\vec{\mu_L}$ keinen Anteil bei, da hier lediglich Atome im Grundzustand betrachtet werden sollen, d.h. $L = 0 = \lvert \mu_L \rvert$ erfüllt ist.
+Zusätzlich wird in diesem Versuch ein Teilchenstrahl aus Kalium-Atomen, einem Alkalimetall, untersucht.
+Alkalimetalle besitzen ein Valenzelektron, welches alleinig die Eigenschaften des magnetischen Momentes des Atoms bestimmt.
+Im Grundzustand besitzt das Valenzelektron keinen Bahndrehimpuls, dementsprechend ist $L = 0 = \lvert \mu_L \rvert$. %trägt das magnetische Moment des Bahndrehimpulses $\vec{\mu_L}$ keinen Anteil bei, da hier lediglich Atome im Grundzustand betrachtet werden sollen, d.h. $L = 0 = \lvert \mu_L \rvert$ erfüllt ist.
 Somit muss ausschließlich das magnetische Moment des Spins berücksichtigt werden, welches mit dem Spin $\vec{S}$ über
 \begin{equation}
   \vec{\mu_s} = - \underbrace{\frac{e \hbar}{2m}}_{\mu_B} g_S \frac{\vec{S}}{\hbar}
 \end{equation}
 verknüpft ist.
 Hierbei ist $\mu_B$ das Bohrsche Magneton sowie $g_S$ der Land\'{e}-Faktor, wobei für Elektronen $g_S \approx 2$ gilt.
-Bei diesem Versuchsaufbau wird ein Teilchenstrahl aus Kalium-Atomen verwendet.
-Dieses Alkalimetall besitzt ein äußeres Valenzelektron, welches dementsprechend alleinig die Eigenschaften des magnetischen Momentes des Kaliumatoms bestimmt.
+%Bei diesem Versuchsaufbau wird ein Teilchenstrahl aus Kalium-Atomen verwendet.
+%Dieses Alkalimetall besitzt ein äußeres Valenzelektron, welches dementsprechend alleinig die Eigenschaften des magnetischen Momentes des Kaliumatoms bestimmt.
 
 Befindet sich das Atom mit dem magnetischen Moment $\vec{\mu_S}$ innerhalb eines inhomogenen Magnetfeldes, so tritt eine Wechselwirkung von $\vec{\mu_S}$ mit dem Magnetfeld auf.
 Verläuft das $\vec{B}$-Feld beispielsweise in $z$-Richtung und ist das magnetische Moment parallel zu den Feldlinien ausgerichtet, so wirkt auf das Atom eine Kraft von
@@ -48,3 +50,9 @@ Hierbei gibt die Größe
 \end{align*}
 an, welche Teilchengeschwindigkeit bei einer Temperatur von $T$ sowie einer Atommasse von $m$ die höchste Wahrscheinlichkeit besitzt.
 Hieraus kann auch der Teilchenstrom $I(v) = \rho(v) v$ berechnet werden, welcher vom Detektor aufgenommen wird.
+Der Abstand der Intensitätsmaxima zur Nullposition lässt sich über die Formel
+\begin{equation}
+ s = \mu_{\text{sz}}\frac{l\cdot L(1-\frac{L}{2l})}{6k_{\text{B}}T}\frac{\partial B}{\partial z}
+\end{equation}
+berechnen, wobei $T$ die Temperatur des Ofens, $l$ den Abstand zwischen dem Detektor und dem Betreten des Feldgradienten, und $L$ die Länge der im Versuch verwendeten Polschuhe ist.
+Auf den Aufbau des Versuchs wird im nächsten Kapitel eingegangen.
