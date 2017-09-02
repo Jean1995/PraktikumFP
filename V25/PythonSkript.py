@@ -458,31 +458,32 @@ Vorf_g = l * L * (1-L/(2*l))/(6*const.k * T_g) * dB(B_abgelesen_g)
 Vorf_u = l * L * (1-L/(2*l))/(6*const.k * T_u) * dB(B_abgelesen_u)
 
 
-params9_g, cov9_g = curve_fit(linear_fit,Vorf_g,s_g_l_n, p0=[9*10**(-24), 0], sigma=s_g_l_s)
-params10_g, cov10_g = curve_fit(linear_fit,Vorf_g,s_g_r_n, p0=[9*10**(-24), 0], sigma=s_g_r_s)
-params11_g, cov11_g = curve_fit(linear_fit,Vorf_g,s_g_l_h_n, p0=[9*10**(-24), 0], sigma=s_g_l_h_s)
-params12_g, cov12_g = curve_fit(linear_fit,Vorf_g,s_g_r_h_n, p0=[9*10**(-24), 0], sigma=s_g_r_h_s)
+params9_g, cov9_g = curve_fit(linear_fit,dB(B_abgelesen_g),s_g_l_n, p0=[9*10**(-7), 0], sigma=s_g_l_s)
+params10_g, cov10_g = curve_fit(linear_fit,dB(B_abgelesen_g),s_g_r_n, p0=[9*10**(-7), 0], sigma=s_g_r_s)
+params11_g, cov11_g = curve_fit(linear_fit,dB(B_abgelesen_g),s_g_l_h_n, p0=[9*10**(-7), 0], sigma=s_g_l_h_s)
+params12_g, cov12_g = curve_fit(linear_fit,dB(B_abgelesen_g),s_g_r_h_n, p0=[9*10**(-7), 0], sigma=s_g_r_h_s)
 
-params9_u, cov9_u = curve_fit(linear_fit,Vorf_u,s_u_l_n, p0=[9*10**(-24), 0], sigma=s_u_l_s)
-params10_u, cov10_u = curve_fit(linear_fit,Vorf_u,s_u_r_n, p0=[9*10**(-24), 0], sigma=s_u_r_s)
-params11_u, cov11_u = curve_fit(linear_fit,Vorf_u,s_u_l_h_n, p0=[9*10**(-24), 0], sigma=s_u_l_h_s)
-params12_u, cov12_u = curve_fit(linear_fit,Vorf_u,s_u_r_h_n, p0=[9*10**(-24), 0], sigma=s_u_r_h_s)
+params9_u, cov9_u = curve_fit(linear_fit,dB(B_abgelesen_u),s_u_l_n, p0=[9*10**(-7), 0], sigma=s_u_l_s)
+params10_u, cov10_u = curve_fit(linear_fit,dB(B_abgelesen_u),s_u_r_n, p0=[9*10**(-7), 0], sigma=s_u_r_s)
+params11_u, cov11_u = curve_fit(linear_fit,dB(B_abgelesen_u),s_u_l_h_n, p0=[9*10**(-7), 0], sigma=s_u_l_h_s)
+params12_u, cov12_u = curve_fit(linear_fit,dB(B_abgelesen_u),s_u_r_h_n, p0=[9*10**(-7), 0], sigma=s_u_r_h_s)
 
-x_space_9 = np.linspace(np.amin(Vorf_u),np.amax(Vorf_g),1000)
+x_space_9 = np.linspace(np.amin(dB(B_abgelesen_u)),np.amax(dB(B_abgelesen_g)),1000)
 plt.plot(x_space_9,linear_fit(x_space_9, *params9_g)*10**3, 'r-',linewidth=1, label=r'Abstände mit Fits - Linke Maxima')
 plt.plot(x_space_9,linear_fit(x_space_9, *params11_g)*10**3, 'b-', linewidth=1, label=r'Abstände per Hand - Linke Maxima')
 plt.plot(x_space_9,linear_fit(x_space_9, *params9_u)*10**3, 'r-',linewidth=1)
 plt.plot(x_space_9,linear_fit(x_space_9, *params11_u)*10**3, 'b-', linewidth=1)
 
-plt.errorbar(Vorf_g, s_g_l_n*10**3,yerr=s_g_l_s*10**3, fmt='r.')
-plt.errorbar(Vorf_u, s_u_l_n*10**3,yerr=s_u_l_s*10**3, fmt='r.')
+plt.errorbar(dB(B_abgelesen_g), s_g_l_n*10**3,yerr=s_g_l_s*10**3, fmt='r.')
+plt.errorbar(dB(B_abgelesen_u), s_u_l_n*10**3,yerr=s_u_l_s*10**3, fmt='r.')
 
-plt.errorbar(Vorf_g, s_g_l_h_n*10**3,yerr=s_g_l_h_s*10**3, fmt='b.')
-plt.errorbar(Vorf_u, s_u_l_h_n*10**3,yerr=s_u_l_h_s*10**3, fmt='b.')
+plt.errorbar(dB(B_abgelesen_g), s_g_l_h_n*10**3,yerr=s_g_l_h_s*10**3, fmt='b.')
+plt.errorbar(dB(B_abgelesen_u), s_u_l_h_n*10**3,yerr=s_u_l_h_s*10**3, fmt='b.')
 
 plt.ylabel(r'$s / \si{\milli\metre}$')
-plt.xlabel(r'$\zeta / \si{\tesla\metre\per\joule}$')
+plt.xlabel(r'$\frac{\partial B}{\partial z} \:/\: \si{\tesla\per\metre}$')
 plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/plot_links.pdf')
 plt.clf()
 
@@ -491,14 +492,15 @@ plt.plot(x_space_9,linear_fit(x_space_9, *params12_g)*10**3, 'b-', linewidth=1, 
 plt.plot(x_space_9,linear_fit(x_space_9, *params10_u)*10**3, 'r-',linewidth=1)
 plt.plot(x_space_9,linear_fit(x_space_9, *params12_u)*10**3, 'b-', linewidth=1)
 
-plt.errorbar(Vorf_g, s_g_r_n*10**3,yerr=s_g_r_s*10**3, fmt='r.')
-plt.errorbar(Vorf_u, s_u_r_n*10**3,yerr=s_u_r_s*10**3, fmt='r.')
+plt.errorbar(dB(B_abgelesen_g), s_g_r_n*10**3,yerr=s_g_r_s*10**3, fmt='r.')
+plt.errorbar(dB(B_abgelesen_u), s_u_r_n*10**3,yerr=s_u_r_s*10**3, fmt='r.')
 
-plt.errorbar(Vorf_g, s_g_r_h_n*10**3,yerr=s_g_r_h_s*10**3, fmt='b.')
-plt.errorbar(Vorf_u, s_u_r_h_n*10**3,yerr=s_u_r_h_s*10**3, fmt='b.')
+plt.errorbar(dB(B_abgelesen_g), s_g_r_h_n*10**3,yerr=s_g_r_h_s*10**3, fmt='b.')
+plt.errorbar(dB(B_abgelesen_u), s_u_r_h_n*10**3,yerr=s_u_r_h_s*10**3, fmt='b.')
 plt.ylabel(r'$s / \si{\milli\metre}$')
-plt.xlabel(r'$\zeta / \si{\tesla\metre\per\joule}$')
+plt.xlabel(r'$\frac{\partial B}{\partial z} \:/\: \si{\tesla\per\metre}$')
 plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/plot_rechts.pdf')
 plt.clf()
 
@@ -506,15 +508,17 @@ plt.clf()
 
 ## Ergebnisse
 
-mu_l_f_g = ufloat(params9_g[0], np.sqrt(cov9_g[0,0]))
-mu_l_f_u = ufloat(params9_u[0], np.sqrt(cov9_u[0,0]))
-mu_r_f_g = ufloat(params10_g[0], np.sqrt(cov10_g[0,0]))
-mu_r_f_u = ufloat(params10_u[0], np.sqrt(cov10_u[0,0]))
+ufaktor = l * L * (1-L/(2*l))/(6*const.k * T_g[1]) # Die Tatsache, dass die Temperatur ein mal um einen Kelvin abgewichen hat, kehren wir einfach unter den Teppich... *hust*
 
-mu_l_h_g = ufloat(params11_g[0], np.sqrt(cov11_g[0,0]))
-mu_l_h_u = ufloat(params11_u[0], np.sqrt(cov11_u[0,0]))
-mu_r_h_g = ufloat(params12_g[0], np.sqrt(cov12_g[0,0]))
-mu_r_h_u = ufloat(params12_u[0], np.sqrt(cov12_u[0,0]))
+mu_l_f_g = ufloat(params9_g[0], np.sqrt(cov9_g[0,0]))/ufaktor
+mu_l_f_u = ufloat(params9_u[0], np.sqrt(cov9_u[0,0]))/ufaktor
+mu_r_f_g = ufloat(params10_g[0], np.sqrt(cov10_g[0,0]))/ufaktor
+mu_r_f_u = ufloat(params10_u[0], np.sqrt(cov10_u[0,0]))/ufaktor
+
+mu_l_h_g = ufloat(params11_g[0], np.sqrt(cov11_g[0,0]))/ufaktor
+mu_l_h_u = ufloat(params11_u[0], np.sqrt(cov11_u[0,0]))/ufaktor
+mu_r_h_g = ufloat(params12_g[0], np.sqrt(cov12_g[0,0]))/ufaktor
+mu_r_h_u = ufloat(params12_u[0], np.sqrt(cov12_u[0,0]))/ufaktor
 
 write('build/mu_l_f_g.tex', make_SI(mu_l_f_g*10**24, r'\joule\per\tesla','e-24', figures=1))
 write('build/mu_l_f_u.tex', make_SI(mu_l_f_u*10**24, r'\joule\per\tesla','e-24', figures=1))

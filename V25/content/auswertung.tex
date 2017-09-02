@@ -102,13 +102,7 @@ Diese Ergebnisse für $\mu_{1, \text{H}}$, $\mu_{2, \text{H}}$ beziehungsweise $
 
 \subsection{Bestimmung des Bohrschen Magnetons}
 
-Zur Bestimmung des Bohrschen Magnetons kann der Zusammenhang
-\begin{equation}
-  \label{eqn:namebittehierergaenzen}
-  s = \mu_{sz} \frac{l \cdot L \left( 1 - \frac{L}{2l} \right)}{6 k_\text{B} T} \frac{\partial B}{\partial z}
-\end{equation}
-verwendet werden, welcher aus den Angaben in Theorie und Aufbau folgt.
-Hierbei steht s für den Abstand zwischen dem Intensitätsmaximum ohne Magnetfeld und dem linkem oder rechtem Intensitätsmaximum mit Magnetfeld sowie $T$ für die Temperatur des Ofens.
+Zur Bestimmung des Bohrschen Magnetons kann der Zusammenhang \eqref{eqn:namebittehierergaenzen} verwendet werden.
 Als Temperatur wird bei der ersten Messung $T = \SI{197}{\celsius}$ verwendet, in allen weiteren Messungen $T = \SI{198}{\celsius}$.
 Der Feldgradient wird im vorliegenden Versuchsaufbau durch
 \begin{equation}
@@ -127,30 +121,29 @@ Der Faktor $\mu_{sz}$ setzt sich zusammen aus
   \lvert \mu_{sz} \rvert = \lvert \mu_B g_s m_s \rvert \approx \lvert \mu_b \rvert
 \end{align*}
 und ist somit im vorliegenden Fall betragsmäßig identisch zum zu bestimmenden Bohrschen Magneton.
-Somit kann, der Gleichung \eqref{eqn:namebittehierergaenzen} folgend, die Größe s gegen den Faktor
-\begin{align*}
-  \zeta \coloneq \frac{l L \left( 1 - \frac{L}{2l} \right)}{6 k_\text{B} T} \frac{\partial B}{\partial z}
-\end{align*}
-aufgetragen werden.
+Somit kann, der Gleichung \eqref{eqn:namebittehierergaenzen} folgend, die Größe s gegen den Feldgradienten $\frac{\partial B}{\partial z}$ aufgetragen werden.
 Aus einen linearen Fit an die Funktion
 \begin{equation}
-  f(\zeta) = m \zeta + b
+  f\left(\frac{\partial B}{\partial z}\right) = m \frac{\partial B}{\partial z} + b
 \end{equation}
-ergibt sich somit das Bohrsche Magneton direkt aus der Steigung der Graphen $m = \mu_B$.
+ergibt sich somit das Bohrsche Magneton aus der Steigung der Graphen
+\begin{align*}
+  m = \frac{l L \left( 1 - \frac{L}{2l} \right)}{6 k_\text{B} T} \mu_B.
+\end{align*}
 
 Hierbei wird zunächst zwischen den Daten für das linke Maximum und den Daten für das rechte Maximum unterschieden.
 Die Ergebnisse, die sich auf die linken Maxima beziehen, sind in Abbildung \ref{fig:plotlinks} dargestellt. Die Ergebnisse, welche sich auf die rechten Maxima beziehen, sind in Abbildung \ref{fig:plotrechts} dargestellt.
 \begin{figure}
   \centering
   \includegraphics[height=7cm]{build/plot_links.pdf}
-  \caption{Abtragung der Größe $s$ gegen $\zeta$ bei Betrachtung der linken Maxima.}
+  \caption{Abtragung der Größe $s$ gegen den Feldgradienten bei Betrachtung der linken Maxima.}
   \label{fig:plotlinks}
 \end{figure}
 
 \begin{figure}
   \centering
   \includegraphics[height=7cm]{build/plot_rechts.pdf}
-  \caption{Abtragung der Größe $s$ gegen $\zeta$ bei Betrachtung der rechten Maxima.}
+  \caption{Abtragung der Größe $s$ gegen den Feldgradienten bei Betrachtung der rechten Maxima.}
   \label{fig:plotrechts}
 \end{figure}
 

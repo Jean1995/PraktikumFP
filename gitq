@@ -1,0 +1,301 @@
+[33mcommit 9b75dd02ade90a17d21ccdebd1040d1e1aaa2baa[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Thu Jul 6 22:42:14 2017 +0200
+
+    V25: hab vergeblich versucht eine gute methode zu finden die Maxima gut abzuschätzen :/
+
+[33mcommit 85bef0df2e4ff30dc6940833333838bddefc43bc[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Thu Jul 6 14:43:37 2017 +0200
+
+    V25:Aufbau und Abführung
+
+[33mcommit 8e8949b56b91e6d6864434a0bf924c0161902768[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Wed Jul 5 17:38:22 2017 +0200
+
+    V25: Theorie erste Version$
+
+[33mcommit 35c6a3fa5434c5d91785b86ebc1b76ac678a2e89[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Mon Jul 3 23:21:46 2017 +0200
+
+    V25: Zähler für Messpunkte ^^
+
+[33mcommit fbb2d66cdb8c2f94fd4781768bbd6ce8b00cea65[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Mon Jul 3 23:21:29 2017 +0200
+
+    V25: Vorlage erstellt, 619 Messdaten eingetippt, und erste Graphen erstellt
+
+[33mcommit bca80b1add3ab81c61bab43ad2d335a58812c150[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Mon Jun 26 15:33:27 2017 +0200
+
+    V53:finish
+
+[33mcommit 760b9f0b720344962fa0d26238c0e8f578799afd[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Sun Jun 25 22:18:15 2017 +0200
+
+    V53: Korrekturen
+
+[33mcommit b767f4997c44fa4daa499d1ac9ec8465c5ed2e23[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Wed Jun 21 18:33:26 2017 +0200
+
+    V53:Diskussion fertig, DOTTO
+
+[33mcommit 6fda70223888e34ec56762413ed0e820ccc40a1d[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Wed Jun 21 15:35:04 2017 +0200
+
+    V53: Interpolation gelöst über Fakepunkte
+
+[33mcommit ddcd8a9cfac91f894b6676d914c8acb05471e766[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Jun 20 19:07:31 2017 +0200
+
+    V53: Tabelle ergänzt -> Auswertung fertig
+
+[33mcommit 35021edecc4578d86dd80840dbfec819c15a76a5[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Jun 20 18:50:53 2017 +0200
+
+    V53: Auswertung im Python Skript fertig
+
+[33mcommit 6460f0d1278162fadd384a9e06034aad546b3da3[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Jun 20 18:50:40 2017 +0200
+
+    V53: Auswertung fertig
+
+[33mcommit 09c350f3b35c4f52178c923d2d452c91fa678efd[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Jun 20 17:21:21 2017 +0200
+
+    V53: Weiteres Python Gedönse
+
+[33mcommit d0ed5e99954def56a32570f7bda66935a4b35f57[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Jun 20 17:21:21 2017 +0200
+
+    V53:bissl auswertung
+
+[33mcommit 118d4d0c5843e2d21de9455b9c22d5e31e0c2ad5[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Jun 20 16:42:12 2017 +0200
+
+    V53: Rechnungen
+
+[33mcommit 62e2aefcd1387b00b9324ea30f499e4fb55202ff[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Jun 20 16:40:12 2017 +0200
+
+    V53:etwas Auswertung
+
+[33mcommit daff6de5ee06c6d02c405d8747693fc6685f4720[m
+Merge: 1870ec8 369db29
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Sat Jun 17 17:07:47 2017 +0200
+
+    Merge branch 'master' of https://github.com/Jean1995/PraktikumFP
+
+[33mcommit 1870ec85bbd58494cea8085b8e0f9c6f3c112588[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Sat Jun 17 17:04:04 2017 +0200
+
+    V21: alles gut :)
+
+[33mcommit 369db2987f924d63d7e2277f6bbaae2cd9d23bbe[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Sat Jun 17 00:43:54 2017 +0200
+
+    V53: Aufbau, Durchführung und Messdaten
+
+[33mcommit 295f026dd224d8f0b91103f2c34ad999d65a049b[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Thu Jun 15 22:18:14 2017 +0200
+
+    V53: Theorie soweit fertig
+
+[33mcommit 16c49b133b36f56a3b9a529e414d0e8c6123bc8d[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Jun 13 11:17:51 2017 +0200
+
+    V53: Theorie angefangen
+
+[33mcommit 256ed955e888a0c1d2f22462c0ea07968c3f8c4d[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Jun 13 08:09:56 2017 +0200
+
+    V53: leer
+
+[33mcommit 568ccc6e0c6642fa20b8fe8138a5c7983a290080[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Mon Jun 5 21:48:02 2017 +0200
+
+    V21: Erste Korrektur
+
+[33mcommit 4ce5420bacb8a4ae4ea9554ddbb1efb44e4bf29f[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue May 23 19:10:47 2017 +0200
+
+    V21: Rechtschreibkorrektur
+
+[33mcommit 02a1552cbd14417bf1589e66c8cce2ea91aaeba6[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue May 23 18:55:00 2017 +0200
+
+    V21:bitte rechtschrabschrab
+
+[33mcommit 9de69585b38211a6c0673d88ce277377397e32e2[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Fri May 19 18:42:53 2017 +0200
+
+    V21: Auswertung.
+
+[33mcommit e63cf601d45963f2146817ccfcde9f30f897861c[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Thu May 18 22:53:44 2017 +0200
+
+    V21: Aufbau und Durchführung
+
+[33mcommit af597d73226a46fd3ec25728b8474bda10a974a2[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Thu May 18 17:52:48 2017 +0200
+
+    V21: Theorie fertig, ggf. bis auf Larmor-Mist
+
+[33mcommit 26b5d84b76348f960fac0fffefa7b3ea6ac3e1a4[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Wed May 17 20:49:26 2017 +0200
+
+    V21: Erste Hälfte der Monster-Theorie
+
+[33mcommit cf562bce56c62c08d7435865621818f08d1003fe[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Wed May 17 16:56:34 2017 +0200
+
+    V21: Vorlage
+
+[33mcommit abf5f70156b024aa162cd6bfe735404ea047eeb3[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Mon May 15 22:34:22 2017 +0200
+
+    V21: Scan Messdaten und Aufnahme Oszilloskop
+
+[33mcommit 13f303f97b0c964d48be91f5d908fd8a0e781137[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Sat May 13 14:38:05 2017 +0200
+
+    V47: Korrekturen nach 1. Abgabe
+
+[33mcommit f981ed5e7575e456ddb30083065792090f1ddf18[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Sat May 13 11:50:12 2017 +0200
+
+    V47: Alte Korrekturen (?)
+
+[33mcommit 17c4f39d03c778b47d8ce8aa35a400fad341db0f[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Sun Apr 30 15:52:08 2017 +0200
+
+    V47:prüfende Blicke abgeschlossen
+
+[33mcommit 278a27e77f0b004417e2d31d42c5bc920ab7b6b1[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Sun Apr 30 13:30:18 2017 +0200
+
+    V47: Fehlerformeln und Diskussion eingefügt. Korrektur an der Theorierechnung in N
+
+[33mcommit bfda97ecf1edbba9667fd8539d04494740f62fa6[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Sun Apr 30 02:09:10 2017 +0200
+
+    V47: Feinheiten, inklusive: Beschriftungen, Quellen, Anhang, Plotstil, Formulierungen,
+    Titelblatt. Fehlend: Fehlerformeln (?), Diskussion.
+
+[33mcommit cc5434ed138ef635e90f12ee0639af6b2314b801[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Sat Apr 29 15:44:34 2017 +0200
+
+    V47:Auswertung fast fertig; irgendwas stimmt mit den Fehlerbalken wohl nicht oder unsere Werte sind wirklich so beknattert...
+
+[33mcommit 571602edee956474e35141d08e299b485fc3ad61[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Sat Apr 29 02:45:49 2017 +0200
+
+    V47:bissl Auswertung
+
+[33mcommit 325742ba1e0c6c2c6691965d4d5f07e7972cbd3b[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Fri Apr 28 21:37:51 2017 +0200
+
+    V47: plotten geht bei mir mit dieser meine-matplotlib nicht, ohne ja aber hab dann kein siunix
+
+[33mcommit b1167ad1514a482ff4a9dacec3335e900a0506a3[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Fri Apr 28 00:01:24 2017 +0200
+
+    V47: Ein bisschen Auswertung, wäre mehr wäre ich nicht so doof...
+
+[33mcommit 70201cd132abc8e0166cffcf26ed409f5f45c02f[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Apr 25 19:24:02 2017 +0200
+
+    V47:Theorie2
+
+[33mcommit 30813402586c4fda27371e531a9f7c45935e500c[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Apr 25 19:22:40 2017 +0200
+
+    V47: Auswertung
+
+[33mcommit 0b8a221e6e296cd03ee06cdc173aed01a3645f14[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Apr 25 16:19:27 2017 +0200
+
+    Korrektur an Versuchsskizze
+
+[33mcommit f7db149601d3436a5131f21f424450b04fec0571[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Apr 25 15:58:16 2017 +0200
+
+    V47: Durchführung fertig und Auswertung angefangen. Berechnungen fertig
+
+[33mcommit e060490b6b9f77d30d2efa329171c776fd50c8ad[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Apr 25 15:57:26 2017 +0200
+
+    V47:Theorie
+
+[33mcommit 3b01e944f54d75415dd42fce2a8780fdfcb3868d[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Apr 25 11:43:16 2017 +0200
+
+    Aufbau und Durchführung zu 75 %
+
+[33mcommit c7549edabc4ab42d319bf812f5f1a63d8f52d1db[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Apr 25 11:42:34 2017 +0200
+
+    V47:Theorie halb
+
+[33mcommit 41ad1bb88c3a00fe927b62c294276f29865a271a[m
+Author: cybajohn <cybajohn@ymail.com>
+Date:   Tue Apr 25 10:34:13 2017 +0200
+
+    V47:Messdaten
+
+[33mcommit 06082e65c32e4d4cefc9f53fc614babfa07a1ce1[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Tue Apr 25 10:30:39 2017 +0200
+
+    V47: Ordner aus Vorlage erstellt
+
+[33mcommit fae4478c9635113b5310d37c4a08e934e9c816ee[m
+Author: Jean-Marco Alameddine <jean-marco.alameddine@tu-dortmund.de>
+Date:   Mon Apr 24 21:46:34 2017 +0200
+
+    first commit
