@@ -1,3 +1,62 @@
+\newcommand\barparen[1]{\overset{(-)}{#1}}
+
 \section{Zielsetzung}
+In vorliegenden Versuch wird die mittlere Lebensdauer von kosmischen Myonen bestimmt.
+Hierzu werden die Myonen abgebremst und ihre Lebensdauer mithilfe eines Szintillationsdetektors gemessen.
+Aus den Messdaten ergibt sich eine empirische Verteilungsfunktion, aus dessen Form die charakteristischen Größen ermittelt werden.
 
 \section{Theorie}
+
+\subsection{Eigenschaften und Entstehung der kosmischen Myonen}
+Myonen gehören, wie auch Elektronen oder Tauonen, zu der Gruppe der Leptonen.
+Von den anderen Leptonen unterscheidet sich das Myon vor allem in seiner Masse: Es ist ca. $\num{200}$-mal schwerer als ein Elektron, gleichzeitig aber ca. $\num{3500}$-mal leichter als ein Tauon.
+Zudem besitzt das Myon $\mu$, im Vergleich zum Elektron $e^-$, eine endliche Lebensdauer, an dessen Ende fast ausschießlich der Zerfall
+\begin{align*}
+  \mu^- \rightarrow e^- + \overline{\nu}_e + \nu_\mu
+\end{align*}
+bzw. für das dazugehörige Antiteilchen $\mu^+$ der Zerfall
+\begin{align*}
+  \mu^+ \rightarrow e^+ + \overline{\nu}_\mu + \nu_e
+\end{align*}
+stattfindet.
+Hierbei bezeichen $\nu$, $\overline{\nu}$ die zu den jeweiligen Teilchen gehörigen, fast masselosen, Neutrinos bzw. Antineutrions.
+Die Existenz dieser weiteren Leptonen äußert sich auch in der Erhaltung der sogenannten Leptonenfamilienzahlen $l_e$, $l_\mu$ im Standardmodell der Elementarteilchenphysik:
+Hierbei erhöht die Existenz eines Teilchens die Leptonenfamilienzahl der dazugehörigen Familie um $\num{1}$ während ein Antiteilchen sie um $\num{1}$ vermindert.
+
+Die Entstehung der hier betrachteten kosmischen Myonen beginnt in der oberen Atmosphäre.
+Insbesondere durch Reaktionen von energiereichen Protonen aus der kosmischen Strahlung mit Atomkernen der Luft enstehen Pionen.
+Diese sind instabile Mesonen, welche innerhalb kürzester Zeit ($\tau \approx \SI{26}{\nano\second}$) unter
+\begin{align*}
+  \pi^{\pm} \rightarrow \mu^{\pm} + \overset{\textbf{\fontsize{5pt}{5pt}\selectfont(---)}}{\nu_\mu}
+\end{align*}
+in Myonen zerfallen.
+Diese können, da sie sich mit annäherend Lichtgeschwindigkeit ausbreiten und dementsprechend die Effekte der Zeitdilatation berücksichtigt werden müssen, auf der Erde nachgewiesen werden.
+
+\subsection{Statistische Eigenschaften der Myonen}
+
+Der Zerfall eines Teilchens ist ein statistischer Prozess, so dass eine genauere Definition seiner mittleren Lebensdauer $\tau$ notwendig ist.
+Die Zerfallswahrscheinlichkeit ist, wie bei einem radioaktiven Zerfall, unabhängig von der vorherigen Lebensdauer des Teilchens und somit infinitesimal durch
+\begin{align*}
+  \symup{d}W = \lambda \symup{d}t
+\end{align*}
+gegeben.
+Hierbei ist $\lambda$ die charakteristische Zerfallskonstante des Zerfalls.
+Für einen Ausgangswert von $N_0$ Teilchen ergibt sich somit für großes $N$ die Gleichung
+\begin{equation}
+  N(t) = N_0 \exp{\left( -\lambda t \right)}.
+\end{equation}
+Betrachtet man die differentielle zeitliche Änderung von $N(t)$, folgt für die Lebensdauer die Verteilungsfunktion
+\begin{equation}
+  \label{eqn:vfunktion}
+  \symup{d}N(t) = N_0 \lambda \exp{\left(- \lambda t \right)} \symup{d}t.
+\end{equation}
+Um eine allgemeingültige, charakteristische Aussage für alle Myonen zu treffen, wird die mittlere Lebensdauer $\tau$ als Erwartungswert von t
+\begin{align*}
+  \tau \coloneqq E[t] = \int_0^\infty t f(t) \symup{d}t
+\end{align*}
+definiert, wobei $f(t)$ die zugrunde liegende Verteilungsfunktion ist.
+Im hier vorliegenden Fall folgt somit mit der Verteilungsfunktion in \eqref{eqn:vfunktion}
+\begin{equation}
+  \tau = \int_0^\infty t \lambda \exp{\left(- \lambda t \right)} \symup{d}t = \frac{1}{\lambda}.
+\end{equation}
+Die mittlere Lebensdauer ist also das Reziproke der charakteristischen Zerfallskonstante.
