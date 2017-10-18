@@ -162,3 +162,93 @@ plt.set_cmap('Set2')
 
 ########## DIFFERENT STUFF ##########
 # R = const.physical_constants["molar gas constant"]      # Array of value, unit, error
+
+
+### MESSDATEN
+
+data = np.array([       0,   0,   0, 244, 324,  86,  87,  92,  71,  84,  54,  83,  67,  71,  94,  92,  69,  88,  73,  62,  67,  79,  92,  64,  74,  68,  68,  76,  54,  75,  72,  64,  64,  58,  55,  68,  64,  64,  73,  62,  49,  48,  57,  60,  46,  48,  62,  44,  42,  54,  50,  50,  48,  52,  41,  52,  40,  55,  40,  46,  52,  50,  52,  44,  51,  33,  40,  67,  51,  43,  38,  41,  36,  39,  52,  37,  34,  47,  49,  42,  66,  30,  39,  44,  47,  41,  31,  36,  30,  28,  43,  35,  41,  30,  31,  44,  28,  19,  36,  30,  27,  43,  39,  41,  28,  29,  26,  23,  32,  13,  30,  35,  24,  32,  21,  23,  18,  21,  27,  23,  23,  24,  27,  27,  24,  21,  27,  28,  32,  24,  26,  29,  23,  22,  21,  21,  24,  19,  26,  25,  16,  18,  27,  17,  19,  16,  21,  21,  18,  14,  14,  14,  19,  15,  20,  22,  16,   9,  18,  20,  29,  14,  15,  16,  19,  23,  17,  17,  10,  19,  14,  12,  16,  20,  16,  15,  15,  17,  18,  13,  12,  15,  10,  14,  11,  11,  16,  13,   9,   5,  14,  14,  18,  13,   9,  14,  18,   3,  14,   3,  15,  12,  12,  16,   3,   9,  17,   5,   7,  14,  11,   7,  15,  13,  15,  11,  10,  10,  11,  10,   7,  11,   7,  12,   9,   7,   7,  10,   5,   5,   8,   8,   6,  11,  10,  10,   9,  18,  11,   9,   6,  15,   9,   5,   9,  10,   6,   7,   8,   6,  11,   9,  10,   6,  11,   8,   5,   8,   9,  12,   6,   4,   5,   5,   5,   6,  10,  12,   4,   7,   9,   6,   5,  11,   7,   7,   6,   4,   2,  10,   8,   3,   7,   9,   3,   4,   6,   4,   6,   7,   4,   6,   8,   8,   7,   4,   3,   2,   6,   4,   8,   5,   3,   3,   5,   7,   2,   5,   6,   2,   5,   8,   4,   4,   4,   6,   2,   6,   6,   2,   5,   1,   6,   2,   4,   5,   2,   7,   4,   3,   3,   4,   5,   7,   3,   9,   5,   7,   2,   2,   3,   3,   3,   2,   1,   8,   1,   0,   1,   5,   5,   1,   3,   1,   8,   7,   2,   2,   2,   1,   2,   3,   3,   0,   3,   3,   3,   6,   6,   1,   3,   5,   5,   0,   6,   4,   1,   3,   3,   3,   3,   8,   3,   3,   1,   1,   4,   2,   3,   4,   1,   4,   4,   3,   4,   4,   8,   6,   1,   3,   3,   3,   1,   1,   1,   4,   0,   1,   0,   1,   4,   3,   1,   3,   2,   3,   1,   4,   2,   0,   3,   5,   4,   3,   1,   5,   4,   5,   3,   3,   5,   2,   1,   0,   1,   0,   1,   3,   2,   3,   2,   4,   2,   3,   3,   4,   6,   1,   5,   3,   2,   2,   2,   1,   0,   2,   0,   2,   2,   2,   3,   0,   0,   1,   3,   2,   1,   3,   3,   1,   0,   0,   0,   6,   3,   3,   4,   2,   3,   0,   1,   1,   2,   2,   2,   1,   3,   0,   1,   0,   0,   0,   1,   1,   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0])
+
+
+# Kanäle (eichung):
+kanal_nummer = np.array([ 45, 90, 135, 179, 224, 269, 313, 358, 403  ]) #statet bei 0, d.h. der erste Kanal ist 0, der letzte 511
+t_s = np.array([ 1,2,3,4,5,6,7,8,9 ]) * 10**(-6) # zum kanal n gehört jeweils diese Lebenszeit
+
+
+### KALIBRIERUNG
+# Lineare Regression: Eichgerade, um Kanälen die jeweilige Lebensdauer zuzuordnen
+
+def f(x, a, b):
+    return a * x + b
+
+params_eich, covariance_matrix_eich = curve_fit(f, kanal_nummer, t_s)
+
+def tau(kanal):
+    ''' Gebe Kanalnummer ein - Erhalte dazugehörige Lebensdauer '''
+    return f(kanal, *params_eich)
+
+tau_x = tau(np.linspace(0,511,512)) # Zu den Kanälen 0,1,...,511 stehen in diesem Array nun die Lebensdauern
+
+#### FITTE EXPONENTIALFUNKTION
+
+def exp_dist(t, N_0, lambd, U):
+    return N_0  * np.exp(-lambd * t) + U
+    #fitten mit lambda extra funktioniert nicht. buh.
+
+params_fit, covariance_matrix_fit = curve_fit(exp_dist, tau_x, data)
+errors_fit = np.sqrt(np.diag(covariance_matrix_fit))
+
+#plt.plot(tau_x, data, 'r.', label='Messdaten')
+
+### Mister Monte-Carlo (presented by Super Mario Copy-Pasta)
+
+x_plot_up = np.zeros(len(tau_x))
+x_plot_down = np.zeros(len(tau_x))
+a_mc = random.multivariate_normal(params_fit, covariance_matrix_fit, 10000)
+
+
+for i, val in enumerate(tau_x):
+    mc_values = []
+
+    for k in a_mc:
+        mc_values.append(exp_dist(val, *k))
+
+    mc_mean = np.mean(mc_values)
+    mc_std = np.std(mc_values)
+
+    x_plot_up[i] = mc_mean + 2*mc_std
+    x_plot_down[i] = mc_mean - 2*mc_std
+
+
+plt.errorbar(tau_x*10**6, data, fmt='k.', yerr=np.sqrt(data) , label='Messdaten',  linewidth=1,  markersize='1', capsize=1)
+
+plt.ylabel(r'$N$')
+plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
+
+plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit)), 'b-', label='Fit')
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/expfit.pdf')
+
+plt.clf()
+
+N_0_val = ufloat(params_fit[0], errors_fit[0])
+lambd_val = ufloat(params_fit[1], errors_fit[1])
+U_val = ufloat(params_fit[2], errors_fit[2])
+
+
+
+
+### Nur Sigmaintervall und Punkte
+
+plt.plot(tau_x*10**6, data, 'k.', label='Messdaten', markersize=1)
+plt.fill_between(tau_x*10**6, x_plot_up,  x_plot_down, interpolate=True, alpha=0.7, color='b',linewidth=0.0, zorder=50, label = r'$2\sigma-\text{Intervall}$') #Fehlerdings
+plt.ylabel(r'$N$')
+plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/expfit_sigma.pdf')
+
+
+
+print(lambd_val)
+print(1/lambd_val)
