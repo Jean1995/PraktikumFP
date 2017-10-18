@@ -181,12 +181,30 @@ def f(x, a, b):
     return a * x + b
 
 params_eich, covariance_matrix_eich = curve_fit(f, kanal_nummer, t_s)
+errors_eich = np.sqrt(np.diag(covariance_matrix_eich))
 
 def tau(kanal):
     ''' Gebe Kanalnummer ein - Erhalte dazugehörige Lebensdauer '''
     return f(kanal, *params_eich)
 
 tau_x = tau(np.linspace(0,511,512)) # Zu den Kanälen 0,1,...,511 stehen in diesem Array nun die Lebensdauern
+kanal_plot = np.linspace(0,511,512)
+
+plt.xlabel('Kanal')
+plt.ylabel(r'$\tau \,/\, \si{\micro\second}$')
+
+plt.plot(kanal_plot, f(kanal_plot, *noms(params_eich))*10**6, 'b-', label='Fit')
+plt.plot(kanal_nummer, t_s*10**6, 'r.', label='Messdaten')
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/eichung.pdf')
+plt.clf()
+
+m_val = ufloat(params_eich[0], errors_eich[0])
+b_val = ufloat(params_eich[1], errors_eich[1])
+
+write('build/m_val.tex', make_SI(m_val * 10**6, r'\micro\second', figures=2))
+write('build/b_val.tex', make_SI(b_val * 10**6, r'\micro\second', figures=2))
 
 #### FITTE EXPONENTIALFUNKTION
 
@@ -198,6 +216,9 @@ params_fit, covariance_matrix_fit = curve_fit(exp_dist, tau_x, data)
 errors_fit = np.sqrt(np.diag(covariance_matrix_fit))
 
 #plt.plot(tau_x, data, 'r.', label='Messdaten')
+
+
+
 
 ### Mister Monte-Carlo (presented by Super Mario Copy-Pasta)
 
@@ -235,7 +256,18 @@ N_0_val = ufloat(params_fit[0], errors_fit[0])
 lambd_val = ufloat(params_fit[1], errors_fit[1])
 U_val = ufloat(params_fit[2], errors_fit[2])
 
+write('build/N_0_val.tex', make_SI(N_0_val, r'', figures=2))
+write('build/lambd_val.tex', make_SI(lambd_val / (10**6), r'\per\micro\second', figures=2))
+write('build/U_val.tex', make_SI(U_val, r'', figures=2))
 
+tau = 1/lambd_val
+
+write('build/tau.tex', make_SI(tau*10**6, r'\micro\second', figures=1))
+
+print(N_0_val)
+print(lambd_val)
+print(U_val)
+print(tau)
 
 
 ### Nur Sigmaintervall und Punkte
@@ -248,7 +280,20 @@ plt.legend(loc='best')
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/expfit_sigma.pdf')
 
+### Bestimmung Untergrund (ist das richtig?!!?)
 
+N_ges = 2882767
+t_ges = 160147
+T_such = 15*10**(-6) #suchzeit
 
-print(lambd_val)
-print(1/lambd_val)
+mu_mittel = N_ges/t_ges * T_such # so viele Myonen durchqueren den Tank im Mittel in der Suchzeit
+# mu_mittel ist dann auch der Erwartungswert der Poissionverteilung
+
+mu_folgend = mu_mittel * np.exp(-mu_mittel)
+#poissionverteilung mit lambda = mu_mittel und n=1
+
+mu_gesamt_fehl = mu_folgend * N_ges
+
+U_theo = mu_gesamt_fehl/512 # aufgeteilt auf 512 Kanäle
+
+write('build/U_theo.tex', make_SI(U_theo, r'', figures=1))
