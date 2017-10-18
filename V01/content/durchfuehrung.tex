@@ -1,2 +1,28 @@
 \subsection{Durchführung}
 \label{sec:durchführung}
+
+Bevor mit der Eigentlichen Messung begonnen werden kann, müssen die einzelnen Bauteile justiert werden.
+Es wird zunächst die Schaltung gemäß Abbildung \ref{fig:aufbau1} aufgebaut.
+Nachdem die Hochspannung eingeschaltet wird, sollten die SEVs Impulse unterschiedlicher Breite und Höhe abgeben.
+Dies wird mit einem Oszilloskop überprüft.
+Parallel zum Oszilloskop wird ein $\SI{50}{\ohm}$-Widerstand zugeschaltet, um Reflexionen zu vermeiden.\\
+Als nächstes wird überprüft, ob die Diskriminatoren die Impulse aus dem jeweiligen SEV in Impulse einheitlicher Höhe und Breite umwandelt.
+Mit Hilfe eines Zählwerkes werden die Schwellen der Diskriminatoren so eingestellt, dass sie beide etwa $20-40$ Impulse pro Sekunde durchlassen.\\
+Danach wird die Koinzidenz abgestimmt, indem an ihrem Ausgang ein Zählwerk angeschlossen wird.
+Die Verzögerungen vor den Diskriminatoren und die Breiten der Impulse werden nun so eingestellt, dass die maximale Anzahl an Impulsen pro Sekunde von der Koinzidenz weitergeleitet wird.
+Diese Verzögerungszeit wird für spätere Rechnungen notiert.
+Mit Zählwerken wird überprüft, ob die Koinzidenz wirksam das Rauschen unterdrückt.
+Ist dies nicht effektiv der Fall, werden die Diskriminatorschwellen erniedrigt, um mehr Signale durchzulassen.\\
+Danach wird die Suchzeit der monostabilen Kippstufe mit Hilfe des Oszilloskopes eingestellt.
+Diese sollte groß gegenüber der Lebenszeit eines Myons, aber klein gegen die Zeitspanne sein, in der im Mittel ein zweites Myon den Tank durchquert.\\
+Ist die Suchzeit eingestellt, wird der Zeitmessbereich des TAC einjustiert.
+Dieser sollte geringfügig kleiner sein als die Suchzeit.
+Die Funktionsweise der Schaltung wird dann geprüft, indem nur der Doppelimpulsgenerator an den Eingang der Koinzidenz geschaltet wird.
+Am Ausgang des TAC werden dann Impulse mit einer Höhe proportional zum eingestellten Abstand der Doppelimpulse zu sehen sein.
+Die Impulse des TAC können über den Vielkanalanalysator am Rechner eingesehen werden.
+Wenn diese der Länge nach geordnet werden, wird, bevor die eigentliche Messung begonnen werden kann, das Programm mit Hilfe des Doppelimpulsgenerators kalibriert.
+Dabei werden Impulse verschiedener über den Doppelimpulsgenerator fest definierter Abstände aufgenommen, sodass einzusehen ist, welcher Kanal für welchen Zeitabstand steht.\\
+Sind alle Justierungen getroffen, kann mit der Messung begonnen werden.
+Die Diskriminatoren werden wieder zur Koinzidenz geschaltet und der Doppelimpulsgenerator abgeklemmt.
+Das Programm zum Aufzeichnen der Impulse wird gleichzeitig mit dem Startimpuls-Zähler gestartet.
+Nach etwa zwei Tagen wird die Messung beendet.
