@@ -22,25 +22,25 @@ Es entsteht erneut ein Lichtimpuls.
 Der Abstand der beiden Lichtimpulse ist dabei die Individuallebenszeit des Myons.
 Die Lichtimpulse werden von Photokathoden in elektrische Signale umgewandelt.
 Die daran anschließenden Sekundärelektronenvervielfacher (SEV) verstärken das elektrische Signal.
-Da es ab gewisser Temperatur in dem SEV zu thermischer Emission von Elektronen kommen kann, werden zwei SEVs eingesetzt, welche eine Koinzidenz durchlaufen.
-Weil diese thermische Emission der beiden SEVs unkorreliert sind, können diese Fehlimpulse durch die Koinzidenz relativ gut herausgefiltert werden.
-Die Verzögerungsleitung wird eingesetzt, da die SEVs verschiedene Eigenschaften besitzen.\\
+Da es bei endlicher Temperatur in dem SEV zu thermischer Emission von Elektronen kommen kann, werden zwei SEVs eingesetzt, welche eine Koinzidenz durchlaufen.
+Weil diese thermische Emission der beiden SEVs unkorreliert sind, können diese Fehlimpulse durch die Koinzidenz herausgefiltert werden.
+Hierbei wird eine Verzögerungsleitung eingesetzt, da die SEVs verschiedene elektronische Eigenschaften besitzen.\\
 Die Diskriminatoren erfüllen mehrere Funktionen.
-Zunächst wandeln sie das elektrische Signal, welches aus den SEVs kommt, in einen elektrischen Impuls mit definierbarer Breite und Höhe um, der von Logik des NIM-Standards verarbeitet werden kann.
-Die Breite des Signals bestimmt, welche es durch die Koinzidenz schaffen.
-Die Koinzidenz leitet nur weiter, wenn die beiden Signale der Diskriminatoren innerhalb der Auflösezeit $\Delta t_\text{K}$ aufeinandertreffen.
+Zunächst wandeln sie das elektrische Signal, welches aus den SEVs kommt, in einen elektrischen Impuls mit fest definierter Breite und Höhe um, der von der Logik des NIM-Standards verarbeitet werden kann.
+%Die Breite des Signals bestimmt, welche es durch die Koinzidenz schaffen.
+Die Koinzidenz leitet die Signale nur weiter, wenn beiden Signale der Diskriminatoren innerhalb der Auflösezeit $\Delta t_\text{K}$ aufeinandertreffen.
 Die Auflösezeit hängt von der Verzögerungsleitung und der Breiten der Signale ab.
 Sie sollte größer sein als $\SI{4}{\nano\second}$, dem Fall, in dem ein Lichtimpuls direkt an einer der Photokathoden ausgelöst wird.
 Desweiteren lassen die Diskriminatoren nur Impulse durch, welche eine Spannungsschwelle von $U_0$ überschreiten.
-Da die Impulse, ausgelöst durch die thermische Emission in den SEVs, in der Regel viel kleiner sind als die, welche von Myonen herrühren, können somit diese Fehlimpulse zusätzlich herausgefiltert werden.\\
+Da die Impulse, ausgelöst durch die thermische Emission in den SEVs, in der Regel viel kleiner sind als die, welche von Myonen ausgelöst werden, können somit diese Fehlimpulse zusätzlich herausgefiltert werden.\\
 An einem Eingang der Koinzidenz befindet sich aus Justagezwecken ein Doppelimpulsgenerator, welcher ein $\SI{1}{\kilo\hertz}$-Signal in einem in $\SI{0,1}{\micro\second}$-Schritten einstellbaren Abstand aussendet.\\
-Auf die Koinzidenz folgt die Logik, die die Lebensdauer messen soll.
+Auf die Koinzidenz folgt die Logik, welche die Lebensdauer der Myonen misst.
 Im Idealfall erzeugt das Myon, welches in den Tank fällt, einen Startimpuls.
 Selbiges erzeugt beim Zerfall einen Stop-Impuls.
 Der Startimpuls geht an den START-Eingang eines Zeit-Amplituden-Converters (TAC), sowie der Stopimpuls an den STOP-Eingang.
 Der TAC gibt einen Impuls aus, dessen Höhe proportional zum Zeitunterschied zwischen Start- und Stopsignal ist.
 Dieses Signal wird von einem Vielkanalanalysator zu einem Rechner weitergeleitet.
-Das auf dem Rechner vorinstallierte Programm sortiert die Impulse der Höhe nach ein.\\
+Das auf dem Rechner vorinstallierte Programm ordnet den Impulses je nach Höhe einen Kanal zu.\\
 Das Aussehen der Schaltung resultiert jedoch daher, dass ein Großteil der Myonen den Tank durchquert ohne zu zerfallen.
 Daher gäbe es einen Start- aber keinen Stopimpuls.
 Um dies zu beheben wird eine Monostabile Kippstufe eingesetzt, welche eine einstellbare Suchzeit $T_S$ besitzt.

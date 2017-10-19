@@ -3,51 +3,59 @@
 
 \subsection{Kalibration des Vielkanalysators}
 
-Mit Hilfe von Doppelimpulsen, deren Abstand in $\SI{1}{\micro\second}$-Schritten vergrößert wird, konnte durch eine lineare Fitfunktion,
+Um den Kanälen des Vielkanalanalysators die jeweiligen Lebensdauern zuzuordnen, wird mithilfe des Doppelimpulsgenerators, wie in der Durchführung beschrieben, eine Kalibration durchgeführt.
+Hierzu werden Doppelimpulse, deren Abstand in $\SI{1}{\micro\second}$-Schritten vergrößert wird, verwendet.
+Mithilfe der Funktion \emph{curvefit} in Python \cite{scipy} wird ein linearer Fit an die Funktion
 \begin{equation}
   f(x) = mx + b \label{linfit}
 \end{equation}
-die Kalibrationsgerade aus Abbildung \ref{plot:kali} gewonnen werden.
+durchgeführt.
+Die Fitparameter lauten
+\begin{align*}
+  m &= \input{build/m_val.tex},\\
+  b &= \input{build/b_val.tex}.
+\end{align*}
+Über diese Kalibrationsfunktion können den aufgenommenen Messwerten, welchen Kanäle zugeordnet werden, nun Zeiten zugeordnet werden.
+Die Kalibrationsgerade ist in Abbildung \ref{plot:kali} dargestellt.
+Der vermutete lineare Zusammenhang zwischen Lebensdauer und Kanalnummer kann bestätigt werden.
+
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{build/eichung.pdf}
-  \caption{Kalibrationswerte und -gerade bestimmt über einen linearen Fit \ref{linfit}.}
+  \caption{Kalibrationsgerade ermittelt durch einen linearen Fit.}
   \label{plot:kali}
 \end{figure}
-Die Fitparameter lauten
-\begin{align*}
-  m &= \input{build/m_val.tex} \: \text{pro Kanal,}\\
-  b &= \input{build/b_val.tex}.
-\end{align*}
-Über diese Kalibrationsfunktion können den aufgenommenen Messwerten, welche Kanäle zugeordnet wurden, nun Zeiten zugeordnet werden.
 
 \subsection{Ergebnisse der Messung der Lebensdauer}
 
-Zum Fitten der Zerfallsrate wird $curve_fit$ aus der python Bibliothek scipy.optimize mit der Fitfunktion
+Zum Fitten der Zerfallsrate wird wieder \emph{curvefit} mit der Fitfunktion
 \begin{equation}
   N(t) = N_0 \exp{-\lambda t} + U_0 \label{exp}
 \end{equation}
 verwendet.
-Der Fehler des Messwertes eines Kanals entpricht der Wurzel der gemessenen Anzahl. %but wryyyyyy?
+Der Fehler des Messwertes eines Kanals entpricht, da die Zählrate poissionverteilt ist, der Wurzel der gemessenen Zählrate. %but wryyyyyy?
 Die Parameter werden auf die Werte \label{params}
 \begin{align*}
   N_0 &= \input{build/N_0_val.tex},\\
   \lambda &= \input{build/lambd_val.tex},\\
   U_0 &= \input{build/U_val.tex}
 \end{align*}
-bestimmt, $U_0$ entspricht dabei dem Untergrund.
-Das Ergebnis ist in Abbildung \ref{plot:punkte_err_fit} zu begutachten.
+bestimmt.
+Dabei entspricht $U_0$ dem im Aufbau beschriebenen Untergrund, welcher durch direkt hintereinander auftreffende Myonen ausgelöst wird.
+Die Fitfunktion ist, zusammen mit den Messwerten, in Abbildung \ref{plot:punkte_err_fit} dargestellt.
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{build/expfit.pdf}
   \caption{Aufgenommene Messwerte der Individuallebensdauern mit Fehlern und Fit der Funktion \ref{exp}.}
   \label{plot:punkte_err_fit}
 \end{figure}
-Die mittlere Lebensdauer errechnet sich damit zu
+Die mittlere Lebensdauer errechnet sich nach Formel \eqref{eqn:tau} zu
 \begin{align*}
   \tau = \frac{1}{\lambda} = \input{tau.tex}.
 \end{align*}
-Zu Darstellungszwecken sind in Abbildung \ref{plot:punkte_sigma} die Messpunkte und das $2\sigma$-Intervall dargestellt.
+Zu Darstellungszwecken sind in Abbildung \ref{plot:punkte_sigma} die Messpunkte ohne Fehlerbalken und das $2\sigma$-Intervall dargestellt.
+Dabei wird das $2\sigma$-Intervall durch eine Monte-Carlo-Simulation mit $\num{10000}$-Konfigurationen mithilfe der von \emph{curvefit} berechneten Kovarianzmatrix bestimmt.
+
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{build/expfit_sigma.pdf}
@@ -58,19 +66,21 @@ Zu Darstellungszwecken sind in Abbildung \ref{plot:punkte_sigma} die Messpunkte 
 
 \subsection{Theoretische Berechnung des Untergrundes}
 
-Der Untergrund wird dominiert durch ein zweites Myon, welches den Stopimpuls auslöst.
+Der Untergrund wird dominiert durch ein zweites, direkt nach dem ersten auftretendes Myon, welches den Stopimpuls auslöst.
 Dieser Störeffekt kann ausgerechnet werden, da die Ankunft der Myonen im Tank poissonverteilt ist.
-Es werden $N_\text{ges} = \num{2882767}$ Myonen während der totalen Messzeit von $T_\text{ges} = \SI{160147}{\second}$ gemessen.
+Es werden $N_\text{ges} = \num{2882767}$ Myonen während der totalen Messzeit \footnote{Dieser zeitliche Wert entspricht der wahren Messzeit abzüglich der Totzeit. Während der Toteit konnten keine Myonen detektiert werden.} von $T_\text{ges} = \SI{160147}{\second}$ gemessen.
 Während der Suchzeit $T_\text{S} = \SI{15}{\micro\second}$ kommen demnach durchschnittlich
 \begin{align*}
   \lambda_{pv} = \frac{N_\text{ges}}{T_\text{ges}} T_\text{S}
 \end{align*}
 Myonen an.
-Die Wahrscheinlichkeit, dass genau ein zweites Myon während der Suchzeit den Tank durchquert, beträgt
+Die Wahrscheinlichkeit, dass genau ein zweites Myon während der Suchzeit den Tank durchquert, beträgt nach der Poissionverteilung für $n=1$
 \begin{align*}
-  P = \lambda_{pv} \exp{-\lambda_{pv}}
+  P = \lambda_{pv} \exp{\left(-\lambda_{pv}\right)}.
 \end{align*}
-multipliziert mit der gesamten Anzahl an gemessenen Myonen ergibt sich ein Untergrund von
+Multipliziert mit der gesamten Anzahl an gemessenen Myonen erhält man die Gesamtzahl der Myonen, welche einen Fehlimpuls auflösen.
+Da sich diese Anzahl gleichmäßig auf alle $\num{512}$ Kanäle aufteilt, ergibt sich ein Untergrund von
 \begin{align*}
   U_{\text{Theorie}} = \input{build/U_theo.tex}.
 \end{align*}
+Dieser Wert ist konsistent mit dem Untergrund $U_0$ aus dem Fit.

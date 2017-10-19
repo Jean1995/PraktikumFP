@@ -264,6 +264,14 @@ tau = 1/lambd_val
 
 write('build/tau.tex', make_SI(tau*10**6, r'\micro\second', figures=1))
 
+
+tau_lit = ufloat(2.196*10**(-6), 0.000002*10**(-6))
+write('build/tau_lit.tex', make_SI(tau_lit*10**6, r'\micro\second', figures=1))
+
+abw = np.abs(tau_lit - tau)/tau_lit * 100
+
+write('build/tau_lit_abw.tex', make_SI(abw.n, r'\percent', figures=1))
+
 print(N_0_val)
 print(lambd_val)
 print(U_val)
