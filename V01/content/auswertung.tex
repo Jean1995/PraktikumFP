@@ -1,4 +1,76 @@
 \section{Auswertung}
 \label{sec:Auswertung}
 
-\subsection{Kallibration des Vielkanalysators}
+\subsection{Kalibration des Vielkanalysators}
+
+Mit Hilfe von Doppelimpulsen, deren Abstand in $\SI{1}{\micro\second}$-Schritten vergrößert wird, konnte durch eine lineare Fitfunktion,
+\begin{equation}
+  f(x) = mx + b \label{linfit}
+\end{equation}
+die Kalibrationsgerade aus Abbildung \ref{plot:kali} gewonnen werden.
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{build/eichung.pdf}
+  \caption{Kalibrationswerte und -gerade bestimmt über einen linearen Fit \ref{linfit}.}
+  \label{plot:kali}
+\end{figure}
+Die Fitparameter lauten
+\begin{align*}
+  m &= \input{build/m_val.tex} \: \text{pro Kanal,}\\
+  b &= \input{build/b_val.tex}.
+\end{align*}
+Über diese Kalibrationsfunktion können den aufgenommenen Messwerten, welche Kanäle zugeordnet wurden, nun Zeiten zugeordnet werden.
+
+\subsection{Ergebnisse der Messung der Lebensdauer}
+
+Zum Fitten der Zerfallsrate wird $curve_fit$ aus der python Bibliothek scipy.optimize mit der Fitfunktion
+\begin{equation}
+  N(t) = N_0 \exp{-\lambda t} + U_0 \label{exp}
+\end{equation}
+verwendet.
+Der Fehler des Messwertes eines Kanals entpricht der Wurzel der gemessenen Anzahl. %but wryyyyyy?
+Die Parameter werden auf die Werte \label{params}
+\begin{align*}
+  N_0 &= \input{build/N_0_val.tex},\\
+  \lambda &= \input{build/lambd_val.tex},\\
+  U_0 &= \input{build/U_val.tex}
+\end{align*}
+bestimmt, $U_0$ entspricht dabei dem Untergrund.
+Das Ergebnis ist in Abbildung \ref{plot:punkte_err_fit} zu begutachten.
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{build/expfit.pdf}
+  \caption{Aufgenommene Messwerte der Individuallebensdauern mit Fehlern und Fit der Funktion \ref{exp}.}
+  \label{plot:punkte_err_fit}
+\end{figure}
+Die mittlere Lebensdauer errechnet sich damit zu
+\begin{align*}
+  \tau = \frac{1}{\lambda} = \input{tau.tex}.
+\end{align*}
+Zu Darstellungszwecken sind in Abbildung \ref{plot:punkte_sigma} die Messpunkte und das $2\sigma$-Intervall dargestellt.
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{build/expfit_sigma.pdf}
+  \caption{Aufgenommene Messwerte der Individuallebensdauern und Funktion \ref{exp} mit den Parametern \ref{params} mit $2\sigma$-Intervall.}
+  \label{plot:punkte_sigma}
+\end{figure}
+
+
+\subsection{Theoretische Berechnung des Untergrundes}
+
+Der Untergrund wird dominiert durch ein zweites Myon, welches den Stopimpuls auslöst.
+Dieser Störeffekt kann ausgerechnet werden, da die Ankunft der Myonen im Tank poissonverteilt ist.
+Es werden $N_\text{ges} = \num{2882767}$ Myonen während der totalen Messzeit von $T_\text{ges} = \SI{160147}{\second}$ gemessen.
+Während der Suchzeit $T_\text{S} = \SI{15}{\micro\second}$ kommen demnach durchschnittlich
+\begin{align*}
+  \lambda_{pv} = \frac{N_\text{ges}}{T_\text{ges}} T_\text{S}
+\end{align*}
+Myonen an.
+Die Wahrscheinlichkeit, dass genau ein zweites Myon während der Suchzeit den Tank durchquert, beträgt
+\begin{align*}
+  P = \lambda_{pv} \exp{-\lambda_{pv}}
+\end{align*}
+multipliziert mit der gesamten Anzahl an gemessenen Myonen ergibt sich ein Untergrund von
+\begin{align*}
+  U_{\text{Theorie}} = \input{build/U_theo.tex}.
+\end{align*}
