@@ -1,7 +1,7 @@
 \section{Auswertung}
 \label{sec:Auswertung}
 
-\subsection{Kalibration des Vielkanalysators}
+\subsection{Kalibration des Vielkanalanalysators}
 
 Um den Kanälen des Vielkanalanalysators die jeweiligen Lebensdauern zuzuordnen, wird mithilfe des Doppelimpulsgenerators, wie in der Durchführung beschrieben, eine Kalibration durchgeführt.
 Hierzu werden Doppelimpulse, deren Abstand in $\SI{1}{\micro\second}$-Schritten vergrößert wird, verwendet.
@@ -33,7 +33,7 @@ Zum Fitten der Zerfallsrate wird wieder \emph{curvefit} mit der Fitfunktion
   N(t) = N_0 \exp{(-\lambda t)} + U_0 \label{exp}
 \end{equation}
 verwendet.
-Der Fehler des Messwertes eines Kanals entpricht, da die Zählrate poissionverteilt ist, der Wurzel der gemessenen Zählrate. %but wryyyyyy?
+Der Fehler des Messwertes eines Kanals entspricht, da die Zählrate poissonverteilt ist, der Wurzel der gemessenen Zählrate. %but wryyyyyy?
 Die Parameter werden auf die Werte \label{params}
 \begin{align*}
   N_0 &= \input{build/N_0_val.tex},\\
@@ -50,9 +50,10 @@ Die Fitfunktion ist, zusammen mit den Messwerten, in Abbildung \ref{plot:punkte_
   \label{plot:punkte_err_fit}
 \end{figure}
 Die mittlere Lebensdauer errechnet sich nach Formel \eqref{eqn:tau} zu
-\begin{align*}
+\begin{align}
+  \label{eqn:result}
   \tau = \frac{1}{\lambda} = \input{tau.tex}.
-\end{align*}
+\end{align}
 Zu Darstellungszwecken sind in Abbildung \ref{plot:punkte_sigma} die Messpunkte ohne Fehlerbalken und das $2\sigma$-Intervall dargestellt.
 Dabei wird das $2\sigma$-Intervall durch eine Monte-Carlo-Simulation mit $\num{10000}$-Konfigurationen mithilfe der von \emph{curvefit} berechneten Kovarianzmatrix bestimmt.
 
@@ -68,13 +69,13 @@ Dabei wird das $2\sigma$-Intervall durch eine Monte-Carlo-Simulation mit $\num{1
 
 Der Untergrund wird dominiert durch ein zweites, direkt nach dem ersten auftretendes Myon, welches den Stopimpuls auslöst.
 Dieser Störeffekt kann ausgerechnet werden, da die Ankunft der Myonen im Tank poissonverteilt ist.
-Es werden $N_\text{ges} = \num{2882767}$ Myonen während der totalen Messzeit \footnote{Dieser zeitliche Wert entspricht der wahren Messzeit abzüglich der Totzeit. Während der Toteit konnten keine Myonen detektiert werden.} von $T_\text{ges} = \SI{160147}{\second}$ gemessen.
+Es werden $N_\text{ges} = \num{2882767}$ Myonen während der totalen Messzeit \footnote{Dieser zeitliche Wert entspricht der wahren Messzeit abzüglich der Totzeit. Während der Totzeit konnten keine Myonen detektiert werden.} von $T_\text{ges} = \SI{160147}{\second}$ gemessen.
 Während der Suchzeit $T_\text{S} = \SI{15}{\micro\second}$ kommen demnach durchschnittlich
 \begin{align*}
   \lambda_{pv} = \frac{N_\text{ges}}{T_\text{ges}} T_\text{S}
 \end{align*}
 Myonen an.
-Die Wahrscheinlichkeit, dass genau ein zweites Myon während der Suchzeit den Tank durchquert, beträgt nach der Poissionverteilung für $n=1$
+Die Wahrscheinlichkeit, dass genau ein zweites Myon während der Suchzeit den Tank durchquert, beträgt nach der Poissonverteilung für $n=1$
 \begin{align*}
   P = \lambda_{pv} \exp{\left(-\lambda_{pv}\right)}.
 \end{align*}
