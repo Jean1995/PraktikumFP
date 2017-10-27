@@ -3,13 +3,13 @@
 \section{Zielsetzung}
 Im vorliegenden Versuch wird die mittlere Lebensdauer von kosmischen Myonen bestimmt.
 Hierzu werden die Myonen abgebremst und ihre Lebensdauer mithilfe eines Szintillationsdetektors gemessen.
-Aus den Messdaten ergibt sich eine empirische Verteilungsfunktion, aus dessen Form die charakteristischen Größen ermittelt werden.
+Aus den Messdaten ergibt sich eine empirische Verteilungsfunktion, aus der durch Fits schließlich die mittlere Lebensdauer ermittelt wird.
 
 \section{Theorie}
 
 \subsection{Eigenschaften und Entstehung der kosmischen Myonen}
 Myonen gehören, wie auch Elektronen oder Tauonen, zu der Gruppe der Leptonen.
-Von den anderen Leptonen unterscheidet sich das Myon vor allem in seiner Masse: Es ist ca. $\num{200}$-mal schwerer als ein Elektron, gleichzeitig aber ca. $\num{3500}$-mal leichter als ein Tauon.
+Von den anderen Leptonen unterscheidet sich das Myon vor allem in seiner Masse: Es ist ca. $\num{200}$-mal schwerer als ein Elektron, gleichzeitig aber ca. $\num{17}$-mal leichter als ein Tauon.
 Zudem besitzt das Myon $\mu$, im Vergleich zum Elektron $e^-$, eine endliche Lebensdauer, an dessen Ende fast ausschließlich der Zerfall
 \begin{align*}
   \mu^- \rightarrow e^- + \overline{\nu}_e + \nu_\mu
@@ -25,23 +25,30 @@ Hierbei erhöht die Existenz eines Teilchens die Leptonenfamilienzahl der dazuge
 
 Die Entstehung der hier betrachteten kosmischen Myonen beginnt in der oberen Atmosphäre.
 Insbesondere durch Reaktionen von energiereichen Protonen aus der kosmischen Strahlung mit Atomkernen der Luft entstehen Pionen.
-Diese sind instabile Mesonen, welche innerhalb kürzester Zeit ($\tau \approx \SI{26}{\nano\second}$) unter
+Diese sind instabile Mesonen, welche innerhalb kürzester Zeit ($\tau \approx \SI{26}{\nano\second}$, \cite{Agashe:2014kda}) unter
 \begin{align*}
   \pi^{\pm} \rightarrow \mu^{\pm} + \overset{\textbf{\fontsize{5pt}{5pt}\selectfont(---)}}{\nu_\mu}
 \end{align*}
 in Myonen zerfallen.
 Diese können, da sie sich mit annähernd Lichtgeschwindigkeit ausbreiten und dementsprechend die Effekte der Zeitdilatation berücksichtigt werden müssen, auf der Erde nachgewiesen werden.
 
-\subsection{Statistische Eigenschaften der Myonen}
+\subsection{Statistik des Zerfallsprozesses}
 
 Der Zerfall eines Teilchens ist ein statistischer Prozess, sodass eine genauere Definition seiner mittleren Lebensdauer $\tau$ notwendig ist.
 Die Zerfallswahrscheinlichkeit ist, wie bei einem radioaktiven Zerfall, unabhängig von der vorherigen Lebensdauer des Teilchens und somit infinitesimal durch
-\begin{align*}
+\begin{equation}
+  \label{eqn:nummeregal}
   \symup{d}W = \lambda \symup{d}t
-\end{align*}
+\end{equation}
 gegeben.
-Hierbei ist $\lambda$ die charakteristische Zerfallskonstante des Zerfalls.
-Für einen Ausgangswert von $N_0$ Teilchen ergibt sich somit für großes $N$ die Gleichung
+Hier ist $\symup{d}W$ die Wahrscheinlichkeit für den Zerfall im infinitesimalen Zeitraum $\symup{d}t$ sowie $\lambda$ die charakteristische Zerfallskonstante.
+Werden nun $N$ Teilchen betrachtet, folgt für die Anzahl der im Zeitraum $\symup{d}t$ zerfallenden Teilchen unter Nutzung der Gleichung \eqref{eqn:nummeregal}
+\begin{equation}
+  \symup{d}N = - N \symup{d}W = - N \lambda \symup{d}T
+\end{equation}
+%Hierbei ist $\lambda$ die charakteristische Zerfallskonstante des Zerfalls.
+Für großes $N$ kann diese Gleichung durch Integration gelöst werden.
+Hieraus ergibt sich mit $N(t = 0) = N_0$ die Entwicklung der Teilchenzahl $N(t)$ zu
 \begin{equation}
   N(t) = N_0 \exp{\left( -\lambda t \right)}.
 \end{equation}
@@ -50,7 +57,7 @@ Betrachtet man die differentielle zeitliche Änderung von $N(t)$, folgt für die
   \label{eqn:vfunktion}
   \symup{d}N(t) = N_0 \lambda \exp{\left(- \lambda t \right)} \symup{d}t.
 \end{equation}
-Um eine allgemeingültige, charakteristische Aussage für alle Myonen zu treffen, wird die mittlere Lebensdauer $\tau$ als Erwartungswert von t
+Um eine allgemeingültige, charakteristische Aussage für alle Myonen zu treffen, wird die mittlere Lebensdauer $\tau$ als Erwartungswert von $t$
 \begin{align*}
   \tau \coloneqq E[t] = \int_0^\infty t f(t) \symup{d}t
 \end{align*}
