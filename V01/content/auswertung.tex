@@ -1,11 +1,12 @@
 \section{Auswertung}
 \label{sec:Auswertung}
 
+
 \subsection{Kalibration des Vielkanalanalysators}
 
 Um den Kanälen des Vielkanalanalysators die jeweiligen Lebensdauern zuzuordnen, wird mithilfe des Doppelimpulsgenerators, wie in der Durchführung beschrieben, eine Kalibration durchgeführt.
 Hierzu werden Doppelimpulse, deren Abstand in $\SI{1}{\micro\second}$-Schritten vergrößert wird, verwendet.
-Mithilfe der Funktion \emph{curvefit} in Python \cite{scipy} wird ein linearer Fit an die Funktion
+Mithilfe der Funktion \emph{curve\_fit} aus \emph{SciPy $0.19.0$} in Python \cite{scipy} wird ein linearer Fit an die Funktion
 \begin{equation}
   f(x) = mx + b \label{linfit}
 \end{equation}
@@ -18,6 +19,7 @@ Die Fitparameter lauten
 Über diese Kalibrationsfunktion können den aufgenommenen Messwerten, welchen Kanäle zugeordnet werden, nun Zeiten zugeordnet werden.
 Die Kalibrationsgerade ist in Abbildung \ref{plot:kali} dargestellt.
 Der vermutete lineare Zusammenhang zwischen Lebensdauer und Kanalnummer kann bestätigt werden.
+Aufgrund der sehr geringen auftretenden Fehler in den Fitparametern werden die Fehler bei der Bestimmung der Lebensdauer im Folgenden nicht berücksichtigt.
 
 \begin{figure}
   \centering
@@ -28,49 +30,72 @@ Der vermutete lineare Zusammenhang zwischen Lebensdauer und Kanalnummer kann bes
 
 \subsection{Ergebnisse der Messung der Lebensdauer}
 
-Zum Fitten der Zerfallsrate wird wieder \emph{curvefit} mit der Fitfunktion
+Zum Fitten der Zerfallsrate wird wieder \emph{curve\_fit} mit der Fitfunktion
 \begin{equation}
   N(t) = N_0 \exp{(-\lambda t)} + U_0 \label{exp}
 \end{equation}
 verwendet.
 Der Fehler des Messwertes eines Kanals entspricht, da die Zählrate poissonverteilt ist, der Wurzel der gemessenen Zählrate. %but wryyyyyy?
-Die Parameter werden auf die Werte \label{params}
+Um diese Fehler zu berücksichtigen, wird ein gewichteter Fit durchgeführt.
+Hierbei werden die einzelnen Messwerte mit der Inverse ihres Fehlers gewichtet.\\
+Da in den ersten drei Kanälen keine Impulse gemessen wurden, werden diese Messwerte nicht beim Fit berücksichtigt.
+Zusätzlich befinden sich in den letzten $\num{17}$ Kanälen keine Impulse, sodass diese Messwerte ebenfalls nicht berücksichtigt werden.
+Dies liegt daran, dass die monostabile Kippstufe eine feste Suchzeit $T_s$ besitzt und längere Zerfallszeiten nicht gemessen werden können.
+Aus den Messwerten lässt sich somit eine Suchzeit von
 \begin{align*}
-  N_0 &= \input{build/N_0_val.tex},\\
-  \lambda &= \input{build/lambd_val.tex},\\
-  U_0 &= \input{build/U_val.tex}
+  T_s &= \input{build/T_such.tex}
 \end{align*}
-bestimmt.
+abschätzen.
+Der Fehler wird hierbei über den zeitlichen Abstand von zwei Kanälen abgeschätzt.
+
+Mit diesen Vorgaben lassen sich die Parameter zu
+\begin{align}
+  \label{params}
+  N_0 &= \input{build/N_0_val_gew.tex},\\
+  \lambda &= \input{build/lambd_val_gew.tex},\\
+  U_0 &= \input{build/U_val_gew.tex}
+\end{align}
+bestimmen.
 Dabei entspricht $U_0$ dem im Aufbau beschriebenen Untergrund, welcher durch direkt hintereinander auftreffende Myonen ausgelöst wird.
+Die Fehler entsprechen dabei den Abschätzungen durch die \emph{curve\_fit}-Funktion.
 Die Fitfunktion ist, zusammen mit den Messwerten, in Abbildung \ref{plot:punkte_err_fit} dargestellt.
 \begin{figure}
   \centering
-  \includegraphics[height=8cm]{build/expfit.pdf}
-  \caption{Aufgenommene Messwerte der Individuallebensdauern mit Fehlern und Fit der Funktion \ref{exp}.}
+  \includegraphics[height=8cm]{build/expfit_gew.pdf}
+  \caption{Aufgenommene Messwerte der Individuallebensdauern mit Fehlern und Fit der Funktion \eqref{exp}.}
   \label{plot:punkte_err_fit}
+\end{figure}
+Zusätzlich ist in Abbildung \ref{plot:punkte_err_fit_robert} die Fitfunktion mit den Messwerten unter Nutzung einer logarithmischen Skala dargestellt.
+Um dies zu ermöglichen, werden bei dieser Darstellung die Kanäle mit nur einem oder gar keinen Impulseintrag nicht angegeben.
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{build/expfit_gew_robert.pdf}
+  \caption{Aufgenommene Messwerte der Individuallebensdauern mit Fehlern und Fit der Funktion \eqref{exp} mit logarithmischer Skala. Kanäle mit keinem oder nur einem Impuls werden nicht dargestellt.}
+  \label{plot:punkte_err_fit_robert}
 \end{figure}
 Die mittlere Lebensdauer errechnet sich nach Formel \eqref{eqn:tau} zu
 \begin{align}
   \label{eqn:result}
-  \tau = \frac{1}{\lambda} = \input{tau.tex}.
+  \tau = \frac{1}{\lambda} = \input{tau_gew.tex}.
 \end{align}
-Zu Darstellungszwecken sind in Abbildung \ref{plot:punkte_sigma} die Messpunkte ohne Fehlerbalken und das $2\sigma$-Intervall dargestellt.
-Dabei wird das $2\sigma$-Intervall durch eine Monte-Carlo-Simulation mit $\num{10000}$-Konfigurationen mithilfe der von \emph{curvefit} berechneten Kovarianzmatrix bestimmt.
+
+Zu Darstellungszwecken sind in Abbildung \ref{plot:punkte_sigma} die Messpunkte ohne Fehlerbalken und eine Abschätzung für das $2\sigma$-Intervall dargestellt.
+Die Schätzung für das $2\sigma$-Intervall wird dabei mithilfe von Fehlerfortpflanzung aus den von \emph{curve\_fit} geschätzen Fehlern bestimmt.
 
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{build/expfit_sigma.pdf}
-  \caption{Aufgenommene Messwerte der Individuallebensdauern und Funktion \ref{exp} mit den Parametern \ref{params} mit $2\sigma$-Intervall.}
+  \caption{Aufgenommene Messwerte der Individuallebensdauern und Funktion \eqref{exp} mit den Parametern \eqref{params} sowie Schätzung für das $2\sigma$-Intervall.}
   \label{plot:punkte_sigma}
 \end{figure}
-
 
 \subsection{Theoretische Berechnung des Untergrundes}
 
 Der Untergrund wird dominiert durch ein zweites, direkt nach dem ersten auftretendes Myon, welches den Stopimpuls auslöst.
 Dieser Störeffekt kann ausgerechnet werden, da die Ankunft der Myonen im Tank poissonverteilt ist.
-Es werden $N_\text{ges} = \num{2882767}$ Myonen während der totalen Messzeit \footnote{Dieser zeitliche Wert entspricht der wahren Messzeit abzüglich der Totzeit. Während der Totzeit konnten keine Myonen detektiert werden.} von $T_\text{ges} = \SI{160147}{\second}$ gemessen.
-Während der Suchzeit $T_\text{S} = \SI{15}{\micro\second}$ kommen demnach durchschnittlich
+Es werden $N_\text{ges} = \input{build/N_ges.tex}$ Myonen während der totalen Messzeit \footnote{Dieser zeitliche Wert entspricht der wahren Messzeit abzüglich der Totzeit. Während der Totzeit konnten keine Myonen detektiert werden.} von $T_\text{ges} = \SI{160147}{\second}$ gemessen.
+Der Fehler in der Messzeit $T_\text{ges}$ kann vernachlässigt werden.
+Während der Suchzeit $T_\text{S} = \input{build/T_such.tex}$ kommen demnach durchschnittlich
 \begin{align*}
   \lambda_{pv} = \frac{N_\text{ges}}{T_\text{ges}} T_\text{S}
 \end{align*}
@@ -80,8 +105,9 @@ Die Wahrscheinlichkeit, dass genau ein zweites Myon während der Suchzeit den Ta
   P = \lambda_{pv} \exp{\left(-\lambda_{pv}\right)}.
 \end{align*}
 Multipliziert mit der gesamten Anzahl an gemessenen Myonen erhält man die Gesamtzahl der Myonen, welche einen Fehlimpuls auflösen.
-Da sich diese Anzahl gleichmäßig auf alle $\num{512}$ Kanäle aufteilt, ergibt sich ein Untergrund von
+Dieser Untergrund teilt sich auf $\num{492}$ Kanäle, d.h. alle Kanäle, in denen gemessen werden kann, auf.
+Hieraus ergibt sich ein Untergrund von
 \begin{align*}
   U_{\text{Theorie}} = \input{build/U_theo.tex}.
 \end{align*}
-Dieser Wert ist konsistent mit dem Untergrund $U_0$ aus dem Fit.
+%Dieser Wert ist konsistent mit dem Untergrund $U_0$ aus dem Fit.

@@ -11,6 +11,9 @@ from uncertainties.unumpy import (
     nominal_values as noms,
     std_devs as stds,
 )
+
+from uncertainties.unumpy import exp
+
 ################################################ Finish importing system libraries #################################################
 
 ################################################ Adding subfolder to system's path #################################################
@@ -211,6 +214,15 @@ def tau(kanal):
 tau_x = tau(np.linspace(0,511,512)) # Zu den Kanälen 0,1,...,511 stehen in diesem Array nun die Lebensdauern
 kanal_plot = np.linspace(0,511,512)
 
+
+print("Abgeschnitten bei: ", tau_x[511-16])
+
+T_such = ufloat( tau_x[511-16], tau_x[511]-tau_x[510])
+
+write('build/T_such.tex', make_SI(T_such * 10**6, r'\micro\second', figures=1))
+
+
+
 plt.xlabel('Kanal')
 plt.ylabel(r'$\tau \,/\, \si{\micro\second}$')
 
@@ -224,8 +236,8 @@ plt.clf()
 m_val = ufloat(params_eich[0], errors_eich[0])
 b_val = ufloat(params_eich[1], errors_eich[1])
 
-write('build/m_val.tex', make_SI(m_val * 10**6, r'\micro\second', figures=2))
-write('build/b_val.tex', make_SI(b_val * 10**6, r'\micro\second', figures=2))
+write('build/m_val.tex', make_SI(m_val * 10**6, r'\micro\second', figures=1))
+write('build/b_val.tex', make_SI(b_val * 10**6, r'\micro\second', figures=1))
 
 #### FITTE EXPONENTIALFUNKTION
 
@@ -233,35 +245,80 @@ def exp_dist(t, N_0, lambd, U):
     return N_0  * np.exp(-lambd * t) + U
     #fitten mit lambda extra funktioniert nicht. buh.
 
-params_fit, covariance_matrix_fit = curve_fit(exp_dist, tau_x, data)
+
+## Lösche schlechte Werte
+tau_x_fit = tau_x[3:-16]
+data_fit = data[3:-16]
+tau_x_raus = np.append( tau_x[0:3], tau_x[-16:] )
+data_fit_raus = np.append( data[0:3], data[-16:] )
+
+
+params_fit_gew, covariance_matrix_fit_gew = curve_fit(exp_dist, tau_x_fit, data_fit, sigma = np.sqrt(data_fit)+1*(data_fit==0)) # Workaround für sigma: Bei allen Nullmessungen packe eine eins dazu, damit gewichteter Fit möglich ,  + 1*(data==0)
+errors_fit_gew = np.sqrt(np.diag(covariance_matrix_fit_gew))
+
+params_fit, covariance_matrix_fit = curve_fit(exp_dist, tau_x_fit, data_fit)
 errors_fit = np.sqrt(np.diag(covariance_matrix_fit))
-
-#plt.plot(tau_x, data, 'r.', label='Messdaten')
-
 
 
 
 ### Mister Monte-Carlo (presented by Super Mario Copy-Pasta)
 
+#x_plot_up = np.zeros(len(tau_x))
+#x_plot_down = np.zeros(len(tau_x))
+#a_mc = random.multivariate_normal(params_fit_gew, covariance_matrix_fit_gew, 10000)
+#
+#
+#for i, val in enumerate(tau_x):
+#    mc_values = []
+#
+#    for k in a_mc:
+#        mc_values.append(exp_dist(val, *k))
+#
+#    mc_mean = np.mean(mc_values)
+#    mc_std = np.std(mc_values)
+#
+#    x_plot_up[i] = mc_mean + 2*mc_std
+#    x_plot_down[i] = mc_mean - 2*mc_std
+
+### Mister Not-Monte-Carlo (presented by Super Mario Copy-Pasta)
+
+
+def exp_dist_unp(t, N_0, lambd, U):
+    return N_0  * exp(-lambd * t) + U
+
 x_plot_up = np.zeros(len(tau_x))
 x_plot_down = np.zeros(len(tau_x))
-a_mc = random.multivariate_normal(params_fit, covariance_matrix_fit, 10000)
 
+N_0_with_err = ufloat(params_fit_gew[0], errors_fit_gew[0])
+lambd_with_err = ufloat(params_fit_gew[1], errors_fit_gew[1])
+U_with_err = ufloat(params_fit_gew[2], errors_fit_gew[2])
 
 for i, val in enumerate(tau_x):
-    mc_values = []
 
-    for k in a_mc:
-        mc_values.append(exp_dist(val, *k))
+    tmp = exp_dist_unp(val, N_0_with_err, lambd_with_err, U_with_err)
 
-    mc_mean = np.mean(mc_values)
-    mc_std = np.std(mc_values)
+    x_plot_up[i] = tmp.n + 2*tmp.s
+    x_plot_down[i] = tmp.n - 2*tmp.s
 
-    x_plot_up[i] = mc_mean + 2*mc_std
-    x_plot_down[i] = mc_mean - 2*mc_std
+### Plot gewichtet
 
+plt.errorbar(tau_x_raus*10**6, data_fit_raus, fmt='r.', yerr=np.sqrt(data_fit_raus) , label='Messdaten nicht berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
+plt.errorbar(tau_x_fit*10**6, data_fit, fmt='k.', yerr=np.sqrt(data_fit) , label='Messdaten berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
 
-plt.errorbar(tau_x*10**6, data, fmt='k.', yerr=np.sqrt(data) , label='Messdaten',  linewidth=1,  markersize='1', capsize=1)
+plt.ylabel(r'$N$')
+plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
+
+plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit_gew)), 'b-', label='Fit')
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/expfit_gew.pdf')
+
+plt.clf()
+
+## Plot ungewichtet
+
+plt.errorbar(tau_x_raus*10**6, data_fit_raus, fmt='r.', yerr=np.sqrt(data_fit_raus) , label='Messdaten nicht berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
+plt.errorbar(tau_x_fit*10**6, data_fit, fmt='k.', yerr=np.sqrt(data_fit) , label='Messdaten berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
 
 plt.ylabel(r'$N$')
 plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
@@ -273,6 +330,46 @@ plt.savefig('build/expfit.pdf')
 
 plt.clf()
 
+
+
+
+## Plot gewichtet (Robert Edition)
+
+#plt.errorbar(tau_x_raus[data_fit_raus>1]*10**6, data_fit_raus[data_fit_raus>1], fmt='r.', yerr=np.sqrt(data_fit_raus[data_fit_raus>1]),  linewidth=1,  markersize='1', capsize=1 , label='Messdaten nicht berücksichtigt')
+plt.errorbar(tau_x_fit[data_fit>1]*10**6, data_fit[data_fit>1], fmt='k.', yerr=np.sqrt(data_fit[data_fit>1]) ,  linewidth=1,  markersize='1', capsize=1, label='Messdaten berücksichtigt')
+
+plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit_gew)), 'b-', label='Fit')
+
+plt.ylabel(r'$N$')
+plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
+
+plt.yscale('log')
+plt.legend(loc='best')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/expfit_gew_robert.pdf')
+
+plt.clf()
+
+## Plot ungewichtet (Robert Edition)
+
+#plt.errorbar(tau_x_raus[data_fit_raus>1]*10**6, data_fit_raus[data_fit_raus>1], fmt='r.', yerr=np.sqrt(data_fit_raus[data_fit_raus>1]) , label='Messdaten nicht berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
+plt.errorbar(tau_x_fit[data_fit>1]*10**6, data_fit[data_fit>1], fmt='k.', yerr=np.sqrt(data_fit[data_fit>1]) , label='Messdaten berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
+
+
+plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit)), 'b-', label='Fit')
+
+plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
+plt.legend(loc='best')
+plt.yscale('log')
+plt.ylabel(r'$N$')
+plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+plt.savefig('build/expfit_robert.pdf')
+
+plt.clf()
+
+
+
+### werte ungewichtet
 N_0_val = ufloat(params_fit[0], errors_fit[0])
 lambd_val = ufloat(params_fit[1], errors_fit[1])
 U_val = ufloat(params_fit[2], errors_fit[2])
@@ -285,11 +382,25 @@ tau = 1/lambd_val
 
 write('build/tau.tex', make_SI(tau*10**6, r'\micro\second', figures=1))
 
+### werte gewichtet
+
+N_0_val_gew = ufloat(params_fit_gew[0], errors_fit_gew[0])
+lambd_val_gew = ufloat(params_fit_gew[1], errors_fit_gew[1])
+U_val_gew = ufloat(params_fit_gew[2], errors_fit_gew[2])
+
+write('build/N_0_val_gew.tex', make_SI(N_0_val_gew, r'', figures=2))
+write('build/lambd_val_gew.tex', make_SI(lambd_val_gew / (10**6), r'\per\micro\second', figures=2))
+write('build/U_val_gew.tex', make_SI(U_val_gew, r'', figures=2))
+
+tau_gew = 1/lambd_val_gew
+
+write('build/tau_gew.tex', make_SI(tau_gew*10**6, r'\micro\second', figures=1))
+
 
 tau_lit = ufloat(2.196*10**(-6), 0.000002*10**(-6))
 write('build/tau_lit.tex', make_SI(tau_lit*10**6, r'\micro\second', figures=1))
 
-abw = np.abs(tau_lit - tau)/tau_lit * 100
+abw = np.abs(tau_lit - tau_gew)/tau_lit * 100
 
 write('build/tau_lit_abw.tex', make_SI(abw.n, r'\percent', figures=1))
 
@@ -301,7 +412,8 @@ print(tau)
 
 ### Nur Sigmaintervall und Punkte
 
-plt.plot(tau_x*10**6, data, 'k.', label='Messdaten', markersize=1)
+plt.plot(tau_x_raus*10**6, data_fit_raus, 'r.', label='Messdaten nicht berücksichtigt', markersize=1)
+plt.plot(tau_x_fit*10**6, data_fit, 'k.', label='Messdaten berücksichtigt', markersize=1)
 plt.fill_between(tau_x*10**6, x_plot_up,  x_plot_down, interpolate=True, alpha=0.7, color='b',linewidth=0.0, zorder=50, label = r'$2\sigma-\text{Intervall}$') #Fehlerdings
 plt.ylabel(r'$N$')
 plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
@@ -311,18 +423,19 @@ plt.savefig('build/expfit_sigma.pdf')
 
 ### Bestimmung Untergrund (ist das richtig?!!?)
 
-N_ges = 2882767
+N_ges = ufloat(2882767, np.sqrt(2882767))
+write('build/N_ges.tex', make_SI(N_ges, r'', figures=1))
 t_ges = 160147
-T_such = 15*10**(-6) #suchzeit
+#T_such = 15*10**(-6) #suchzeit siehe oben
 
 mu_mittel = N_ges/t_ges * T_such # so viele Myonen durchqueren den Tank im Mittel in der Suchzeit
 # mu_mittel ist dann auch der Erwartungswert der Poissionverteilung
 
-mu_folgend = mu_mittel * np.exp(-mu_mittel)
+mu_folgend = mu_mittel * exp(-mu_mittel)
 #poissionverteilung mit lambda = mu_mittel und n=1
 
 mu_gesamt_fehl = mu_folgend * N_ges
 
-U_theo = mu_gesamt_fehl/512 # aufgeteilt auf 512 Kanäle
+U_theo = mu_gesamt_fehl/(512-3-17) # aufgeteilt auf 512 Kanäle
 
 write('build/U_theo.tex', make_SI(U_theo, r'', figures=1))
