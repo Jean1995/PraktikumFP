@@ -8,15 +8,16 @@ Dies wird mit einem Oszilloskop überprüft.
 Parallel zum Oszilloskop wird ein $\SI{50}{\ohm}$-Widerstand zugeschaltet, um Reflexionen zu vermeiden.\\
 Als Nächstes wird überprüft, ob die Diskriminatoren die Impulse aus dem jeweiligen SEV in Impulse einheitlicher Höhe und Breite umwandelt.
 Mithilfe eines Zählwerkes werden die Schwellen der Diskriminatoren so eingestellt, dass sie beide etwa $20-40$ Impulse pro Sekunde durchlassen.\\
-Danach wird die Koinzidenz abgestimmt, indem an ihrem Ausgang ein Zählwerk angeschlossen wird.
+Danach wird die Koinzidenz überprüft, indem an ihrem Ausgang ein Zählwerk angeschlossen wird.
 Die Verzögerungen vor den Diskriminatoren und die Breiten der Impulse werden nun so eingestellt, dass die maximale Anzahl an Impulsen pro Sekunde von der Koinzidenz weitergeleitet wird.
 Diese Verzögerungszeit wird für spätere Rechnungen notiert.
 Mit Zählwerken wird überprüft, ob die Koinzidenz wirksam das Rauschen unterdrückt.
 Ist dies nicht effektiv der Fall, werden die Diskriminatorschwellen erniedrigt, um mehr Signale durchzulassen.\\
 Danach wird die Suchzeit der monostabilen Kippstufe mithilfe des Oszilloskops eingestellt.
-Diese sollte groß gegenüber der Lebenszeit eines Myons, aber klein gegen die Zeitspanne sein, in der im Mittel ein zweites Myon den Tank durchquert.\\
+Diese sollte groß gegenüber der Lebenszeit eines Myons (wenige $\si{\micro\second}$), aber viel kleiner gegen die Zeitspanne sein, in der im Mittel ein zweites Myon den Tank durchquert (im Bereich $\SI{10e-2}{\second}$).
+Daher sollte sie im Bereich zwischen $\SI{10}{\micro\second}$ und $\SI{20}{\micro\second}$ liegen.\\
 Ist die Suchzeit eingestellt, wird der Zeitmessbereich des TAC einjustiert.
-Dieser sollte geringfügig kleiner sein als die Suchzeit.
+Idealerweise sollte dieser der Suchzeit entsprechen, sollte hier aber geringfügig größer gewählt werden, damit der TAC den Stoppimpuls im schlimmsten Fall noch aufnehmen kann.
 Die Funktionsweise der Schaltung wird dann geprüft, indem nur der Doppelimpulsgenerator an den Eingang der Koinzidenz geschaltet wird.
 Am Ausgang des TAC werden dann Impulse mit einer Höhe proportional zum eingestellten Abstand der Doppelimpulse zu sehen sein.
 Die Impulse des TAC können über den Vielkanalanalysator am Rechner eingesehen werden.
@@ -24,5 +25,5 @@ Wenn diese der Länge nach geordnet werden, wird, bevor die eigentliche Messung 
 Dabei werden Impulse verschiedener über den Doppelimpulsgenerator fest definierter Abstände aufgenommen, sodass einzusehen ist, welcher Kanal für welchen Zeitabstand steht.\\
 Sind alle Justierungen getroffen, kann mit der Messung begonnen werden.
 Die Diskriminatoren werden wieder zur Koinzidenz geschaltet und der Doppelimpulsgenerator abgeklemmt.
-Das Programm zum Aufzeichnen der Impulse wird gleichzeitig mit dem Startimpuls-Zähler gestartet.
+Das Programm zum Aufzeichnen der Impulse wird gleichzeitig mit dem Start- und dem Stoppimpuls-Zähler gestartet.
 Nach etwa zwei Tagen wird die Messung beendet.
