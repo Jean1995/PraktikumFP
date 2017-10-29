@@ -1,9 +1,18 @@
 \section{Diskussion}
 \label{sec:Diskussion}
 
+Die Auflösungszeit der Koinzidenz beträgt
+\begin{align*}
+  \Delta t_\text{K} = \SI{19}{\nano\second}.
+\end{align*}
+Dieser Wert ist eine sehr grobe Abschätzung aus der Abbildung \ref{plot:verzoegerung}.
+Für eine genauere Bestimmung hätten mehr Werte im Bereich größerer Verzögerungen aufgenommen werden sollen.
+Dadurch, dass zusätzlich die Breiten der Diskriminatorimpulse bei den Messergebnissen fehlen, kann der Wert von $\Delta t_\text{K}$ auch nicht in Verbindung der Breiten gesetzt werden.
+Daher können hierzu keine Aussagen getroffen werden.
+
 Die in diesem Versuch ermittelte mittlere Lebensdauer beträgt laut \eqref{eqn:result}
 \begin{align*}
-  \tau = \input{tau.tex}.
+  \tau = \input{tau_gew.tex}.
 \end{align*}
 In der Literatur \cite{Agashe:2014kda} ist die mittlere Lebensdauer eines (gelandenen) Myons als
 \begin{align*}
@@ -14,22 +23,27 @@ Dies entspricht einer Abweichung des Messwertes zum Theoriewert von
 \begin{align*}
   \Delta \tau = \input{tau_lit_abw.tex}.
 \end{align*}
-Der Theoriewert liegt somit innerhalb der $2\sigma$-Umgebung des berechneten Messergebnisses.\\
-Als Fehlerquelle ist zunächst zu nennen, dass es sich bei dem Zerfall der Myonen um einen statistischen Prozess handelt.
+%Der Theoriewert liegt somit innerhalb der $2\sigma$-Umgebung des berechneten Messergebnisses.\\
+Als Fehlerquelle ist zu nennen, dass es sich bei dem Zerfall der Myonen um einen statistischen Prozess handelt.
 Trotz einer relativ langen Messdauer hat sich noch keine eindeutige Exponentialverteilung eingestellt und die statistischen Abweichungen in den Messraten überwiegen.
-Dieses Problem ließe sich durch eine deutlich größere Messzeit beheben.
-Ein weiterer Fehler ist, dass negativ geladene Myonen von Atomkernen unter Bildung von myonischen Atomen eingefangen werden können.
-Dieser Effekt verfälscht die Messergebnisse.\\
+Dies ist an Abbildung \ref{plot:punkte_err_fit_robert} zu erkennen, da der Fit viele Fehlerbalken nicht schneidet.
+Dieses Problem ließe sich durch eine deutlich größere Messzeit beheben.\\
+%Ein weiterer Fehler ist, dass negativ geladene Myonen von Atomkernen unter Bildung von myonischen Atomen eingefangen werden können.
+%Dieser Effekt verfälscht die Messergebnisse.\\
 
 Zusätzlich wird am Fit deutlich, dass die Fitfunktion insbesondere für geringe Lebensdauern die hohen Zählraten nicht optimal trifft.
-Eine bessere Kanalauflösung im Bereich geringerer Lebensdauer oder eine größere Anzahl an Messwerten könnte einen besseren Fit ermöglichen.
-Des Weiteren kann trotz Nutzung der Diskriminatoren und Koinzidenz nicht vollständig ausgeschlossen werden, dass Fehlmessungen durch thermische Emission auftritt oder wahre Ereignisse verworfen werden.
+Es steht generell offen, ob die beiden großen Messwerte durch irgendeinen Fehler ausgelöst wurden.
+Sie wurden berücksichtigt, da sie den Trend der Theorie unterstützen.
+Eine bessere Kanalauflösung im Bereich geringerer Lebensdauer oder eine größere Anzahl an Messwerten könnte einen besseren Fit bzw. einen besseren Einblick im Bereich kleiner Lebensdauern ermöglichen.
+Des Weiteren kann trotz Nutzung der Diskriminatoren und Koinzidenz nicht vollständig ausgeschlossen werden, dass Fehlmessungen durch thermische Emission auftritt. %oder wahre Ereignisse verworfen werden.
 Ein Hinweis darauf, dass dies geschieht, ist, dass der durch den Fit bestimmte Untergrund
 \begin{align*}
-  U_0 = \input{build/U_val.tex}
+  U_0 = \input{build/U_val_gew.tex}
 \end{align*}
-größer ist, als der theoretisch bestimmte, welcher die thermische Emission von Elektronen nicht berücksichtigt,
+wesentlich kleiner ist, als der theoretisch bestimmte, welcher die thermische Emission von Elektronen durch die gemessenen Startsignale berücksichtigt,
 \begin{align*}
   U_{\text{Theorie}} = \input{build/U_theo.tex}.
 \end{align*}
-Der Fehler des durch den Fit bestimmten Wertes ist jedoch so groß, dass dies kein aussagekräftiges Argument ist.
+Demnach konnten die Fehlimpulse der thermischen Emission durch die Koinzidenz und die Diskriminatoren nicht wirksam herausgefiltert werden.
+Der große Theoriewert könnte auch dadurch resultieren, dass negativ geladene Myonen von Atomkernen unter Bildung von myonischen Atomen eingefangen werden können und daher auch ein Start- aber kein Stoppimpuls entsteht.
+%Der Fehler des durch den Fit bestimmten Wertes ist jedoch so groß, dass dies kein aussagekräftiges Argument ist.

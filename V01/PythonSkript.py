@@ -180,6 +180,7 @@ t_vz1  = np.array([0  , 4  , 8  , 12 , 13 , 14 , 15 , 16 , 20 , 24 , 28 ])
 rate  = np.array([151, 180, 175, 159, 179, 182, 189, 205, 188, 188, 158])
 
 
+
 #def g(x, sigma_0, sigma_1):
 #    return sigma_0 * np.exp(-sigma_1*(x-393)**2)
 #
