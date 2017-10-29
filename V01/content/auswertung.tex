@@ -1,6 +1,35 @@
 \section{Auswertung}
 \label{sec:Auswertung}
 
+\subsection{Bestimmung der besten Verzögerung und Auflösungszeit}
+
+Zur Bestimmung der besten Verzögerungszeit wird der rechte SEV um $\SI{10}{\nano\second}$ verzögert.
+Dies wird im Folgenden als Nullpunkt gesetzt.
+Es werden für verschiedene Verzögerungszeiten $t_\text{VZ}$ des linken SEV $\SI{20}{\second}$ lang die aus der Koinzidenz kommenden Impulse gezählt.
+Das Ergebnis ist in Abbildung \ref{plot:verzoegerung} einzusehen.
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{build/verzoegerung.pdf}
+  \caption{Die gemessenen Impulse über $\SI{20}{\second}$ in Abhängigkeit von der Verzögerung $t_\text{VZ}$ am linken SEV. Bei negativen Verzögerungen wird die Verzögerung des rechten SEV verkleinert.}
+  \label{plot:verzoegerung}
+\end{figure}
+Das Maximum befindet sich demnach bei einer Verzögerungszeit von etwa
+\begin{align*}
+  t_{\text{VZ}} = \SI{0}{\second}
+\end{align*}
+am linken SEV und demnach wird nur der rechte SEV mit einer Zeit von
+\begin{align*}
+  T_{\text{VZ}} = \SI{10}{\nano\second}
+\end{align*}
+verzögert.
+Aufgrund der niedrigen Anzahl an notierten Messwerten kann die Auflösungszeit $\Delta t_\text{K}$, welche der Halbwertsbreite der Kurve entspricht nur sehr grob abgeschätzt werden.
+Diese wird auf etwa
+\begin{align*}
+  \Delta t_\text{K} = \SI{19}{\nano\second}
+\end{align*}
+geschätzt.
+Dies ist die Zeit, die die untere Schranke bildet, in der zwei Impulse unterschieden werden können.
+Demnach können keine Lebensdauern gemessen werden, die kleiner sind als die Auflösungszeit $\Delta t_\text{K}$.
 
 \subsection{Kalibration des Vielkanalanalysators}
 
@@ -39,11 +68,14 @@ Der Fehler des Messwertes eines Kanals entspricht, da die Zählrate poissonverte
 Um diese Fehler zu berücksichtigen, wird ein gewichteter Fit durchgeführt.
 Hierbei werden die einzelnen Messwerte mit der Inverse ihres Fehlers gewichtet.\\
 Da in den ersten drei Kanälen keine Impulse gemessen wurden, werden diese Messwerte nicht beim Fit berücksichtigt.
-Zusätzlich befinden sich in den letzten $\num{17}$ Kanälen keine Impulse, sodass diese Messwerte ebenfalls nicht berücksichtigt werden.
-Dies liegt daran, dass die monostabile Kippstufe eine feste Suchzeit $T_s$ besitzt und längere Zerfallszeiten nicht gemessen werden können.
+Der Grund dafür, dass diese kleinen Zeiten nicht gemessen wurden, liegt anschaulich in dem Versuchsaufbau.
+Durch die Verzögerung vor der monostabilen Kippstufe von $\SI{30}{\nano\second}$ kann ein zweiter Impuls innerhalb von $\SI{30}{\nano\second}$ keinen Stoppimpuls auslösen.
+Der dritte Kanal entspricht etwa $\SI{30}{\nano\second}$.
+Zusätzlich zu den ersten drei Kanälen befinden sich in den letzten $\num{17}$ Kanälen auch keine Impulse, sodass diese Messwerte ebenfalls nicht berücksichtigt werden.
+Dies liegt daran, dass die monostabile Kippstufe eine feste Suchzeit $T_\text{S}$ besitzt und längere Zerfallszeiten nicht gemessen werden können.
 Aus den Messwerten lässt sich somit eine Suchzeit von
 \begin{align*}
-  T_s &= \input{build/T_such.tex}
+  T_\text{S} &= \input{build/T_such.tex}
 \end{align*}
 abschätzen.
 Der Fehler wird hierbei über den zeitlichen Abstand von zwei Kanälen abgeschätzt.
@@ -91,7 +123,7 @@ Die Schätzung für das $2\sigma$-Intervall wird dabei mithilfe von Fehlerfortpf
 
 \subsection{Theoretische Berechnung des Untergrundes}
 
-Der Untergrund wird dominiert durch ein zweites, direkt nach dem ersten auftretendes Myon, welches den Stopimpuls auslöst.
+Der Untergrund wird dominiert durch ein zweites, direkt nach dem ersten auftretendes Myon, welches den Stoppimpuls auslöst.
 Dieser Störeffekt kann ausgerechnet werden, da die Ankunft der Myonen im Tank poissonverteilt ist.
 Es werden $N_\text{ges} = \input{build/N_ges.tex}$ Myonen während der totalen Messzeit \footnote{Dieser zeitliche Wert entspricht der wahren Messzeit abzüglich der Totzeit. Während der Totzeit konnten keine Myonen detektiert werden.} von $T_\text{ges} = \SI{160147}{\second}$ gemessen.
 Der Fehler in der Messzeit $T_\text{ges}$ kann vernachlässigt werden.

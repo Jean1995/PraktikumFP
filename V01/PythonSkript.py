@@ -180,14 +180,18 @@ t_vz1  = np.array([0  , 4  , 8  , 12 , 13 , 14 , 15 , 16 , 20 , 24 , 28 ])
 rate  = np.array([151, 180, 175, 159, 179, 182, 189, 205, 188, 188, 158])
 
 
-def g(x, sigma_0, sigma_1):
-    return sigma_0 * np.exp(-sigma_1*(x-393)**2)
+#def g(x, sigma_0, sigma_1):
+#    return sigma_0 * np.exp(-sigma_1*(x-393)**2)
+#
+#params_eich, covariance_matrix_eich = curve_fit(g, t_vz, rate2)
+#t_lin = np.linspace(-5,30,1000)
 
-params_eich, covariance_matrix_eich = curve_fit(g, t_vz, rate2)
-t_lin = np.linspace(-5,30,1000)
-
-plt.plot(t_lin, g(t_lin,*noms(params_eich)),  'b-', label='Fit' )
+#plt.plot(t_lin, g(t_lin,*noms(params_eich)),  'b-', label='Fit' )
 plt.plot(t_vz, rate2 , 'r.', label='Messdaten')
+plt.xlabel(r'$t_\text{VZ} \,/\, \si{\nano\second}$')
+plt.ylabel(r'Impulse')
+plt.xlim(-4.5,30)
+plt.ylim(0,405)
 plt.legend(loc='best')
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
 plt.savefig('build/verzoegerung.pdf')
@@ -244,6 +248,10 @@ write('build/b_val.tex', make_SI(b_val * 10**6, r'\micro\second', figures=1))
 def exp_dist(t, N_0, lambd, U):
     return N_0  * np.exp(-lambd * t) + U
     #fitten mit lambda extra funktioniert nicht. buh.
+
+## Gebe Lebensdauern der ersten drei Kanäle aus
+
+print("ersten drei Kanäle:", tau_x[0],tau_x[1],tau_x[2])
 
 
 ## Lösche schlechte Werte
