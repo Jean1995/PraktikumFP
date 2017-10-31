@@ -256,13 +256,14 @@ print("ersten drei Kanäle:", tau_x[0],tau_x[1],tau_x[2])
 
 
 ## Lösche schlechte Werte
-tau_x_fit = tau_x[3:-16]
+tau_x_fit = tau_x[3:-16] # 3 <-> 5?
 data_fit = data[3:-16]
 tau_x_raus = np.append( tau_x[0:3], tau_x[-16:] )
 data_fit_raus = np.append( data[0:3], data[-16:] )
 
 
-params_fit_gew, covariance_matrix_fit_gew = curve_fit(exp_dist, tau_x_fit, data_fit, sigma = np.sqrt(data_fit)+1*(data_fit==0)) # Workaround für sigma: Bei allen Nullmessungen packe eine eins dazu, damit gewichteter Fit möglich ,  + 1*(data==0)
+params_fit_gew, covariance_matrix_fit_gew = curve_fit(exp_dist, tau_x_fit, data_fit, sigma = np.sqrt(data_fit)+1*(data_fit==0)  ) # Workaround für sigma: Bei allen Nullmessungen packe eine eins dazu, damit gewichteter Fit möglich
+# Allternative hier: Gewichte mit "sigma = 1/sigma", d.h. Gewichte mit sqrt(N)
 errors_fit_gew = np.sqrt(np.diag(covariance_matrix_fit_gew))
 
 params_fit, covariance_matrix_fit = curve_fit(exp_dist, tau_x_fit, data_fit)
@@ -272,44 +273,45 @@ errors_fit = np.sqrt(np.diag(covariance_matrix_fit))
 
 ### Mister Monte-Carlo (presented by Super Mario Copy-Pasta)
 
-#x_plot_up = np.zeros(len(tau_x))
-#x_plot_down = np.zeros(len(tau_x))
-#a_mc = random.multivariate_normal(params_fit_gew, covariance_matrix_fit_gew, 10000)
-#
-#
-#for i, val in enumerate(tau_x):
-#    mc_values = []
-#
-#    for k in a_mc:
-#        mc_values.append(exp_dist(val, *k))
-#
-#    mc_mean = np.mean(mc_values)
-#    mc_std = np.std(mc_values)
-#
-#    x_plot_up[i] = mc_mean + 2*mc_std
-#    x_plot_down[i] = mc_mean - 2*mc_std
+x_plot_up = np.zeros(len(tau_x))
+x_plot_down = np.zeros(len(tau_x))
+a_mc = random.multivariate_normal(params_fit_gew, covariance_matrix_fit_gew, 10000)
+
+for i, val in enumerate(tau_x):
+    mc_values = []
+
+    for k in a_mc:
+        mc_values.append(exp_dist(val, *k))
+
+    mc_mean = np.mean(mc_values)
+    mc_std = np.std(mc_values)
+
+    x_plot_up[i] = mc_mean + 2*mc_std
+    x_plot_down[i] = mc_mean - 2*mc_std
+
+    ## Alternative Methode: Siehe Zeilen 295 bis 313
 
 ### Mister Not-Monte-Carlo (presented by Super Mario Copy-Pasta)
 
 
-def exp_dist_unp(t, N_0, lambd, U):
-    return N_0  * exp(-lambd * t) + U
-
-x_plot_up = np.zeros(len(tau_x))
-x_plot_down = np.zeros(len(tau_x))
-
-N_0_with_err = ufloat(params_fit_gew[0], errors_fit_gew[0])
-lambd_with_err = ufloat(params_fit_gew[1], errors_fit_gew[1])
-U_with_err = ufloat(params_fit_gew[2], errors_fit_gew[2])
-
-for i, val in enumerate(tau_x):
-
-    tmp = exp_dist_unp(val, N_0_with_err, lambd_with_err, U_with_err)
-
-    x_plot_up[i] = tmp.n + 2*tmp.s
-    x_plot_down[i] = tmp.n - 2*tmp.s
-
-### Plot gewichtet
+#def exp_dist_unp(t, N_0, lambd, U):
+#    return N_0  * exp(-lambd * t) + U
+#
+#x_plot_up = np.zeros(len(tau_x))
+#x_plot_down = np.zeros(len(tau_x))
+#
+#N_0_with_err = ufloat(params_fit_gew[0], errors_fit_gew[0])
+#lambd_with_err = ufloat(params_fit_gew[1], errors_fit_gew[1])
+#U_with_err = ufloat(params_fit_gew[2], errors_fit_gew[2])
+#
+#for i, val in enumerate(tau_x):
+#
+#    tmp = exp_dist_unp(val, N_0_with_err, lambd_with_err, U_with_err)
+#
+#    x_plot_up[i] = tmp.n + 2*tmp.s
+#    x_plot_down[i] = tmp.n - 2*tmp.s
+##
+#### Plot gewichtet
 
 plt.errorbar(tau_x_raus*10**6, data_fit_raus, fmt='r.', yerr=np.sqrt(data_fit_raus) , label='Messdaten nicht berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
 plt.errorbar(tau_x_fit*10**6, data_fit, fmt='k.', yerr=np.sqrt(data_fit) , label='Messdaten berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
