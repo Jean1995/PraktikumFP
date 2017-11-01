@@ -64,9 +64,13 @@ Zum Fitten der Zerfallsrate wird wieder \emph{curve\_fit} mit der Fitfunktion
   N(t) = N_0 \exp{(-\lambda t)} + U_0 \label{exp}
 \end{equation}
 verwendet.
-Der Fehler des Messwertes eines Kanals entspricht, da die Zählrate poissonverteilt ist, der Wurzel der gemessenen Zählrate. %but wryyyyyy?
+Da die Zählrate poissonverteilt ist, entspricht der Fehler des Messwertes eines Kanals der Wurzel der gemessenen Zählrate.
+%Der Fehler des Messwertes eines Kanals entspricht, da die Zählrate poissonverteilt ist, der Wurzel der gemessenen Zählrate. %but wryyyyyy?
 Um diese Fehler zu berücksichtigen, wird ein gewichteter Fit durchgeführt.
-Hierbei werden die einzelnen Messwerte mit der Inverse ihres Fehlers gewichtet.\\
+Hierbei werden die einzelnen Messwerte mit ihrem Fehler $\sigma$ gewichtet.
+Dadurch wird sichergestellt, dass Kanäle mit einer hohen Statistik mit einem höheren Gewicht in den Fit eingehen.
+Damit die Einträge mit $\num{0}$ ebenfalls berücksichtigt werden, werden diese abweichend davon mit dem Faktor $\num{1}$ gewichtet.\\
+%Hierbei werden die einzelnen Messwerte mit der Inverse ihres Fehlers gewichtet.\\
 Da in den ersten drei Kanälen keine Impulse gemessen wurden, werden diese Messwerte nicht beim Fit berücksichtigt.
 Der Grund dafür, dass diese kleinen Zeiten nicht gemessen wurden, liegt anschaulich in dem Versuchsaufbau.
 Durch die Verzögerung vor der monostabilen Kippstufe von $\SI{30}{\nano\second}$ kann ein zweiter Impuls innerhalb von $\SI{30}{\nano\second}$ keinen Stoppimpuls auslösen.
@@ -80,21 +84,30 @@ Aus den Messwerten lässt sich somit eine Suchzeit von
 abschätzen.
 Der Fehler wird hierbei über den zeitlichen Abstand von zwei Kanälen abgeschätzt.
 
-Mit diesen Vorgaben lassen sich die Parameter zu
+Wird der Fit mit diesen Vorgaben durchgeführt, ergibt sich der in Abbildung \ref{plot:punkte_err_fit_schlecht} dargestellte Fit.
+\begin{figure}
+  \centering
+  \includegraphics[height=8cm]{build/expfit_gew_schlecht.pdf}
+  \caption{Aufgenommene Messwerte der Individuallebensdauern mit Fehlern und Fit der Funktion \eqref{exp}. Die Messwerte in den ersten beiden nichtleeren Kanälen werden berücksichtigt.}
+  \label{plot:punkte_err_fit_schlecht}
+\end{figure}
+Es fällt direkt auf, dass der Fit die Messwerte nicht gut beschreibt.
+Dies liegt daran, dass die beiden Messwerte mit den meisten Impulsen am stärksten gewichtet und somit die anderen Kanäle mit deutlich niedrigeren Einträgen vernachlässigt werden.
+Da der Fit somit keine Aussagekraft hat, wird der Fit ohne die beiden ersten nichtleeren Kanäle wiederholt.
+Hierbei ergeben sich die Fitparameter zu
 \begin{align}
   \label{params}
   N_0 &= \input{build/N_0_val_gew.tex},\\
   \lambda &= \input{build/lambd_val_gew.tex},\\
-  U_0 &= \input{build/U_val_gew.tex}
+  U_0 &= \input{build/U_val_gew.tex}.
 \end{align}
-bestimmen.
 Dabei entspricht $U_0$ dem im Aufbau beschriebenen Untergrund, welcher durch direkt hintereinander auftreffende Myonen ausgelöst wird.
 Die Fehler entsprechen dabei den Abschätzungen durch die \emph{curve\_fit}-Funktion.
 Die Fitfunktion ist, zusammen mit den Messwerten, in Abbildung \ref{plot:punkte_err_fit} dargestellt.
 \begin{figure}
   \centering
   \includegraphics[height=8cm]{build/expfit_gew.pdf}
-  \caption{Aufgenommene Messwerte der Individuallebensdauern mit Fehlern und Fit der Funktion \eqref{exp}.}
+  \caption{Aufgenommene Messwerte der Individuallebensdauern mit Fehlern und Fit der Funktion \eqref{exp}. Die Messwerte in den ersten beiden nichtleeren Kanälen werden nicht berücksichtigt.}
   \label{plot:punkte_err_fit}
 \end{figure}
 Zusätzlich ist in Abbildung \ref{plot:punkte_err_fit_robert} die Fitfunktion mit den Messwerten unter Nutzung einer logarithmischen Skala dargestellt.

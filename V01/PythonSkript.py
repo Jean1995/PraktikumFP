@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.constants as const
 import uncertainties.unumpy as unp
+from uncertainties import correlated_values
 from uncertainties import ufloat
 from uncertainties.unumpy import (
     nominal_values as noms,
@@ -170,6 +171,7 @@ plt.set_cmap('Set2')
 ### MESSDATEN
 
 data = np.array([       0,   0,   0, 244, 324,  86,  87,  92,  71,  84,  54,  83,  67,  71,  94,  92,  69,  88,  73,  62,  67,  79,  92,  64,  74,  68,  68,  76,  54,  75,  72,  64,  64,  58,  55,  68,  64,  64,  73,  62,  49,  48,  57,  60,  46,  48,  62,  44,  42,  54,  50,  50,  48,  52,  41,  52,  40,  55,  40,  46,  52,  50,  52,  44,  51,  33,  40,  67,  51,  43,  38,  41,  36,  39,  52,  37,  34,  47,  49,  42,  66,  30,  39,  44,  47,  41,  31,  36,  30,  28,  43,  35,  41,  30,  31,  44,  28,  19,  36,  30,  27,  43,  39,  41,  28,  29,  26,  23,  32,  13,  30,  35,  24,  32,  21,  23,  18,  21,  27,  23,  23,  24,  27,  27,  24,  21,  27,  28,  32,  24,  26,  29,  23,  22,  21,  21,  24,  19,  26,  25,  16,  18,  27,  17,  19,  16,  21,  21,  18,  14,  14,  14,  19,  15,  20,  22,  16,   9,  18,  20,  29,  14,  15,  16,  19,  23,  17,  17,  10,  19,  14,  12,  16,  20,  16,  15,  15,  17,  18,  13,  12,  15,  10,  14,  11,  11,  16,  13,   9,   5,  14,  14,  18,  13,   9,  14,  18,   3,  14,   3,  15,  12,  12,  16,   3,   9,  17,   5,   7,  14,  11,   7,  15,  13,  15,  11,  10,  10,  11,  10,   7,  11,   7,  12,   9,   7,   7,  10,   5,   5,   8,   8,   6,  11,  10,  10,   9,  18,  11,   9,   6,  15,   9,   5,   9,  10,   6,   7,   8,   6,  11,   9,  10,   6,  11,   8,   5,   8,   9,  12,   6,   4,   5,   5,   5,   6,  10,  12,   4,   7,   9,   6,   5,  11,   7,   7,   6,   4,   2,  10,   8,   3,   7,   9,   3,   4,   6,   4,   6,   7,   4,   6,   8,   8,   7,   4,   3,   2,   6,   4,   8,   5,   3,   3,   5,   7,   2,   5,   6,   2,   5,   8,   4,   4,   4,   6,   2,   6,   6,   2,   5,   1,   6,   2,   4,   5,   2,   7,   4,   3,   3,   4,   5,   7,   3,   9,   5,   7,   2,   2,   3,   3,   3,   2,   1,   8,   1,   0,   1,   5,   5,   1,   3,   1,   8,   7,   2,   2,   2,   1,   2,   3,   3,   0,   3,   3,   3,   6,   6,   1,   3,   5,   5,   0,   6,   4,   1,   3,   3,   3,   3,   8,   3,   3,   1,   1,   4,   2,   3,   4,   1,   4,   4,   3,   4,   4,   8,   6,   1,   3,   3,   3,   1,   1,   1,   4,   0,   1,   0,   1,   4,   3,   1,   3,   2,   3,   1,   4,   2,   0,   3,   5,   4,   3,   1,   5,   4,   5,   3,   3,   5,   2,   1,   0,   1,   0,   1,   3,   2,   3,   2,   4,   2,   3,   3,   4,   6,   1,   5,   3,   2,   2,   2,   1,   0,   2,   0,   2,   2,   2,   3,   0,   0,   1,   3,   2,   1,   3,   3,   1,   0,   0,   0,   6,   3,   3,   4,   2,   3,   0,   1,   1,   2,   2,   2,   1,   3,   0,   1,   0,   0,   0,   1,   1,   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0])
+print("Menge der Einträge:", np.sum(data))
 rate2 = np.array([393, 384, 372, 380, 392, 385, 273])
 rate2 = np.array([391, 393, 384, 372, 380, 273])
 #t_vz  = np.array([0  , 4  , 8  , 12 , 13 , 14 , 15 , 16 , 20 , 24 , 28 ])
@@ -256,61 +258,74 @@ print("ersten drei Kanäle:", tau_x[0],tau_x[1],tau_x[2])
 
 
 ## Lösche schlechte Werte
-tau_x_fit = tau_x[3:-16] # 3 <-> 5?
-data_fit = data[3:-16]
-tau_x_raus = np.append( tau_x[0:3], tau_x[-16:] )
-data_fit_raus = np.append( data[0:3], data[-16:] )
+tau_x_fit = tau_x[5:-16] # 3 <-> 5?
+data_fit = data[5:-16]
+tau_x_raus = np.append( tau_x[0:5], tau_x[-16:] )
+data_fit_raus = np.append( data[0:5], data[-16:] )
 
+tau_x_fit_schlecht = tau_x[3:-16] # 3 <-> 5?
+data_fit_schlecht = data[3:-16]
+tau_x_raus_schlecht = np.append( tau_x[0:3], tau_x[-16:] )
+data_fit_raus_schlecht = np.append( data[0:3], data[-16:] )
 
-params_fit_gew, covariance_matrix_fit_gew = curve_fit(exp_dist, tau_x_fit, data_fit, sigma = np.sqrt(data_fit)+1*(data_fit==0)  ) # Workaround für sigma: Bei allen Nullmessungen packe eine eins dazu, damit gewichteter Fit möglich
-# Allternative hier: Gewichte mit "sigma = 1/sigma", d.h. Gewichte mit sqrt(N)
+gewichte = (1/(np.sqrt(data_fit)+1*(data_fit==0)  )) #* (data_fit<200) + 1/5 * (data_fit>200)
+gewichte_schlecht = (1/(np.sqrt(data_fit_schlecht)+1*(data_fit_schlecht==0)  )) #* (data_fit<200) + 1/5 * (data_fit>200)
+
+params_fit_gew, covariance_matrix_fit_gew = curve_fit(exp_dist, tau_x_fit, data_fit, sigma=gewichte  ) # Workaround für sigma: Bei allen Nullmessungen packe eine eins dazu, damit gewichteter Fit möglich
+# Allternative hier: Gewichte mit "sigma = 1/sigma", d.h. Gewichte mit sqrt(N) sigma = np.sqrt(data_fit)+1*(data_fit==0)
 errors_fit_gew = np.sqrt(np.diag(covariance_matrix_fit_gew))
 
-params_fit, covariance_matrix_fit = curve_fit(exp_dist, tau_x_fit, data_fit)
-errors_fit = np.sqrt(np.diag(covariance_matrix_fit))
+params_fit_gew_schlecht, covariance_matrix_fit_gew_schlecht = curve_fit(exp_dist, tau_x_fit_schlecht, data_fit_schlecht, sigma=gewichte_schlecht  ) # Workaround für sigma: Bei allen Nullmessungen packe eine eins dazu, damit gewichteter Fit möglich
+# Allternative hier: Gewichte mit "sigma = 1/sigma", d.h. Gewichte mit sqrt(N) sigma = np.sqrt(data_fit)+1*(data_fit==0)
+errors_fit_gew_schlecht = np.sqrt(np.diag(covariance_matrix_fit_gew_schlecht))
+
+#params_fit, covariance_matrix_fit = curve_fit(exp_dist, tau_x_fit, data_fit)
+#errors_fit = np.sqrt(np.diag(covariance_matrix_fit))
 
 
 
 ### Mister Monte-Carlo (presented by Super Mario Copy-Pasta)
 
-x_plot_up = np.zeros(len(tau_x))
-x_plot_down = np.zeros(len(tau_x))
-a_mc = random.multivariate_normal(params_fit_gew, covariance_matrix_fit_gew, 10000)
-
-for i, val in enumerate(tau_x):
-    mc_values = []
-
-    for k in a_mc:
-        mc_values.append(exp_dist(val, *k))
-
-    mc_mean = np.mean(mc_values)
-    mc_std = np.std(mc_values)
-
-    x_plot_up[i] = mc_mean + 2*mc_std
-    x_plot_down[i] = mc_mean - 2*mc_std
-
-    ## Alternative Methode: Siehe Zeilen 295 bis 313
+#x_plot_up = np.zeros(len(tau_x))
+#x_plot_down = np.zeros(len(tau_x))
+#a_mc = random.multivariate_normal(params_fit_gew, covariance_matrix_fit_gew, 10000)
+#
+#for i, val in enumerate(tau_x):
+#    mc_values = []
+#
+#    for k in a_mc:
+#        mc_values.append(exp_dist(val, *k))
+#
+#    mc_mean = np.mean(mc_values)
+#    mc_std = np.std(mc_values)
+#
+#    x_plot_up[i] = mc_mean + 2*mc_std
+#    x_plot_down[i] = mc_mean - 2*mc_std
+#
+#    ## Alternative Methode: Siehe Zeilen 295 bis 313
 
 ### Mister Not-Monte-Carlo (presented by Super Mario Copy-Pasta)
 
 
-#def exp_dist_unp(t, N_0, lambd, U):
-#    return N_0  * exp(-lambd * t) + U
-#
-#x_plot_up = np.zeros(len(tau_x))
-#x_plot_down = np.zeros(len(tau_x))
-#
+def exp_dist_unp(t, N_0, lambd, U):
+    return N_0  * exp(-lambd * t) + U
+
+x_plot_up = np.zeros(len(tau_x))
+x_plot_down = np.zeros(len(tau_x))
+
+N_0_with_err, lambd_with_err, U_with_err = correlated_values( params_fit_gew, covariance_matrix_fit_gew )
+
 #N_0_with_err = ufloat(params_fit_gew[0], errors_fit_gew[0])
 #lambd_with_err = ufloat(params_fit_gew[1], errors_fit_gew[1])
 #U_with_err = ufloat(params_fit_gew[2], errors_fit_gew[2])
+
+for i, val in enumerate(tau_x):
+
+    tmp = exp_dist_unp(val, N_0_with_err, lambd_with_err, U_with_err)
+
+    x_plot_up[i] = tmp.n + 2*tmp.s
+    x_plot_down[i] = tmp.n - 2*tmp.s
 #
-#for i, val in enumerate(tau_x):
-#
-#    tmp = exp_dist_unp(val, N_0_with_err, lambd_with_err, U_with_err)
-#
-#    x_plot_up[i] = tmp.n + 2*tmp.s
-#    x_plot_down[i] = tmp.n - 2*tmp.s
-##
 #### Plot gewichtet
 
 plt.errorbar(tau_x_raus*10**6, data_fit_raus, fmt='r.', yerr=np.sqrt(data_fit_raus) , label='Messdaten nicht berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
@@ -326,20 +341,35 @@ plt.savefig('build/expfit_gew.pdf')
 
 plt.clf()
 
-## Plot ungewichtet
+#### Plot gewichtet - aber schlecht
 
-plt.errorbar(tau_x_raus*10**6, data_fit_raus, fmt='r.', yerr=np.sqrt(data_fit_raus) , label='Messdaten nicht berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
-plt.errorbar(tau_x_fit*10**6, data_fit, fmt='k.', yerr=np.sqrt(data_fit) , label='Messdaten berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
+plt.errorbar(tau_x_raus_schlecht*10**6, data_fit_raus_schlecht, fmt='r.', yerr=np.sqrt(data_fit_raus_schlecht) , label='Messdaten nicht berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
+plt.errorbar(tau_x_fit_schlecht*10**6, data_fit_schlecht, fmt='k.', yerr=np.sqrt(data_fit_schlecht) , label='Messdaten berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
 
 plt.ylabel(r'$N$')
 plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
 
-plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit)), 'b-', label='Fit')
+plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit_gew_schlecht)), 'b-', label='Fit')
 plt.legend(loc='best')
 plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-plt.savefig('build/expfit.pdf')
+plt.savefig('build/expfit_gew_schlecht.pdf')
 
 plt.clf()
+
+## Plot ungewichtet
+
+#plt.errorbar(tau_x_raus*10**6, data_fit_raus, fmt='r.', yerr=np.sqrt(data_fit_raus) , label='Messdaten nicht berücksichtigt',  #linewidth=1,  markersize='1', capsize=1)
+#plt.errorbar(tau_x_fit*10**6, data_fit, fmt='k.', yerr=np.sqrt(data_fit) , label='Messdaten berücksichtigt',  linewidth=1,  #markersize='1', capsize=1)
+#
+#plt.ylabel(r'$N$')
+#plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
+#
+#plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit)), 'b-', label='Fit')
+#plt.legend(loc='best')
+#plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+#plt.savefig('build/expfit.pdf')
+#
+#plt.clf()
 
 
 
@@ -364,34 +394,34 @@ plt.clf()
 ## Plot ungewichtet (Robert Edition)
 
 #plt.errorbar(tau_x_raus[data_fit_raus>1]*10**6, data_fit_raus[data_fit_raus>1], fmt='r.', yerr=np.sqrt(data_fit_raus[data_fit_raus>1]) , label='Messdaten nicht berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
-plt.errorbar(tau_x_fit[data_fit>1]*10**6, data_fit[data_fit>1], fmt='k.', yerr=np.sqrt(data_fit[data_fit>1]) , label='Messdaten berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
-
-
-plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit)), 'b-', label='Fit')
-
-plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
-plt.legend(loc='best')
-plt.yscale('log')
-plt.ylabel(r'$N$')
-plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
-plt.savefig('build/expfit_robert.pdf')
-
-plt.clf()
+#plt.errorbar(tau_x_fit[data_fit>1]*10**6, data_fit[data_fit>1], fmt='k.', yerr=np.sqrt(data_fit[data_fit>1]) , label='Messdaten #berücksichtigt',  linewidth=1,  markersize='1', capsize=1)
+#
+#
+#plt.plot(tau_x*10**6, exp_dist(tau_x, *noms(params_fit)), 'b-', label='Fit')
+#
+#plt.xlabel(r'$\tau \,/\, \si{\micro\second}$')
+#plt.legend(loc='best')
+#plt.yscale('log')
+#plt.ylabel(r'$N$')
+#plt.tight_layout(pad=0, h_pad=1.08, w_pad=1.08)
+#plt.savefig('build/expfit_robert.pdf')
+#
+#plt.clf()
 
 
 
 ### werte ungewichtet
-N_0_val = ufloat(params_fit[0], errors_fit[0])
-lambd_val = ufloat(params_fit[1], errors_fit[1])
-U_val = ufloat(params_fit[2], errors_fit[2])
-
-write('build/N_0_val.tex', make_SI(N_0_val, r'', figures=2))
-write('build/lambd_val.tex', make_SI(lambd_val / (10**6), r'\per\micro\second', figures=2))
-write('build/U_val.tex', make_SI(U_val, r'', figures=2))
-
-tau = 1/lambd_val
-
-write('build/tau.tex', make_SI(tau*10**6, r'\micro\second', figures=1))
+#N_0_val = ufloat(params_fit[0], errors_fit[0])
+#lambd_val = ufloat(params_fit[1], errors_fit[1])
+#U_val = ufloat(params_fit[2], errors_fit[2])
+#
+#write('build/N_0_val.tex', make_SI(N_0_val, r'', figures=2))
+#write('build/lambd_val.tex', make_SI(lambd_val / (10**6), r'\per\micro\second', figures=2))
+#write('build/U_val.tex', make_SI(U_val, r'', figures=2))
+#
+#tau = 1/lambd_val
+#
+#write('build/tau.tex', make_SI(tau*10**6, r'\micro\second', figures=1))
 
 ### werte gewichtet
 
@@ -415,10 +445,6 @@ abw = np.abs(tau_lit - tau_gew)/tau_lit * 100
 
 write('build/tau_lit_abw.tex', make_SI(abw.n, r'\percent', figures=1))
 
-print(N_0_val)
-print(lambd_val)
-print(U_val)
-print(tau)
 
 
 ### Nur Sigmaintervall und Punkte
