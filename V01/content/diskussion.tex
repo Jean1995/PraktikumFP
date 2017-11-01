@@ -10,7 +10,7 @@ Für eine genauere Bestimmung hätten mehr Werte im Bereich größerer Verzöger
 Dadurch, dass zusätzlich die Breiten der Diskriminatorimpulse bei den Messergebnissen fehlen, kann der Wert von $\Delta t_\text{K}$ auch nicht in Verbindung der Breiten gesetzt werden.
 Qualitativ wäre zu erwarten gewesen, dass ein breiterer Diskriminatorimpuls dazu führt, dass das Plateau in Abbildung \ref{plot:verzoegerung} breiter wird und somit eine höhere Halbwertsbreite auftritt. %<- Stay or go?
 
-Die in diesem Versuch ermittelte mittlere Lebensdauer bezüglich des Fits ohne die ersten beiden nichtleeren Kanäle \ref{plot:punkte_err_fit} beträgt laut \eqref{eqn:result}
+Die in diesem Versuch ermittelte mittlere Lebensdauer bezüglich des Fits ohne die ersten beiden nichtleeren Kanäle, dargestellt in Abbildung \ref{plot:punkte_err_fit}, beträgt laut \eqref{eqn:result}
 \begin{align*}
   \tau = \input{tau_gew.tex}.
 \end{align*}
@@ -23,7 +23,7 @@ Dies entspricht einer Abweichung des Messwertes zum Theoriewert von
 \begin{align*}
   \Delta \tau = \input{tau_lit_abw.tex}.
 \end{align*}
-%Der Theoriewert liegt somit innerhalb der $2\sigma$-Umgebung des berechneten Messergebnisses.\\
+Der Theoriewert liegt somit innerhalb der $2\sigma$-Umgebung des berechneten Messergebnisses.\\
 Die absolute Abweichung lässt sich unter anderem dadurch erklären, dass es sich bei dem Zerfall der Myonen um einen statistischen Prozess handelt.
 Trotz einer relativ langen Messdauer hat sich noch keine eindeutige Exponentialverteilung eingestellt und die statistischen Abweichungen in den Messraten überwiegen.
 Dies ist an Abbildung \ref{plot:punkte_err_fit_robert} zu erkennen, da der Fit viele Fehlerbalken nicht schneidet.
@@ -35,7 +35,7 @@ Dieses Problem ließe sich durch eine deutlich größere Messzeit beheben.\\
 Es steht generell offen, ob die beiden Messwerte im Bereich kleiner Lebensdauern mit sehr hohen Zählraten durch einen systematischen Fehler ausgelöst wurden. % <- Geändert
 %Sie wurden berücksichtigt, da sie den Trend der Theorie unterstützen. %<- Wieso schreibst du das? Hört sich schlecht an.
 Eine bessere Kanalauflösung im Bereich geringerer Lebensdauer oder eine größere Anzahl an Messwerten könnte einen besseren Fit bzw. einen besseren Einblick im Bereich kleiner Lebensdauern ermöglichen.
-Interessant ist vor Allem, dass mit dem Impulszähler
+Interessant ist vor allem, dass mit dem Impulszähler
 \begin{align*}
   N_\text{Stopp, Zähler} = \num{7374}
 \end{align*}
@@ -44,7 +44,7 @@ Stoppimpulse gezählt wurden, aber insgesamt
   N_\text{Daten} = \num{9064}
 \end{align*}
 Messdaten vom Computer abgespeichert wurden.
-Dementsprechend hat entweder der TAC fehlerhafte Signale erzeugt und weitergegeben oder der Vielkanalanalysator einen Impuls mehreren Kanälen zugeordnet oder das Computerprogramm durch einen Fehler falsche Daten abspeichert hat.
+Dementsprechend hat entweder der TAC fehlerhafte Signale erzeugt und weitergegeben oder der Vielkanalanalysator einen Impuls mehreren Kanälen zugeordnet oder das Computerprogramm durch einen Fehler falsche Daten abspeichert.
 Daher ist wahrscheinlich auch der durch den Fit bestimmte Untergrund
 %Des Weiteren kann trotz Nutzung der Diskriminatoren und Koinzidenz nicht vollständig ausgeschlossen werden, dass Fehlmessungen durch thermische Emission auftritt. %oder wahre Ereignisse verworfen werden. <- Sollen wir den Satz wirklich reinnehmen?? Wir hatten ja schon darüber gesprochen dass es unwahrscheinlich ist, dass gleichzeitig thermische EMission auftritt und ein Myon durchfliegt und somit den Stopimpuls auflöst (oder anders herum)
 %Ein Hinweis darauf, dass dies geschieht, ist, dass der durch den Fit bestimmte Untergrund
@@ -55,9 +55,10 @@ größer als der theoretisch bestimmte, welcher nur die gezählten Startsignale 
 \begin{align*}
   U_{\text{Theorie}} = \input{build/U_theo.tex}.
 \end{align*}
-Zugegebenermaßen liegt der Theoriewert im $1\sigma$-Intervall des vom Fit bestimmten Wertes.
+Trotzdem liegt der Theoriewert im $1\sigma$-Intervall des vom Fit bestimmten Wertes.
+
 Die beiden großen Werte in den ersten beiden nichtleeren Kanälen erklären nicht die $\num{1690}$ Fehlimpulse, welche zusätzlich am Computer zu sehen sind, da es in Summe nur $\num{568}$ Messergebnisse sind.
-Paradox ist jedoch auch, dass die ersten drei Kanäle dem Versuchsaufbau erwartungsgemäß wegen der Verzögerung von $\SI{30}{\nano\second}$ nicht gefüllt sind.
+Zu beachten ist jedoch auch, dass die ersten drei Kanäle dem Versuchsaufbau erwartungsgemäß wegen der Verzögerung von $\SI{30}{\nano\second}$ nicht gefüllt sind.
 Es ist daher also auch möglich, dass der Impulszähler, welcher die Stoppimpulse zählen sollte, nicht alle Stoppimpulse aufgezeichnet hat.
 Ob und vor Allem welches Gerät nicht richtig funktioniert, kann nur eine Nachuntersuchung der Bauteile beantworten.
 %Demnach konnten die Fehlimpulse der thermischen Emission durch die Koinzidenz und die Diskriminatoren nicht wirksam herausgefiltert werden.
